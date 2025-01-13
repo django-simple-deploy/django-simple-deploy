@@ -23,6 +23,9 @@ markdown_extensions:
   - pymdownx.superfences
   - footnotes
 
+plugins:
+- mkdocstrings
+
 nav:
   - 'Introduction': 'index.md'
   - 'Quick Start':
@@ -43,6 +46,7 @@ nav:
     - 'Parking Lot': 'contributing/parking_lot.md'
   - 'Plugins':
     - 'plugins/index.md'
+    - 'plugins/plugin_utils.md'
   - 'Design Documentation':
     - 'Rationale': 'design_docs/rationale.md'
     - 'Use Cases': 'design_docs/use_cases.md'
