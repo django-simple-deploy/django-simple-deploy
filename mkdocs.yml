@@ -47,6 +47,7 @@ nav:
   - 'Plugins':
     - 'plugins/index.md'
     - 'plugins/plugin_utils.md'
+    - 'plugins/sd_config.md'
   - 'Design Documentation':
     - 'Rationale': 'design_docs/rationale.md'
     - 'Use Cases': 'design_docs/use_cases.md'
