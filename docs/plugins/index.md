@@ -16,3 +16,7 @@ If you want to write a plugin, see the notes in the [dsd-plugin-template](https:
 ## Testing plugins
 
 The test suite will identify a plugin that's installed in editable mode, and run that platform's unit and integration tests.
+
+## More information
+
+See the other pages in this section about [plugin utility functions](plugin_utils.md) and the `sd_config` [object](sd_config.md).
