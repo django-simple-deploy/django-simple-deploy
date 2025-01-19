@@ -180,11 +180,11 @@ def setup_project(tmp_proj_dir, sd_root_dir, config):
     subprocess.run([git_exe, "commit", "-am", "Initial commit."])
     subprocess.run([git_exe, "tag", "-am", "", "INITIAL_STATE"])
 
-    # Add simple_deploy to INSTALLED_APPS.
+    # Add django_simple_deploy to INSTALLED_APPS.
     settings_file_path = tmp_proj_dir / "blog/settings.py"
     settings_content = settings_file_path.read_text()
     new_settings_content = settings_content.replace(
-        "# Third party apps.", '# Third party apps.\n    "simple_deploy",'
+        "# Third party apps.", '# Third party apps.\n    "django_simple_deploy",'
     )
     settings_file_path.write_text(new_settings_content)
 
@@ -221,12 +221,12 @@ def reset_test_project(tmp_dir, pkg_manager):
     settings_file_path = tmp_dir / "blog/settings.py"
     settings_content = settings_file_path.read_text()
     new_settings_content = settings_content.replace(
-        "# Third party apps.", '# Third party apps.\n    "simple_deploy",'
+        "# Third party apps.", '# Third party apps.\n    "django_simple_deploy",'
     )
     settings_file_path.write_text(new_settings_content)
 
     # Make sure we have a clean status before calling deploy.
-    subprocess.run(["git", "commit", "-am", "Added simple_deploy to INSTALLED_APPS."])
+    subprocess.run(["git", "commit", "-am", "Added django_simple_deploy to INSTALLED_APPS."])
 
 
 def call_simple_deploy(tmp_dir, sd_command, platform=None):
