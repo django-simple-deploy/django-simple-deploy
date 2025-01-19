@@ -129,7 +129,7 @@ def test_unacceptable_settings_change(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." not in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." not in stdout
     assert "SimpleDeployCommandError" in stderr
 
 
@@ -144,7 +144,7 @@ def test_unacceptable_file_changed(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." not in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." not in stdout
     assert "SimpleDeployCommandError" in stderr
 
 
@@ -155,7 +155,7 @@ def test_sdlogs_exists(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
 
 def test_add_sdlogs_gitignore(tmp_project):
@@ -165,7 +165,7 @@ def test_add_sdlogs_gitignore(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
 
 def test_add_sd_installed_apps(tmp_project):
@@ -175,7 +175,7 @@ def test_add_sd_installed_apps(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
 
 # --- Test combinations of two acceptable changes. ---
@@ -191,7 +191,7 @@ def test_sdlogs_exists_add_sdlogs_gitignore(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
 
 def test_sdlogs_exists_sd_installed_apps(tmp_project):
@@ -205,7 +205,7 @@ def test_sdlogs_exists_sd_installed_apps(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
 
 def test_sdlogs_gitignore_sd_installed_apps(tmp_project):
@@ -217,7 +217,7 @@ def test_sdlogs_gitignore_sd_installed_apps(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
 
 # --- Test combination of all three changes.
@@ -235,7 +235,7 @@ def test_sdlogs_exists_sdlogs_gitgnore_sd_installed_apps(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
 
 # --- Tests using --ignore-unclean-git flag. ---
