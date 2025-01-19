@@ -115,7 +115,7 @@ def test_clean_git_status(tmp_project):
     sd_command = "python manage.py deploy"
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
-    assert "No uncommitted changes, other than simple_deploy work." in stdout
+    assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
 
 def test_unacceptable_settings_change(tmp_project):
