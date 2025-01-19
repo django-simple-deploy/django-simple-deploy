@@ -87,8 +87,8 @@ def add_sd_installed_apps(tmp_project):
     path = tmp_project / "blog" / "settings.py"
     settings_text = path.read_text()
 
-    # 'simple_deploy' should no longer be in settings.
-    assert "simple_deploy" not in settings_text
+    # 'django_simple_deploy' should no longer be in settings.
+    assert "django_simple_deploy" not in settings_text
 
     # Split settings into lines, and find where to insert 'simple_deploy'.
     settings_lines = settings_text.splitlines()
@@ -96,7 +96,7 @@ def add_sd_installed_apps(tmp_project):
         if "django_bootstrap5" in line:
             break
 
-    settings_lines.insert(index + 1, '    "simple_deploy",')
+    settings_lines.insert(index + 1, '    "django_simple_deploy",')
     settings_text = "\n".join(settings_lines)
     # Add back the trailing newline that was lost in text processing.
     settings_text += "\n"
