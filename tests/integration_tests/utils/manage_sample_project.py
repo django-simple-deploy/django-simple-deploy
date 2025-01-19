@@ -6,7 +6,7 @@ from pathlib import Path
 from shutil import copytree, rmtree
 from shlex import split
 
-from simple_deploy.management.commands.utils import sd_utils
+from django_simple_deploy.management.commands.utils import sd_utils
 
 import pytest
 

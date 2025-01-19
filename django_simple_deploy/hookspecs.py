@@ -8,11 +8,11 @@ naming plugins in pluggy:
 
 import pluggy
 
-hookspec = pluggy.HookspecMarker("simple_deploy")
+hookspec = pluggy.HookspecMarker("django_simple_deploy")
 
 
 @hookspec
-def simple_deploy_get_plugin_config():
+def dsd_get_plugin_config():
     """Get plugin-specific attributes required by core.
 
     Required:
@@ -24,5 +24,5 @@ def simple_deploy_get_plugin_config():
 
 
 @hookspec
-def simple_deploy_deploy():
+def dsd_deploy():
     """Carry out all platform-specific configuration and deployment work."""

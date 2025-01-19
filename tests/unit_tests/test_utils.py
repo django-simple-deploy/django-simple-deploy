@@ -8,10 +8,10 @@ import filecmp
 import sys
 import subprocess
 
-from simple_deploy.management.commands.utils import sd_utils
-from simple_deploy.management.commands.utils import plugin_utils
-from simple_deploy.management.commands.utils.plugin_utils import sd_config
-from simple_deploy.management.commands.utils.command_errors import (
+from django_simple_deploy.management.commands.utils import sd_utils
+from django_simple_deploy.management.commands.utils import plugin_utils
+from django_simple_deploy.management.commands.utils.plugin_utils import sd_config
+from django_simple_deploy.management.commands.utils.command_errors import (
     SimpleDeployCommandError,
 )
 

@@ -1,11 +1,11 @@
 """Manage deployement to a variety of platforms.
 
 Configuration-only mode: 
-    $ python manage.py simple_deploy
+    $ python manage.py deploy
     Configures project for deployment to the specified platform.
 
 Automated mode:
-    $ python manage.py simple_deploy --automate-all
+    $ python manage.py deploy --automate-all
     Configures project for deployment, *and* issues platform's CLI commands to create
     any resources needed for deployment. Also commits changes, and pushes project.
 
@@ -43,7 +43,7 @@ from .utils.plugin_utils import sd_config
 from .utils.command_errors import SimpleDeployCommandError
 from . import cli
 
-from simple_deploy.plugins import pm
+from django_simple_deploy.plugins import pm
 
 
 class Command(BaseCommand):
@@ -52,7 +52,7 @@ class Command(BaseCommand):
     If using --automate-all, carry out the actual deployment as well.
     """
 
-    # Show a summary of simple_deploy in the help text.
+    # Show a summary of django-simple-deploy in the help text.
     help = "Configures your project for deployment to the specified platform."
 
     def __init__(self):
@@ -129,7 +129,7 @@ class Command(BaseCommand):
         platform_name = self.plugin_config.platform_name
         plugin_utils.write_output(f"\nDeployment target: {platform_name}")
 
-        # Inspect the user's system and project, and make sure simple_deploy is included
+        # Inspect the user's system and project, and make sure django-simple-deploy is included
         # in project requirements.
         self._inspect_system()
         self._inspect_project()
@@ -142,10 +142,10 @@ class Command(BaseCommand):
         sd_config.validate()
 
         # Platform-agnostic work is finished. Hand off to plugin.
-        pm.hook.simple_deploy_deploy()
+        pm.hook.dsd_deploy()
 
     def _parse_cli_options(self, options):
-        """Parse CLI options from simple_deploy command."""
+        """Parse CLI options from deploy command."""
 
         # Platform-agnostic arguments.
         sd_config.automate_all = options["automate_all"]
@@ -164,7 +164,7 @@ class Command(BaseCommand):
         """Set up for logging.
 
         Create a log directory if needed; create a new log file for every run of
-        simple_deploy. Since deploy should be called once, it's helpful to have
+        `deploy`. Since deploy should be called once, it's helpful to have
         separate files for each run. It should only be run more than once when users
         are fixing errors that are called out by deploy, or if a remote resource
         hangs.
@@ -336,21 +336,21 @@ class Command(BaseCommand):
             raise SimpleDeployCommandError(error_msg)
 
     def _check_git_status(self):
-        """Make sure all non-simple_deploy changes have already been committed.
+        """Make sure all non-dsd changes have already been committed.
 
         All configuration-specific work should be contained in a single commit. This
         allows users to easily revert back to the version of the project that worked
         locally, if the overall deployment effort fails, or if they don't like what
-        simple_deploy does for any reason.
+        django-simple-deploy does for any reason.
 
         Don't just look for a clean git status. Some uncommitted changes related to
-        simple_deploy's work is acceptable, for example if they are doing a couple
+        django-simple-deploy's work is acceptable, for example if they are doing a couple
         runs to get things right.
 
         Users can override this check with the --ignore-unclean-git flag.
 
         Returns:
-            None: If status is such that simple_deploy can continue.
+            None: If status is such that `deploy` can continue.
 
         Raises:
             SimpleDeployCommandError: If any reason found not to continue.
@@ -373,7 +373,7 @@ class Command(BaseCommand):
         proceed = sd_utils.check_status_output(status_output, diff_output)
 
         if proceed:
-            msg = "No uncommitted changes, other than simple_deploy work."
+            msg = "No uncommitted changes, other than django-simple-deploy work."
             plugin_utils.write_output(msg)
         else:
             self._raise_unclean_error()
@@ -487,7 +487,7 @@ class Command(BaseCommand):
     def _add_simple_deploy_req(self):
         """Add django-simple-deploy to the project's requirements.
 
-        Since simple_deploy is in INCLUDED_APPS, it needs to be in the project's
+        Since django_simple_deploy is in INCLUDED_APPS, it needs to be in the project's
         requirements. If it's missing, platforms will reject the push.
         """
         msg = "\nLooking for django-simple-deploy in requirements..."
@@ -508,7 +508,7 @@ class Command(BaseCommand):
 
         callers = [caller.name for caller in pm.get_hookcallers(plugin)]
         required_hooks = [
-            "simple_deploy_get_plugin_config",
+            "dsd_get_plugin_config",
         ]
         for hook in required_hooks:
             if hook not in callers:
@@ -516,7 +516,7 @@ class Command(BaseCommand):
                 raise SimpleDeployCommandError(msg)
 
         # Load plugin config, and validate config.
-        self.plugin_config = pm.hook.simple_deploy_get_plugin_config()[0]
+        self.plugin_config = pm.hook.dsd_get_plugin_config()[0]
 
         # Make sure there's a confirmation msg for automate_all if needed.
         if self.plugin_config.automate_all_supported and sd_config.automate_all:

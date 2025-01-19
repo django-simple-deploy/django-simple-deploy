@@ -2,7 +2,7 @@
 
 from textwrap import dedent
 
-from simple_deploy.management.commands.utils import sd_utils
+from django_simple_deploy.management.commands.utils import sd_utils
 
 import pytest
 

@@ -9,7 +9,7 @@ run of simple_deploy. For example make a run with automate_all, cancel the run, 
 sure the spacing of the rendered message looks appropriate.
 """
 
-from simple_deploy.management.commands import sd_messages
+from django_simple_deploy.management.commands import sd_messages
 
 
 # --- Static messages ---

@@ -15,8 +15,8 @@ from textwrap import dedent
 
 import pytest
 
-from simple_deploy.management.commands.utils import sd_utils
-from simple_deploy.management.commands.utils.command_errors import (
+from django_simple_deploy.management.commands.utils import sd_utils
+from django_simple_deploy.management.commands.utils.command_errors import (
     SimpleDeployCommandError,
 )
 
