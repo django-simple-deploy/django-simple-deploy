@@ -62,7 +62,7 @@ dev = [
 
 [tool.setuptools]
 packages = [
-    "simple_deploy",
-    "simple_deploy.management.commands",
-    "simple_deploy.management.commands.utils",
+    "django_simple_deploy",
+    "django_simple_deploy.management.commands",
+    "django_simple_deploy.management.commands.utils",
 ]
