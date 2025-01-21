@@ -51,8 +51,8 @@ def execute_quick_command(tmp_project, cmd):
 
 
 def add_sd_logs(tmp_project):
-    """Add django_simple_deploy_logs/ dir, and a dummy log file with a single line."""
-    log_dir = tmp_project / "django_simple_deploy_logs"
+    """Add dsd_logs/ dir, and a dummy log file with a single line."""
+    log_dir = tmp_project / "dsd_logs"
     assert not log_dir.exists()
     log_dir.mkdir()
 
@@ -61,15 +61,15 @@ def add_sd_logs(tmp_project):
 
 
 def add_sd_logs_gitignore(tmp_project):
-    """Add django_simple_deploy_logs/ to .gitignore, without committing the change."""
+    """Add dsd_logs/ to .gitignore, without committing the change."""
     path = tmp_project / ".gitignore"
     assert path.exists()
 
-    # django_simple_deploy_logs/ should not be in .gitignore yet.
+    # dsd_logs/ should not be in .gitignore yet.
     contents = path.read_text()
-    assert "django_simple_deploy_logs" not in contents
+    assert "dsd_logs" not in contents
 
-    contents += "\ndjango_simple_deploy_logs/\n"
+    contents += "\ndsd_logs/\n"
     path.write_text(contents)
 
 
@@ -149,7 +149,7 @@ def test_unacceptable_file_changed(tmp_project):
 
 
 def test_sdlogs_exists(tmp_project):
-    """Add django_simple_deploy_logs/ dir, and dummy log file with one line."""
+    """Add dsd_logs/ dir, and dummy log file with one line."""
     add_sd_logs(tmp_project)
 
     sd_command = "python manage.py deploy"
@@ -159,7 +159,7 @@ def test_sdlogs_exists(tmp_project):
 
 
 def test_add_sdlogs_gitignore(tmp_project):
-    """Add django_simple_deploy_logs/ to .gitignore."""
+    """Add dsd_logs/ to .gitignore."""
     add_sd_logs_gitignore(tmp_project)
 
     sd_command = "python manage.py deploy"
@@ -182,7 +182,7 @@ def test_add_sd_installed_apps(tmp_project):
 
 
 def test_sdlogs_exists_add_sdlogs_gitignore(tmp_project):
-    """Add django_simple_deploy_logs/ dir, and dummy log file with one line. Also add sdlogs
+    """Add dsd_logs/ dir, and dummy log file with one line. Also add sdlogs
     to .gitignore.
     """
     add_sd_logs(tmp_project)
@@ -195,7 +195,7 @@ def test_sdlogs_exists_add_sdlogs_gitignore(tmp_project):
 
 
 def test_sdlogs_exists_sd_installed_apps(tmp_project):
-    """Add django_simple_deploy_logs/ dir, and dummy log file with one line. Also add sd to
+    """Add dsd_logs/ dir, and dummy log file with one line. Also add sd to
     INSTALLED_APPS.
     """
     # Order matters, because adding to INSTALLED_APPS starts by resetting project.
@@ -209,7 +209,7 @@ def test_sdlogs_exists_sd_installed_apps(tmp_project):
 
 
 def test_sdlogs_gitignore_sd_installed_apps(tmp_project):
-    """Add django_simple_deploy_logs/ to .gitignore, and  add sd to INSTALLED_APPS."""
+    """Add dsd_logs/ to .gitignore, and  add sd to INSTALLED_APPS."""
     # Order matters, because adding to INSTALLED_APPS starts by resetting project.
     add_sd_installed_apps(tmp_project)
     add_sd_logs_gitignore(tmp_project)
@@ -224,7 +224,7 @@ def test_sdlogs_gitignore_sd_installed_apps(tmp_project):
 
 
 def test_sdlogs_exists_sdlogs_gitgnore_sd_installed_apps(tmp_project):
-    """Add django_simple_deploy_logs/ dir and a single log file. Add django_simple_deploy_logs/ to
+    """Add dsd_logs/ dir and a single log file. Add dsd_logs/ to
     .gitignore, and  add sd to INSTALLED_APPS.
     """
     # Order matters, because adding to INSTALLED_APPS starts by resetting project.

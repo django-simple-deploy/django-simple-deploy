@@ -180,7 +180,7 @@ class Command(BaseCommand):
         # Instantiate a logger. Append a timestamp so each new run generates a unique
         # log filename.
         timestamp = datetime.now().strftime("%Y-%m-%d-%H%M%S")
-        log_filename = f"django_simple_deploy_{timestamp}.log"
+        log_filename = f"dsd_{timestamp}.log"
         verbose_log_path = self.log_dir_path / log_filename
         verbose_logger = logging.basicConfig(
             level=logging.INFO,
@@ -203,7 +203,7 @@ class Command(BaseCommand):
         Returns:
             bool: True if created directory, False if already one present.
         """
-        self.log_dir_path = settings.BASE_DIR / "django_simple_deploy_logs"
+        self.log_dir_path = settings.BASE_DIR / "dsd_logs"
         if not self.log_dir_path.exists():
             self.log_dir_path.mkdir()
             return True
@@ -391,21 +391,21 @@ class Command(BaseCommand):
 
         Adds a .gitignore file if one is not found.
         """
-        ignore_msg = "django_simple_deploy_logs/\n"
+        ignore_msg = "dsd_logs/\n"
 
         gitignore_path = sd_config.git_path / ".gitignore"
         if not gitignore_path.exists():
             # Make the .gitignore file, and add log directory.
             gitignore_path.write_text(ignore_msg, encoding="utf-8")
             plugin_utils.write_output("No .gitignore file found; created .gitignore.")
-            plugin_utils.write_output("Added django_simple_deploy_logs/ to .gitignore.")
+            plugin_utils.write_output("Added dsd_logs/ to .gitignore.")
         else:
             # Append log directory to .gitignore if it's not already there.
             contents = gitignore_path.read_text()
-            if "django_simple_deploy_logs/" not in contents:
+            if "dsd_logs/" not in contents:
                 contents += f"\n{ignore_msg}"
                 gitignore_path.write_text(contents)
-                plugin_utils.write_output("Added django_simple_deploy_logs/ to .gitignore")
+                plugin_utils.write_output("Added dsd_logs/ to .gitignore")
 
     def _get_dep_man_approach(self):
         """Identify which dependency management approach the project uses.
