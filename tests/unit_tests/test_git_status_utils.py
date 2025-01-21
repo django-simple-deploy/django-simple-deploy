@@ -203,9 +203,9 @@ def test_clean_diff_settings():
         --- a/blog/settings.py
         +++ b/blog/settings.py
         @@ -39,0 +40 @@ INSTALLED_APPS = [
-        +    'simple_deploy',"""
+        +    'django_simple_deploy',"""
     )
 
     cleaned_diff = sd_utils._clean_diff(diff_output.splitlines())
-    assert cleaned_diff == ["+    'simple_deploy',"]
+    assert cleaned_diff == ["+    'django_simple_deploy',"]
     assert sd_utils._check_settings_diff(diff_output.splitlines())
