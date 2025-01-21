@@ -106,7 +106,7 @@ def check_status_output(status_output, diff_output):
     """Check output of `git status --porcelain` for uncommitted changes.
 
     Look for:
-        Untracked changes other than simple_deploy_logs/
+        Untracked changes other than dsd_logs/
         Modified files beyond .gitignore and settings.py
     Consider looking at other status codes at some point.
 

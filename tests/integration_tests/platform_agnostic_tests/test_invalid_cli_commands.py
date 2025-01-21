@@ -28,7 +28,7 @@ def check_project_unchanged(tmp_proj_dir):
     """
 
     stdout, stderr = msp.make_git_call(tmp_proj_dir, "git status --porcelain")
-    assert "?? simple_deploy_logs/" in stdout
+    assert "?? dsd_logs/" in stdout
 
     stdout, stderr = msp.make_git_call(tmp_proj_dir, "git log")
     assert "Removed unneeded dependency management files." in stdout
