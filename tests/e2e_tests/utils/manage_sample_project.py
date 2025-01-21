@@ -13,7 +13,7 @@ def add_simple_deploy(tmp_dir):
     settings_file_path = tmp_dir / "blog/settings.py"
     settings_content = settings_file_path.read_text()
     new_settings_content = settings_content.replace(
-        "# Third party apps.", "# Third party apps.\n    'simple_deploy',"
+        "# Third party apps.", "# Third party apps.\n    'django_simple_deploy',"
     )
     settings_file_path.write_text(new_settings_content)
 
@@ -204,4 +204,4 @@ def setup_project(tmp_proj_dir, sd_root_dir, cli_options):
     add_simple_deploy(tmp_proj_dir)
 
     # Make sure we have a clean status before calling simple_deploy.
-    make_sp_call("git commit -am 'Added simple_deploy to INSTALLED_APPS.'")
+    make_sp_call("git commit -am 'Added django_simple_deploy to INSTALLED_APPS.'")
