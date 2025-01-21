@@ -123,7 +123,7 @@ def check_status_output(status_output, diff_output):
         return False
     if (
         len(untracked_changes) == 1
-        and "simple_deploy_logs/" not in untracked_changes[0]
+        and "dsd_logs/" not in untracked_changes[0]
     ):
         return False
 
@@ -195,7 +195,7 @@ def _check_gitignore_diff(diff_lines):
         return False
 
     # If the change is not adding simple_deploy, don't proceed.
-    if "simple_deploy_logs" not in lines[0]:
+    if "dsd_logs" not in lines[0]:
         return False
 
     return True

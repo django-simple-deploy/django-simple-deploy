@@ -24,7 +24,7 @@ def test_simple_git_status():
     status_output, diff_output = " M .gitignore\n M settings.py", ""
     assert sd_utils.check_status_output(status_output, diff_output)
 
-    status_output, diff_output = " M blog/settings.py\n?? simple_deploy_logs/", ""
+    status_output, diff_output = " M blog/settings.py\n?? dsd_logs/", ""
     assert sd_utils.check_status_output(status_output, diff_output)
 
 
@@ -40,7 +40,7 @@ def test_diff_ignore_sd_logs():
         +++ b/.gitignore
         @@ -8,0 +9,3 @@ db.sqlite3
         +
-        +simple_deploy_logs/"""
+        +dsd_logs/"""
     )
 
     assert sd_utils._check_git_diff(diff_output)
@@ -70,7 +70,7 @@ def test_diff_settings_requirements_txt():
         +++ b/.gitignore
         @@ -8,0 +9,2 @@ db.sqlite3
         +
-        +simple_deploy_logs/
+        +dsd_logs/
         diff --git a/requirements.txt b/requirements.txt
         index b121799..b28fb7a 100644
         --- a/requirements.txt
@@ -110,7 +110,7 @@ def test_diff_sdlogs_gitignore_sd_installed_apps():
         +++ b/.gitignore
         @@ -8,0 +9,2 @@ db.sqlite3
         +
-        +simple_deploy_logs/
+        +dsd_logs/
         diff --git a/blog/settings.py b/blog/settings.py
         index 6d40136..77a88d2 100644
         --- a/blog/settings.py
@@ -187,11 +187,11 @@ def test_clean_diff_gitignore():
         +++ b/.gitignore
         @@ -8,0 +9,2 @@ db.sqlite3
         +
-        +simple_deploy_logs/"""
+        +dsd_logs/"""
     )
 
     cleaned_diff = sd_utils._clean_diff(diff_output.splitlines())
-    assert cleaned_diff == ["+simple_deploy_logs/"]
+    assert cleaned_diff == ["+dsd_logs/"]
     assert sd_utils._check_gitignore_diff(diff_output.splitlines())
 
 
