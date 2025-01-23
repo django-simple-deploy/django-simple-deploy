@@ -133,7 +133,7 @@ class Command(BaseCommand):
         # in project requirements.
         self._inspect_system()
         self._inspect_project()
-        self._add_simple_deploy_req()
+        self._add_dsd_req()
 
         self._confirm_automate_all(pm)
 
@@ -484,10 +484,10 @@ class Command(BaseCommand):
 
         return requirements
 
-    def _add_simple_deploy_req(self):
+    def _add_dsd_req(self):
         """Add django-simple-deploy to the project's requirements.
 
-        Since django_simple_deploy is in INCLUDED_APPS, it needs to be in the project's
+        Since django_simple_deploy is in INSTALLED_APPS, it needs to be in the project's
         requirements. If it's missing, platforms will reject the push.
         """
         msg = "\nLooking for django-simple-deploy in requirements..."
