@@ -5,7 +5,7 @@ return statement at the end of a dynamic function, and it can be easy to get
 inconsistent spacing in the messages that are returned.
 
 A test here should mean that the spacing has been verified as appropriate in an actual
-run of simple_deploy. For example make a run with automate_all, cancel the run, and make
+run of the deploy command. For example make a run with automate_all, cancel the run, and make
 sure the spacing of the rendered message looks appropriate.
 """
 
@@ -20,7 +20,7 @@ def test_cancel_automate_all():
     msg = sd_messages.cancel_automate_all
     assert (
         msg
-        == "\nOkay, canceling this run. If you want to configure your project\nfor deployment, run simple_deploy again without the --automate-all flag.\n"
+        == "\nOkay, canceling this run. If you want to configure your project\nfor deployment, run the deploy command again without the --automate-all flag.\n"
     )
 
 
@@ -46,5 +46,5 @@ def test_file_replace_rejected():
     msg = sd_messages.file_replace_rejected("Procfile")
     assert (
         msg
-        == "\nIn order to configure the project for deployment, we need to write the\nfile: Procfile\nPlease remove the current version, and then run simple_deploy again.\n"
+        == "\nIn order to configure the project for deployment, we need to write the\nfile: Procfile\nPlease remove the current version, and then run the deploy command again.\n"
     )
