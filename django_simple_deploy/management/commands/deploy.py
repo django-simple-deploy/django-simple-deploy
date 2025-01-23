@@ -19,7 +19,7 @@ Overview:
     - Inspect the user's system.
     - Inspect the project.
     - Add django-simple-deploy to project requirements.
-    - Call the platform's `deploy()` method.
+    - Call the plugin's `deploy()` method.
 
 See the project documentation for more about this process:
     https://django-simple-deploy.readthedocs.io/en/latest/
