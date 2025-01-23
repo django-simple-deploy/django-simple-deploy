@@ -286,7 +286,7 @@ class Command(BaseCommand):
         self._find_git_dir()
         self._check_git_status()
 
-        # Now that we know where .git is, we can ignore simple_deploy logs.
+        # Now that we know where .git is, we can ignore dsd logs.
         if sd_config.log_output:
             self._ignore_sd_logs()
 

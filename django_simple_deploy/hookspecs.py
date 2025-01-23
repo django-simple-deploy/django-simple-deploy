@@ -1,9 +1,4 @@
-"""Hook specs for django-simple-deploy.
-
-The name `simple_deploy_deploy()` is a bit awkward, but it follows the convention of
-naming plugins in pluggy:
-  <plugin_name>_<function_name>()
-"""
+"""Hook specs for django-simple-deploy."""
 
 
 import pluggy
