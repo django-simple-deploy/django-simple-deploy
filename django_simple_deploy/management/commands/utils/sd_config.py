@@ -1,4 +1,4 @@
-from .command_errors import SimpleDeployCommandError
+from .command_errors import DSDCommandError
 
 
 class SDConfig:
@@ -53,20 +53,20 @@ class SDConfig:
         """Make sure all required attributes have been defined."""
         if not self.pkg_manager:
             msg = "Could not identify dependency management system in use."
-            raise SimpleDeployCommandError(msg)
+            raise DSDCommandError(msg)
 
         if self.requirements is None:
             msg = "Could not identify project dependencies."
-            raise SimpleDeployCommandError(msg)
+            raise DSDCommandError(msg)
 
         if self.project_root is None:
             msg = "Could not identify project's root directory."
-            raise SimpleDeployCommandError(msg)
+            raise DSDCommandError(msg)
 
         if self.settings_path is None:
             msg = "Could not identify path to settings.py."
-            raise SimpleDeployCommandError(msg)
+            raise DSDCommandError(msg)
 
         if self.stdout is None:
             msg = "Failed to access stdout."
-            raise SimpleDeployCommandError(msg)
+            raise DSDCommandError(msg)

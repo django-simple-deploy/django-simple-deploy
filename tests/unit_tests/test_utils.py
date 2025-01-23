@@ -12,7 +12,7 @@ from django_simple_deploy.management.commands.utils import sd_utils
 from django_simple_deploy.management.commands.utils import plugin_utils
 from django_simple_deploy.management.commands.utils.plugin_utils import sd_config
 from django_simple_deploy.management.commands.utils.command_errors import (
-    SimpleDeployCommandError,
+    DSDCommandError,
 )
 
 import pytest
@@ -88,7 +88,7 @@ def test_get_plugin_name_no_plugins():
         "django-bootstrap5",
     ]
 
-    with pytest.raises(SimpleDeployCommandError):
+    with pytest.raises(DSDCommandError):
         plugin_name = sd_utils._get_plugin_name_from_packages(available_packages)
 
 
@@ -105,7 +105,7 @@ def test_get_plugin_name_too_many_plugins():
         "django-bootstrap5",
     ]
 
-    with pytest.raises(SimpleDeployCommandError):
+    with pytest.raises(DSDCommandError):
         plugin_name = sd_utils._get_plugin_name_from_packages(available_packages)
 
 

@@ -130,7 +130,7 @@ def test_unacceptable_settings_change(tmp_project):
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." not in stdout
-    assert "SimpleDeployCommandError" in stderr
+    assert "DSDCommandError" in stderr
 
 
 def test_unacceptable_file_changed(tmp_project):
@@ -145,7 +145,7 @@ def test_unacceptable_file_changed(tmp_project):
     stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." not in stdout
-    assert "SimpleDeployCommandError" in stderr
+    assert "DSDCommandError" in stderr
 
 
 def test_sdlogs_exists(tmp_project):

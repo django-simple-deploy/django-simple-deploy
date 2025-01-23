@@ -40,7 +40,7 @@ from .utils import sd_utils
 from .utils import plugin_utils
 
 from .utils.plugin_utils import sd_config
-from .utils.command_errors import SimpleDeployCommandError
+from .utils.command_errors import DSDCommandError
 from . import cli
 
 from django_simple_deploy.plugins import pm
@@ -230,7 +230,7 @@ class Command(BaseCommand):
             None
 
         Raises:
-            SimpleDeployCommandError: If we can't do a deployment with given set of args.
+            DSDCommandError: If we can't do a deployment with given set of args.
         """
         # DEV: This was used to validate the deprecated --platform arg, but will probably
         # be used again.
@@ -320,7 +320,7 @@ class Command(BaseCommand):
             None
 
         Raises:
-            SimpleDeployCommandError: If .git/ dir not found.
+            DSDCommandError: If .git/ dir not found.
         """
         if (sd_config.project_root / ".git").exists():
             sd_config.git_path = sd_config.project_root
@@ -333,7 +333,7 @@ class Command(BaseCommand):
         else:
             error_msg = "Could not find a .git/ directory."
             error_msg += f"\n  Looked in {sd_config.project_root} and in {sd_config.project_root.parent}."
-            raise SimpleDeployCommandError(error_msg)
+            raise DSDCommandError(error_msg)
 
     def _check_git_status(self):
         """Make sure all non-dsd changes have already been committed.
@@ -353,7 +353,7 @@ class Command(BaseCommand):
             None: If status is such that `deploy` can continue.
 
         Raises:
-            SimpleDeployCommandError: If any reason found not to continue.
+            DSDCommandError: If any reason found not to continue.
         """
         if self.ignore_unclean_git:
             msg = "Ignoring git status."
@@ -384,7 +384,7 @@ class Command(BaseCommand):
         if sd_config.automate_all:
             error_msg += sd_messages.unclean_git_automate_all
 
-        raise SimpleDeployCommandError(error_msg)
+        raise DSDCommandError(error_msg)
 
     def _ignore_sd_logs(self):
         """Add log dir to .gitignore.
@@ -421,7 +421,7 @@ class Command(BaseCommand):
             str: "req_txt" | "poetry" | "pipenv"
 
         Raises:
-            SimpleDeployCommandError: If a pkg manager can't be identified.
+            DSDCommandError: If a pkg manager can't be identified.
         """
         if (sd_config.git_path / "Pipfile").exists():
             return "pipenv"
@@ -432,7 +432,7 @@ class Command(BaseCommand):
 
         # Exit if we haven't found any requirements.
         error_msg = f"Couldn't find any specified requirements in {sd_config.git_path}."
-        raise SimpleDeployCommandError(error_msg)
+        raise DSDCommandError(error_msg)
 
     def _check_using_poetry(self):
         """Check if the project appears to be using poetry.
@@ -502,7 +502,7 @@ class Command(BaseCommand):
         Returns:
             None
         Raises:
-            SimpleDeployCommandError: If plugin found invalid in any way.
+            DSDCommandError: If plugin found invalid in any way.
         """
         plugin = pm.list_name_plugin()[0][1]
 
@@ -513,7 +513,7 @@ class Command(BaseCommand):
         for hook in required_hooks:
             if hook not in callers:
                 msg = f"\nPlugin missing required hook implementation: {hook}()"
-                raise SimpleDeployCommandError(msg)
+                raise DSDCommandError(msg)
 
         # Load plugin config, and validate config.
         self.plugin_config = pm.hook.dsd_get_plugin_config()[0]
@@ -522,7 +522,7 @@ class Command(BaseCommand):
         if self.plugin_config.automate_all_supported and sd_config.automate_all:
             if not hasattr(self.plugin_config, "confirm_automate_all_msg"):
                 msg = "\nThis plugin supports --automate-all, but does not provide a confirmation message."
-                raise SimpleDeployCommandError(msg)
+                raise DSDCommandError(msg)
 
     def _confirm_automate_all(self, pm):
         """Confirm the user understands what --automate-all does.
@@ -540,7 +540,7 @@ class Command(BaseCommand):
         if not self.plugin_config.automate_all_supported:
             msg = "\nThis platform does not support automated deployments."
             msg += "\nYou may want to try again without the --automate-all flag."
-            raise SimpleDeployCommandError(msg)
+            raise DSDCommandError(msg)
 
         # Confirm the user wants to automate all steps.
         msg = self.plugin_config.confirm_automate_all_msg

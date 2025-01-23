@@ -11,7 +11,7 @@ from importlib.metadata import packages_distributions
 from django.template.engine import Engine, Context
 from django.template.utils import get_app_template_dirs
 
-from .command_errors import SimpleDeployCommandError
+from .command_errors import DSDCommandError
 
 import toml
 
@@ -237,7 +237,7 @@ def _get_plugin_name_from_packages(available_packages):
         msg += "\n  $ pip install dsd-flyio"
         msg += "\nPlease install the plugin for the platform you want to deploy to,"
         msg += "\nand then run the deploy command again."
-        raise SimpleDeployCommandError(msg)
+        raise DSDCommandError(msg)
 
     if len(plugin_names) == 1:
         return plugin_names[0]
@@ -246,4 +246,4 @@ def _get_plugin_name_from_packages(available_packages):
     msg = f"There seem to be multiple plugins installed."
     msg += "\nPlease uninstall plugins, keeping only the one you want to use for deployment."
     msg += "\nFuture releases of simple_deploy may allow you to select which plugin to use."
-    raise SimpleDeployCommandError(msg)
+    raise DSDCommandError(msg)

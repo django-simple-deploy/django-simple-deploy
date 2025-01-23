@@ -58,7 +58,7 @@ def check_project_unchanged(tmp_proj_dir):
 #     stdout, stderr = msp.call_simple_deploy(tmp_project, invalid_sd_command)
 
 #     assert (
-#         "SimpleDeployCommandError: Could not find plugin for the platform unsupported_platform_name."
+#         "DSDCommandError: Could not find plugin for the platform unsupported_platform_name."
 #         in stderr
 #     )
 #     check_project_unchanged(tmp_project)
@@ -73,7 +73,7 @@ def check_project_unchanged(tmp_proj_dir):
 #     stdout, stderr = msp.call_simple_deploy(tmp_project, invalid_sd_command)
 
 #     assert (
-#         "SimpleDeployCommandError: Could not find plugin for the platform unsupported_platform_name."
+#         "DSDCommandError: Could not find plugin for the platform unsupported_platform_name."
 #         in stderr
 #     )
 #     check_project_unchanged(tmp_project)

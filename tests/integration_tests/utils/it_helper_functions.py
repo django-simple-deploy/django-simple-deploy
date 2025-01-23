@@ -17,7 +17,7 @@ import pytest
 
 from django_simple_deploy.management.commands.utils import sd_utils
 from django_simple_deploy.management.commands.utils.command_errors import (
-    SimpleDeployCommandError,
+    DSDCommandError,
 )
 
 
@@ -78,7 +78,7 @@ def check_plugin_available(config):
     # No plugin specified; make sure one is installed.
     try:
         sd_utils.get_plugin_name()
-    except SimpleDeployCommandError:
+    except DSDCommandError:
         msg = "\n*** No plugins installed. Skipping integration tests. ***"
         print(msg)
         pytest.skip()

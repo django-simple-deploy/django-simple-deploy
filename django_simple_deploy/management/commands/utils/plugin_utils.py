@@ -15,7 +15,7 @@ from django.utils.safestring import mark_safe
 
 from .. import sd_messages
 from .sd_config import SDConfig
-from .command_errors import SimpleDeployCommandError
+from .command_errors import DSDCommandError
 
 
 # Create sd_config once right here. The attributes are set by simple_deploy,
@@ -38,7 +38,7 @@ def add_file(path, contents):
     - None
 
     Raises:
-    - SimpleDeployCommandError: If file exists, and user does not give permission
+    - DSDCommandError: If file exists, and user does not give permission
     to overwrite file.
     """
 
@@ -47,7 +47,7 @@ def add_file(path, contents):
     if path.exists():
         proceed = get_confirmation(sd_messages.file_found(path.name))
         if not proceed:
-            raise SimpleDeployCommandError(sd_messages.file_replace_rejected(path.name))
+            raise DSDCommandError(sd_messages.file_replace_rejected(path.name))
     else:
         write_output(f"    File {path.name} not found. Generating file...")
 
@@ -69,12 +69,12 @@ def modify_file(path, contents):
     - None
 
     Raises:
-    - SimpleDeployCommandError: If file does not exist.
+    - DSDCommandError: If file does not exist.
     """
     # Make sure file exists.
     if not path.exists():
         msg = f"File {path.as_posix()} does not exist."
-        raise SimpleDeployCommandError(msg)
+        raise DSDCommandError(msg)
 
     # Rewrite file with new contents.
     path.write_text(contents)
@@ -138,7 +138,7 @@ def get_numbered_choice(prompt, valid_choices, quit_message):
         log_info(selection)
 
         if selection.lower() in ["q", "quit"]:
-            raise SimpleDeployCommandError(quit_message)
+            raise DSDCommandError(quit_message)
 
         # Make sure they entered a number
         try:
@@ -273,7 +273,7 @@ def check_settings(platform_name, start_line, msg_found, msg_cant_overwrite):
         None
 
     Raises:
-        SimpleDeployCommandError: If we can't overwrite existing platform-specific
+        DSDCommandError: If we can't overwrite existing platform-specific
         settings block.
     """
     settings_text = sd_config.settings_path.read_text()
@@ -287,7 +287,7 @@ def check_settings(platform_name, start_line, msg_found, msg_cant_overwrite):
 
     # A platform-specific settings block exists. Get permission to overwrite it.
     if not get_confirmation(msg_found):
-        raise SimpleDeployCommandError(msg_cant_overwrite)
+        raise DSDCommandError(msg_cant_overwrite)
 
     # Platform-specific settings exist, but we can remove them and start fresh.
     sd_config.settings_path.write_text(m.group(1))
