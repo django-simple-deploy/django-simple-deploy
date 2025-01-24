@@ -113,7 +113,7 @@ def add_sd_installed_apps(tmp_project):
 def test_clean_git_status(tmp_project):
     """Call deploy with the existing clean state of the project."""
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
@@ -127,7 +127,7 @@ def test_unacceptable_settings_change(tmp_project):
     path.write_text(new_settings_text)
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." not in stdout
     assert "DSDCommandError" in stderr
@@ -142,7 +142,7 @@ def test_unacceptable_file_changed(tmp_project):
     path.write_text(new_wsgi_text)
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." not in stdout
     assert "DSDCommandError" in stderr
@@ -153,7 +153,7 @@ def test_sdlogs_exists(tmp_project):
     add_sd_logs(tmp_project)
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
@@ -163,7 +163,7 @@ def test_add_sdlogs_gitignore(tmp_project):
     add_sd_logs_gitignore(tmp_project)
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
@@ -173,7 +173,7 @@ def test_add_sd_installed_apps(tmp_project):
     add_sd_installed_apps(tmp_project)
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
@@ -189,7 +189,7 @@ def test_sdlogs_exists_add_sdlogs_gitignore(tmp_project):
     add_sd_logs_gitignore(tmp_project)
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
@@ -203,7 +203,7 @@ def test_sdlogs_exists_sd_installed_apps(tmp_project):
     add_sd_logs(tmp_project)
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
@@ -215,7 +215,7 @@ def test_sdlogs_gitignore_sd_installed_apps(tmp_project):
     add_sd_logs_gitignore(tmp_project)
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
@@ -233,7 +233,7 @@ def test_sdlogs_exists_sdlogs_gitgnore_sd_installed_apps(tmp_project):
     add_sd_logs_gitignore(tmp_project)
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "No uncommitted changes, other than django-simple-deploy work." in stdout
 
@@ -244,7 +244,7 @@ def test_sdlogs_exists_sdlogs_gitgnore_sd_installed_apps(tmp_project):
 def test_clean_git_status_ignore_unclean_flag(tmp_project):
     """Call deploy with the existing clean state of the project."""
     sd_command = "python manage.py deploy --ignore-unclean-git"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "Ignoring git status." in stdout
 
@@ -258,7 +258,7 @@ def test_unacceptable_settings_change_ignore_unclean_flag(tmp_project):
     path.write_text(new_settings_text)
 
     sd_command = "python manage.py deploy --ignore-unclean-git"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "Ignoring git status." in stdout
     # assert "Ignoring git status." not in stdout
@@ -273,6 +273,6 @@ def test_unacceptable_file_changed_ignore_unclean_flag(tmp_project):
     path.write_text(new_wsgi_text)
 
     sd_command = "python manage.py deploy --ignore-unclean-git"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert "Ignoring git status." in stdout

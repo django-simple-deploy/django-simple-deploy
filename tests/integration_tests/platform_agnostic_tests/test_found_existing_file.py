@@ -46,7 +46,7 @@ def test_with_existing_dockerfile(tmp_project):
     output_str = execute_quick_command(tmp_project, cmd).stdout.decode()
 
     sd_command = "python manage.py deploy"
-    stdout, stderr = msp.call_simple_deploy(tmp_project, sd_command)
+    stdout, stderr = msp.call_deploy(tmp_project, sd_command)
 
     assert (
         "The file Dockerfile already exists. Is it okay to replace this file?" in stdout

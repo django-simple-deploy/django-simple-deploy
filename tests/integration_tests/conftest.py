@@ -157,7 +157,7 @@ def run_simple_deploy(reset_test_project, tmp_project, request):
     platform = plugin_name.removeprefix("dsd-")
 
     cmd = f"python manage.py deploy"
-    msp.call_simple_deploy(tmp_project, cmd, platform)
+    msp.call_deploy(tmp_project, cmd, platform)
 
 
 @pytest.fixture()

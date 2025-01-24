@@ -229,8 +229,8 @@ def reset_test_project(tmp_dir, pkg_manager):
     subprocess.run(["git", "commit", "-am", "Added django_simple_deploy to INSTALLED_APPS."])
 
 
-def call_simple_deploy(tmp_dir, sd_command, platform=None):
-    """Make a call to deploy, using the arguments passed in sd_command.
+def call_deploy(tmp_dir, dsd_command, platform=None):
+    """Make a call to deploy, using the arguments passed in dsd_command.
 
     Returns:
     - stdout, stderr
@@ -242,7 +242,7 @@ def call_simple_deploy(tmp_dir, sd_command, platform=None):
     os.chdir(tmp_dir)
 
     # Add --unit-testing argument to the call.
-    sd_command = sd_command.replace("deploy", "deploy --unit-testing")
+    dsd_command = dsd_command.replace("deploy", "deploy --unit-testing")
 
     # Add options that are present.
     # - If we're testing for a platform, add that platform option.
@@ -255,10 +255,10 @@ def call_simple_deploy(tmp_dir, sd_command, platform=None):
     # DEV: This will probably not be hard-coded once third-party plugins are being
     # written.
     if platform:
-        sd_command = f"{sd_command}"
+        dsd_command = f"{dsd_command}"
     if platform in ("fly_io", "flyio", "platform_sh", "platformsh"):
         # These platforms need a project name to carry out configuration.
-        sd_command = f"{sd_command} --deployed-project-name my_blog_project"
+        dsd_command = f"{dsd_command} --deployed-project-name my_blog_project"
 
     # Get the path to the Python interpreter in the virtual environment.
     #   We'll use the full path to the interpreter, rather than trying to rely on
@@ -268,14 +268,14 @@ def call_simple_deploy(tmp_dir, sd_command, platform=None):
     else:
         python_exe = Path(tmp_dir) / "b_env" / "bin" / "python"
 
-    sd_command = sd_command.replace("python", python_exe.as_posix())
-    print(f"*** sd_command: {sd_command} ***")
+    dsd_command = dsd_command.replace("python", python_exe.as_posix())
+    print(f"*** dsd_command: {dsd_command} ***")
 
     # Make the call to deploy.
     #   The `text=True` argument causes this to return stdout and stderr as strings, not objects.
     #   Some of these commands, such as cwd, are required specifically for Windows.
     sd_call = subprocess.Popen(
-        split(sd_command),
+        split(dsd_command),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
