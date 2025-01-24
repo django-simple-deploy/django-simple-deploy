@@ -8,7 +8,7 @@ from .it_helper_functions import make_sp_call
 # --- Helper functions ---
 
 
-def add_simple_deploy(tmp_dir):
+def add_dsd(tmp_dir):
     """Add django_simple_deploy to INSTALLED_APPS in the test project."""
     settings_file_path = tmp_dir / "blog/settings.py"
     settings_content = settings_file_path.read_text()
@@ -201,7 +201,7 @@ def setup_project(tmp_proj_dir, sd_root_dir, cli_options):
     make_sp_call("git tag -am '' 'INITIAL_STATE'")
 
     # Add django_simple_deploy to INSTALLED_APPS.
-    add_simple_deploy(tmp_proj_dir)
+    add_dsd(tmp_proj_dir)
 
     # Make sure we have a clean status before calling deploy.
     make_sp_call("git commit -am 'Added django_simple_deploy to INSTALLED_APPS.'")
