@@ -35,8 +35,8 @@ def reset_test_project_function(request, tmp_project):
 
 
 @pytest.fixture(autouse=True)
-def run_simple_deploy():
-    """Overrides main run_simple_deploy() fixture, which is not needed here."""
+def run_dsd():
+    """Overrides main run_dsd() fixture, which is not needed here."""
     return
 
 

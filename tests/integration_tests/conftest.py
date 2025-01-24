@@ -133,7 +133,7 @@ def reset_test_project(request, tmp_project):
 
 
 @pytest.fixture(scope="module", autouse=True)
-def run_simple_deploy(reset_test_project, tmp_project, request):
+def run_dsd(reset_test_project, tmp_project, request):
     """Run the deploy command, targeting the plugin that's currently being tested.
     This auto-runs for all test modules in the /integration_tests/ directory, and
     should run for all default plugins as well.
