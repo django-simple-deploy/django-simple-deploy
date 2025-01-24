@@ -11,17 +11,17 @@ Configures your project for deployment to the specified platform.
 Get help:
   --help, -h            Show this help message and exit.
 
-Customize simple_deploy's behavior:
+Customize django-simple-deploy's behavior:
   --automate-all        Automate all aspects of deployment. Create resources,
                         make commits, and run `push` or `deploy` commands.
   --no-logging          Do not create a log of the configuration and
                         deployment process.
-  --ignore-unclean-git  Run simple_deploy even with an unclean `git status`
-                        message.
+  --ignore-unclean-git  Run the deploy command even with an unclean `git
+                        status` message.
 
 Customize deployment configuration:
   --deployed-project-name DEPLOYED_PROJECT_NAME
-                        Provide a name that the platform will use for this
+                        Provide a name that the plugin will use for this
                         project.
   --region REGION       Specify the region that this project will be deployed
                         to.
