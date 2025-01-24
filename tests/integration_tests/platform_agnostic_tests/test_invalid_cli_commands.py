@@ -40,8 +40,8 @@ def check_project_unchanged(tmp_proj_dir):
 # DEV: Update this test after requiring `--configuration-only` or `automate-all`
 # def test_bare_call(tmp_project):
 #     """Call deploy with no arguments."""
-#     invalid_sd_command = "python manage.py deploy"
-#     stdout, stderr = msp.call_deploy(tmp_project, invalid_sd_command)
+#     invalid_dsd_command = "python manage.py deploy"
+#     stdout, stderr = msp.call_deploy(tmp_project, invalid_dsd_command)
 
 #     assert "The --platform flag is required;" in stderr
 #     assert "Please re-run the command with a --platform option specified." in stderr
@@ -52,10 +52,10 @@ def check_project_unchanged(tmp_proj_dir):
 # DEV: Update this to reflect an invalid --plugin arg.
 # def test_invalid_platform_call(tmp_project):
 #     """Call deploy with an invalid --platform argument."""
-#     invalid_sd_command = (
+#     invalid_dsd_command = (
 #         "python manage.py deploy --platform unsupported_platform_name"
 #     )
-#     stdout, stderr = msp.call_deploy(tmp_project, invalid_sd_command)
+#     stdout, stderr = msp.call_deploy(tmp_project, invalid_dsd_command)
 
 #     assert (
 #         "DSDCommandError: Could not find plugin for the platform unsupported_platform_name."
@@ -69,8 +69,8 @@ def check_project_unchanged(tmp_proj_dir):
 #     """Call deploy with an invalid --platform argument,
 #     and `--automate-all`.
 #     """
-#     invalid_sd_command = "python manage.py deploy --platform unsupported_platform_name --automate-all"
-#     stdout, stderr = msp.call_deploy(tmp_project, invalid_sd_command)
+#     invalid_dsd_command = "python manage.py deploy --platform unsupported_platform_name --automate-all"
+#     stdout, stderr = msp.call_deploy(tmp_project, invalid_dsd_command)
 
 #     assert (
 #         "DSDCommandError: Could not find plugin for the platform unsupported_platform_name."

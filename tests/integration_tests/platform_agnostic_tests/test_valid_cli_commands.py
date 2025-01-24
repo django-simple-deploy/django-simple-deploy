@@ -19,8 +19,8 @@ from ..utils import manage_sample_project as msp
 
 def test_help_output(tmp_project, capfd):
     """Call `manage.py deploy --help`."""
-    valid_sd_command = "python manage.py deploy --help"
-    stdout, stderr = msp.call_deploy(tmp_project, valid_sd_command)
+    valid_dsd_command = "python manage.py deploy --help"
+    stdout, stderr = msp.call_deploy(tmp_project, valid_dsd_command)
 
     current_test_dir = Path(__file__).parent
     reference_help_output = (
