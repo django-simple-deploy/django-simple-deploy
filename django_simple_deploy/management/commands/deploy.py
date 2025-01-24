@@ -39,7 +39,7 @@ from . import dsd_messages
 from .utils import dsd_utils
 from .utils import plugin_utils
 
-from .utils.plugin_utils import sd_config
+from .utils.plugin_utils import dsd_config
 from .utils.command_errors import DSDCommandError
 from . import cli
 
@@ -104,7 +104,7 @@ class Command(BaseCommand):
         Call the platform-specific deploy() method.
         """
         # Need to define stdout before the first call to write_output().
-        sd_config.stdout = self.stdout
+        dsd_config.stdout = self.stdout
 
         plugin_utils.write_output(
             "Configuring project for deployment...", skip_logging=True
@@ -114,7 +114,7 @@ class Command(BaseCommand):
         # has been passed.
         self._parse_cli_options(options)
 
-        if sd_config.log_output:
+        if dsd_config.log_output:
             self._start_logging()
             self._log_cli_args(options)
 
@@ -137,9 +137,9 @@ class Command(BaseCommand):
 
         self._confirm_automate_all(pm)
 
-        # At this point sd_config is fully defined, so we can validate it before handing
+        # At this point dsd_config is fully defined, so we can validate it before handing
         # responsiblity off to plugin.
-        sd_config.validate()
+        dsd_config.validate()
 
         # Platform-agnostic work is finished. Hand off to plugin.
         pm.hook.dsd_deploy()
@@ -148,17 +148,17 @@ class Command(BaseCommand):
         """Parse CLI options from deploy command."""
 
         # Platform-agnostic arguments.
-        sd_config.automate_all = options["automate_all"]
-        sd_config.log_output = not (options["no_logging"])
+        dsd_config.automate_all = options["automate_all"]
+        dsd_config.log_output = not (options["no_logging"])
         self.ignore_unclean_git = options["ignore_unclean_git"]
 
         # Platform.sh arguments.
-        sd_config.deployed_project_name = options["deployed_project_name"]
-        sd_config.region = options["region"]
+        dsd_config.deployed_project_name = options["deployed_project_name"]
+        dsd_config.region = options["region"]
 
         # Developer arguments.
-        sd_config.unit_testing = options["unit_testing"]
-        sd_config.e2e_testing = options["e2e_testing"]
+        dsd_config.unit_testing = options["unit_testing"]
+        dsd_config.e2e_testing = options["e2e_testing"]
 
     def _start_logging(self):
         """Set up for logging.
@@ -239,20 +239,20 @@ class Command(BaseCommand):
     def _inspect_system(self):
         """Inspect the user's local system for relevant information.
 
-        Uses sd_config.on_windows and sd_config.on_macos because those are clean checks to run.
-        May want to refactor to sd_config.user_system at some point. Don't ever use
-        sd_config.platform, because "platform" usually refers to the host we're deploying to.
+        Uses dsd_config.on_windows and dsd_config.on_macos because those are clean checks to run.
+        May want to refactor to dsd_config.user_system at some point. Don't ever use
+        dsd_config.platform, because "platform" usually refers to the host we're deploying to.
 
         Linux is not mentioned because so far, if it works on macOS it works on Linux.
         """
-        sd_config.use_shell = False
-        sd_config.on_windows, sd_config.on_macos = False, False
+        dsd_config.use_shell = False
+        dsd_config.on_windows, dsd_config.on_macos = False, False
         if platform.system() == "Windows":
-            sd_config.on_windows = True
-            sd_config.use_shell = True
+            dsd_config.on_windows = True
+            dsd_config.use_shell = True
             plugin_utils.log_info("Local platform identified: Windows")
         elif platform.system() == "Darwin":
-            sd_config.on_macos = True
+            dsd_config.on_macos = True
             plugin_utils.log_info("Local platform identified: macOS")
 
     def _inspect_project(self):
@@ -276,30 +276,30 @@ class Command(BaseCommand):
         Returns:
             None
         """
-        sd_config.local_project_name = settings.ROOT_URLCONF.replace(".urls", "")
-        plugin_utils.log_info(f"Local project name: {sd_config.local_project_name}")
+        dsd_config.local_project_name = settings.ROOT_URLCONF.replace(".urls", "")
+        plugin_utils.log_info(f"Local project name: {dsd_config.local_project_name}")
 
-        sd_config.project_root = settings.BASE_DIR
-        plugin_utils.log_info(f"Project root: {sd_config.project_root}")
+        dsd_config.project_root = settings.BASE_DIR
+        plugin_utils.log_info(f"Project root: {dsd_config.project_root}")
 
         # Find .git location, and make sure there's a clean status.
         self._find_git_dir()
         self._check_git_status()
 
         # Now that we know where .git is, we can ignore dsd logs.
-        if sd_config.log_output:
+        if dsd_config.log_output:
             self._ignore_sd_logs()
 
-        sd_config.settings_path = (
-            sd_config.project_root / sd_config.local_project_name / "settings.py"
+        dsd_config.settings_path = (
+            dsd_config.project_root / dsd_config.local_project_name / "settings.py"
         )
 
         # Find out which package manager is being used: req_txt, poetry, or pipenv
-        sd_config.pkg_manager = self._get_dep_man_approach()
-        msg = f"Dependency management system: {sd_config.pkg_manager}"
+        dsd_config.pkg_manager = self._get_dep_man_approach()
+        msg = f"Dependency management system: {dsd_config.pkg_manager}"
         plugin_utils.write_output(msg)
 
-        sd_config.requirements = self._get_current_requirements()
+        dsd_config.requirements = self._get_current_requirements()
 
     def _find_git_dir(self):
         """Find .git/ location.
@@ -314,7 +314,7 @@ class Command(BaseCommand):
         likely to be.
 
         Sets:
-            sd_config.git_path, sd_config.nested_project
+            dsd_config.git_path, dsd_config.nested_project
 
         Returns:
             None
@@ -322,17 +322,17 @@ class Command(BaseCommand):
         Raises:
             DSDCommandError: If .git/ dir not found.
         """
-        if (sd_config.project_root / ".git").exists():
-            sd_config.git_path = sd_config.project_root
-            plugin_utils.write_output(f"Found .git dir at {sd_config.git_path}.")
-            sd_config.nested_project = False
+        if (dsd_config.project_root / ".git").exists():
+            dsd_config.git_path = dsd_config.project_root
+            plugin_utils.write_output(f"Found .git dir at {dsd_config.git_path}.")
+            dsd_config.nested_project = False
         elif (self.project_root.parent / ".git").exists():
-            sd_config.git_path = sd_config.project_root.parent
-            plugin_utils.write_output(f"Found .git dir at {sd_config.git_path}.")
-            sd_config.nested_project = True
+            dsd_config.git_path = dsd_config.project_root.parent
+            plugin_utils.write_output(f"Found .git dir at {dsd_config.git_path}.")
+            dsd_config.nested_project = True
         else:
             error_msg = "Could not find a .git/ directory."
-            error_msg += f"\n  Looked in {sd_config.project_root} and in {sd_config.project_root.parent}."
+            error_msg += f"\n  Looked in {dsd_config.project_root} and in {dsd_config.project_root.parent}."
             raise DSDCommandError(error_msg)
 
     def _check_git_status(self):
@@ -381,7 +381,7 @@ class Command(BaseCommand):
     def _raise_unclean_error(self):
         """Raise unclean git status error."""
         error_msg = dsd_messages.unclean_git_status
-        if sd_config.automate_all:
+        if dsd_config.automate_all:
             error_msg += dsd_messages.unclean_git_automate_all
 
         raise DSDCommandError(error_msg)
@@ -393,7 +393,7 @@ class Command(BaseCommand):
         """
         ignore_msg = "dsd_logs/\n"
 
-        gitignore_path = sd_config.git_path / ".gitignore"
+        gitignore_path = dsd_config.git_path / ".gitignore"
         if not gitignore_path.exists():
             # Make the .gitignore file, and add log directory.
             gitignore_path.write_text(ignore_msg, encoding="utf-8")
@@ -423,15 +423,15 @@ class Command(BaseCommand):
         Raises:
             DSDCommandError: If a pkg manager can't be identified.
         """
-        if (sd_config.git_path / "Pipfile").exists():
+        if (dsd_config.git_path / "Pipfile").exists():
             return "pipenv"
         elif self._check_using_poetry():
             return "poetry"
-        elif (sd_config.git_path / "requirements.txt").exists():
+        elif (dsd_config.git_path / "requirements.txt").exists():
             return "req_txt"
 
         # Exit if we haven't found any requirements.
-        error_msg = f"Couldn't find any specified requirements in {sd_config.git_path}."
+        error_msg = f"Couldn't find any specified requirements in {dsd_config.git_path}."
         raise DSDCommandError(error_msg)
 
     def _check_using_poetry(self):
@@ -442,7 +442,7 @@ class Command(BaseCommand):
         Returns:
             bool: True if found, False if not found.
         """
-        path = sd_config.git_path / "pyproject.toml"
+        path = dsd_config.git_path / "pyproject.toml"
         if not path.exists():
             return False
 
@@ -465,15 +465,15 @@ class Command(BaseCommand):
         msg = "Checking current project requirements..."
         plugin_utils.write_output(msg)
 
-        if sd_config.pkg_manager == "req_txt":
-            sd_config.req_txt_path = sd_config.git_path / "requirements.txt"
-            requirements = dsd_utils.parse_req_txt(sd_config.req_txt_path)
-        elif sd_config.pkg_manager == "pipenv":
-            sd_config.pipfile_path = sd_config.git_path / "Pipfile"
-            requirements = dsd_utils.parse_pipfile(sd_config.pipfile_path)
-        elif sd_config.pkg_manager == "poetry":
-            sd_config.pyprojecttoml_path = sd_config.git_path / "pyproject.toml"
-            requirements = dsd_utils.parse_pyproject_toml(sd_config.pyprojecttoml_path)
+        if dsd_config.pkg_manager == "req_txt":
+            dsd_config.req_txt_path = dsd_config.git_path / "requirements.txt"
+            requirements = dsd_utils.parse_req_txt(dsd_config.req_txt_path)
+        elif dsd_config.pkg_manager == "pipenv":
+            dsd_config.pipfile_path = dsd_config.git_path / "Pipfile"
+            requirements = dsd_utils.parse_pipfile(dsd_config.pipfile_path)
+        elif dsd_config.pkg_manager == "poetry":
+            dsd_config.pyprojecttoml_path = dsd_config.git_path / "pyproject.toml"
+            requirements = dsd_utils.parse_pyproject_toml(dsd_config.pyprojecttoml_path)
 
         # Report findings.
         msg = "  Found existing dependencies:"
@@ -519,7 +519,7 @@ class Command(BaseCommand):
         self.plugin_config = pm.hook.dsd_get_plugin_config()[0]
 
         # Make sure there's a confirmation msg for automate_all if needed.
-        if self.plugin_config.automate_all_supported and sd_config.automate_all:
+        if self.plugin_config.automate_all_supported and dsd_config.automate_all:
             if not hasattr(self.plugin_config, "confirm_automate_all_msg"):
                 msg = "\nThis plugin supports --automate-all, but does not provide a confirmation message."
                 raise DSDCommandError(msg)
@@ -532,7 +532,7 @@ class Command(BaseCommand):
         If confirmation not granted, exit with a message, but no error.
         """
         # Placing this check here keeps the handle() method cleaner.
-        if not sd_config.automate_all:
+        if not dsd_config.automate_all:
             return
 
         # Make sure this plugin supports automate-all.

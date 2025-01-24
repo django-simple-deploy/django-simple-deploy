@@ -1,6 +1,6 @@
 """Tests for simple_deploy/management/commands/utils.py.
 
-Note: May need to rethink handling of sd_config, if tests start to affect each other.
+Note: May need to rethink handling of dsd_config, if tests start to affect each other.
 """
 
 from pathlib import Path
@@ -10,7 +10,7 @@ import subprocess
 
 from django_simple_deploy.management.commands.utils import dsd_utils
 from django_simple_deploy.management.commands.utils import plugin_utils
-from django_simple_deploy.management.commands.utils.plugin_utils import sd_config
+from django_simple_deploy.management.commands.utils.plugin_utils import dsd_config
 from django_simple_deploy.management.commands.utils.command_errors import (
     DSDCommandError,
 )
@@ -208,13 +208,13 @@ def test_add_pipenv_pkg(tmp_path):
     assert filecmp.cmp(tmp_pipfile, ref_file)
 
 
-# --- Tests for functions that require sd_config ---
+# --- Tests for functions that require dsd_config ---
 
 
 def test_add_file(tmp_path):
     """Test utility for adding a file."""
-    sd_config.unit_testing = "True"
-    sd_config.stdout = sys.stdout
+    dsd_config.unit_testing = "True"
+    dsd_config.stdout = sys.stdout
 
     contents = "Sample file contents.\n"
     path = tmp_path / "test_add_file.txt"

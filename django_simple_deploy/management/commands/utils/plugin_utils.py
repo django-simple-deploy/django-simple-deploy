@@ -14,14 +14,14 @@ from django.template.engine import Engine, Context
 from django.utils.safestring import mark_safe
 
 from .. import dsd_messages
-from .sd_config import SDConfig
+from .dsd_config import DSDConfig
 from .command_errors import DSDCommandError
 
 
-# Create sd_config once right here. The attributes are set by simple_deploy,
+# Create dsd_config once right here. The attributes are set by simple_deploy,
 # and then accessible by plugins. This approach keeps from having to pass the config
 # instance between core, plugins, and these utility functions.
-sd_config = SDConfig()
+dsd_config = DSDConfig()
 
 
 def add_file(path, contents):
@@ -91,14 +91,14 @@ def modify_settings_file(template_path, context=None):
     if context is None:
         context = {}
     # Add current settings to context.
-    settings_string = sd_config.settings_path.read_text()
+    settings_string = dsd_config.settings_path.read_text()
     safe_settings_string = mark_safe(settings_string)
     context["current_settings"] = safe_settings_string
 
     modified_settings_string = get_template_string(template_path, context)
 
     # Write settings to file.
-    modify_file(sd_config.settings_path, modified_settings_string)
+    modify_file(dsd_config.settings_path, modified_settings_string)
 
 
 def add_dir(path):
@@ -180,7 +180,7 @@ def run_quick_command(cmd, check=False, skip_logging=False):
     if not skip_logging:
         log_info(f"\n{cmd}")
 
-    if sd_config.on_windows:
+    if dsd_config.on_windows:
         output = subprocess.run(cmd, shell=True, capture_output=True)
     else:
         cmd_parts = shlex.split(cmd)
@@ -213,7 +213,7 @@ def run_slow_command(cmd, skip_logging=False):
         stderr=subprocess.PIPE,
         bufsize=1,
         universal_newlines=True,
-        shell=sd_config.use_shell,
+        shell=dsd_config.use_shell,
     ) as p:
         for line in p.stderr:
             write_output(line, skip_logging=skip_logging)
@@ -236,13 +236,13 @@ def get_confirmation(msg="Are you sure you want to do this?", skip_logging=False
     confirmed = ""
 
     # If doing e2e testing, always return True.
-    if sd_config.e2e_testing:
+    if dsd_config.e2e_testing:
         write_output(prompt, skip_logging=skip_logging)
         msg = "  Confirmed for e2e testing..."
         write_output(msg, skip_logging=skip_logging)
         return True
 
-    if sd_config.unit_testing:
+    if dsd_config.unit_testing:
         write_output(prompt, skip_logging=skip_logging)
         msg = "  Confirmed for unit testing..."
         write_output(msg, skip_logging=skip_logging)
@@ -276,7 +276,7 @@ def check_settings(platform_name, start_line, msg_found, msg_cant_overwrite):
         DSDCommandError: If we can't overwrite existing platform-specific
         settings block.
     """
-    settings_text = sd_config.settings_path.read_text()
+    settings_text = dsd_config.settings_path.read_text()
 
     re_platform_settings = f"(.*)({start_line})(.*)"
     m = re.match(re_platform_settings, settings_text, re.DOTALL)
@@ -290,7 +290,7 @@ def check_settings(platform_name, start_line, msg_found, msg_cant_overwrite):
         raise DSDCommandError(msg_cant_overwrite)
 
     # Platform-specific settings exist, but we can remove them and start fresh.
-    sd_config.settings_path.write_text(m.group(1))
+    dsd_config.settings_path.write_text(m.group(1))
 
     msg = f"  Removed existing {platform_name}-specific settings block."
     write_output(msg)
@@ -313,7 +313,7 @@ def write_output(output, write_to_console=True, skip_logging=False):
     output_str = get_string_from_output(output)
 
     if write_to_console:
-        sd_config.stdout.write(output_str)
+        dsd_config.stdout.write(output_str)
 
     if not skip_logging:
         log_info(output_str)
@@ -321,7 +321,7 @@ def write_output(output, write_to_console=True, skip_logging=False):
 
 def log_info(output):
     """Log output, which may be a string or CompletedProcess instance."""
-    if sd_config.log_output:
+    if dsd_config.log_output:
         output_str = get_string_from_output(output)
         log_output_string(output_str)
 
@@ -331,7 +331,7 @@ def commit_changes():
 
     This should only be called when automate_all is being used.
     """
-    if not sd_config.automate_all:
+    if not dsd_config.automate_all:
         return
 
     write_output("  Committing changes...")
@@ -372,17 +372,17 @@ def add_package(package_name, version=""):
     """
     write_output(f"\nLooking for {package_name}...")
 
-    if package_name in sd_config.requirements:
+    if package_name in dsd_config.requirements:
         write_output(f"  Found {package_name} in requirements file.")
         return
 
-    if sd_config.pkg_manager == "pipenv":
-        add_pipenv_pkg(sd_config.pipfile_path, package_name, version)
-    elif sd_config.pkg_manager == "poetry":
+    if dsd_config.pkg_manager == "pipenv":
+        add_pipenv_pkg(dsd_config.pipfile_path, package_name, version)
+    elif dsd_config.pkg_manager == "poetry":
         _check_poetry_deploy_group()
-        add_poetry_pkg(sd_config.pyprojecttoml_path, package_name, version)
+        add_poetry_pkg(dsd_config.pyprojecttoml_path, package_name, version)
     else:
-        add_req_txt_pkg(sd_config.req_txt_path, package_name, version)
+        add_req_txt_pkg(dsd_config.req_txt_path, package_name, version)
 
     write_output(f"  Added {package_name} to requirements file.")
 
@@ -402,7 +402,7 @@ def get_template_string(template_path, context):
 
 def read_log():
     """Get the contents of the current log file."""
-    if not sd_config.log_output:
+    if not dsd_config.log_output:
         return None
 
     log_handler = logging.getLogger().handlers[0]
@@ -492,11 +492,11 @@ def add_pipenv_pkg(pipfile_path, package, version):
 
 def _check_poetry_deploy_group():
     """Make sure a deploy group exists in pyproject.toml."""
-    pptoml_data = toml.load(sd_config.pyprojecttoml_path)
+    pptoml_data = toml.load(dsd_config.pyprojecttoml_path)
     try:
         deploy_group = pptoml_data["tool"]["poetry"]["group"]["deploy"]
     except KeyError:
-        create_poetry_deploy_group(sd_config.pyprojecttoml_path)
+        create_poetry_deploy_group(dsd_config.pyprojecttoml_path)
         msg = "    Added optional deploy group to pyproject.toml."
         write_output(msg)
 
