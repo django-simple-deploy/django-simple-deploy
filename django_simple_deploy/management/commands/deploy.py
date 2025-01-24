@@ -21,7 +21,7 @@ Overview:
     - Add django-simple-deploy to project requirements.
     - Call the plugin's `deploy()` method.
 
-See the project documentation for more about this process:
+See the documentation for more about this process:
     https://django-simple-deploy.readthedocs.io/en/latest/
 """
 
@@ -527,8 +527,7 @@ class Command(BaseCommand):
     def _confirm_automate_all(self, pm):
         """Confirm the user understands what --automate-all does.
 
-        Also confirm that the selected platform/ plugin manager supports fully
-        automated deployments.
+        Also confirm that the selected plugin supports fully automated deployments.
 
         If confirmation not granted, exit with a message, but no error.
         """
@@ -536,9 +535,9 @@ class Command(BaseCommand):
         if not sd_config.automate_all:
             return
 
-        # Make sure this platform supports automate-all.
+        # Make sure this plugin supports automate-all.
         if not self.plugin_config.automate_all_supported:
-            msg = "\nThis platform does not support automated deployments."
+            msg = "\nThis plugin does not support automated deployments."
             msg += "\nYou may want to try again without the --automate-all flag."
             raise DSDCommandError(msg)
 
