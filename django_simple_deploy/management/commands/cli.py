@@ -23,7 +23,7 @@ class SimpleDeployCLI:
         #   output for `manage.py deploy --help`
         help_group = parser.add_argument_group("Get help")
         required_group = parser.add_argument_group("Required arguments")
-        behavior_group = parser.add_argument_group("Customize simple_deploy's behavior")
+        behavior_group = parser.add_argument_group("Customize django-simple-deploy's behavior")
         deployment_config_group = parser.add_argument_group(
             "Customize deployment configuration"
         )
@@ -33,7 +33,7 @@ class SimpleDeployCLI:
             "--help", "-h", action="help", help="Show this help message and exit."
         )
 
-        # --- Arguments to customize simple_deploy behavior ---
+        # --- Arguments to customize django-simple-deploy behavior ---
 
         behavior_group.add_argument(
             "--automate-all",
@@ -48,10 +48,10 @@ class SimpleDeployCLI:
             action="store_true",
         )
 
-        # Allow users to use simple_deploy even with an unclean git status.
+        # Allow users to use the deploy command even with an unclean git status.
         behavior_group.add_argument(
             "--ignore-unclean-git",
-            help="Run simple_deploy even with an unclean `git status` message.",
+            help="Run the deploy command even with an unclean `git status` message.",
             action="store_true",
         )
 
@@ -63,7 +63,7 @@ class SimpleDeployCLI:
         deployment_config_group.add_argument(
             "--deployed-project-name",
             type=str,
-            help="Provide a name that the platform will use for this project.",
+            help="Provide a name that the plugin will use for this project.",
             default="",
         )
 
