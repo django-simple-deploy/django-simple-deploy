@@ -25,7 +25,7 @@ def execute_quick_command(tmp_project, cmd):
 
 
 def test_with_existing_dockerfile(tmp_project):
-    """Call simple_deploy with an existing Dockerfile.
+    """Call deploy with an existing Dockerfile.
 
     The --unit-testing flag should get confirmation, but we should see a relevant
     message in the log.

@@ -9,7 +9,7 @@ from .it_helper_functions import make_sp_call
 
 
 def add_simple_deploy(tmp_dir):
-    """Add simple_deploy to INSTALLED_APPS in the test project."""
+    """Add django_simple_deploy to INSTALLED_APPS in the test project."""
     settings_file_path = tmp_dir / "blog/settings.py"
     settings_content = settings_file_path.read_text()
     new_settings_content = settings_content.replace(
@@ -41,10 +41,10 @@ def setup_project(tmp_proj_dir, sd_root_dir, cli_options):
     - Copy the sample project to a temp dir.
     - Set up a venv.
     - Install requirements for the sample project.
-    - Install the appropriate version of simple_deploy.
+    - Install the appropriate version of django_simple_deploy.
     - Install the appropriate version of the plugin being tested.
     - Make an initial commit.
-    - Add simple_deploy to INSTALLED_APPS.
+    - Add django_simple_deploy to INSTALLED_APPS.
 
     Returns:
     - None
@@ -106,11 +106,11 @@ def setup_project(tmp_proj_dir, sd_root_dir, cli_options):
         )
         subprocess.run(cmd, shell=True, check=True)
 
-    # Usually, install the local version of simple_deploy (the version we're testing).
+    # Usually, install the local version of dsd (the version we're testing).
     # Note: We don't need an editable install, but a non-editable install is *much* slower.
     #   We may be able to use --cache-dir to address this, but -e is working fine right now.
     # If `--pypi` flag has been passed, install from PyPI.
-    # Treat plugins the same as simple_deploy.
+    # Treat plugins the same as dsd.
     plugin_repo_dir_name = cli_options.plugin_name.replace("_", "-")
     plugin_root_dir = sd_root_dir.parent / plugin_repo_dir_name
     if cli_options.pkg_manager == "req_txt" and uv_available:
@@ -140,9 +140,9 @@ def setup_project(tmp_proj_dir, sd_root_dir, cli_options):
         # Use pip to install the local version.
         # We could install the local wheel file using `poetry add`, but then
         #   the lock file won't work on the remote server. We're really testing
-        #   how simple_deploy handles a poetry environment, we're not testing
+        #   how dsd handles a poetry environment, we're not testing
         #   how poetry installs the local package. So this should reliably test
-        #   whether an end user who uses poetry is able to use simple_deploy
+        #   whether an end user who uses poetry is able to use django-simple-deploy
         #   successfully.
         if cli_options.pypi:
             cmd = f". {activate_path} && cd {tmp_proj_dir} && poetry add django-simple-deploy {cli_options.plugin_name}"
@@ -184,7 +184,7 @@ def setup_project(tmp_proj_dir, sd_root_dir, cli_options):
             subprocess.run(cmd, shell=True, check=True)
 
     # Make an initial git commit, so we can reset the project every time we want
-    #   to test a different simple_deploy command. This is much more efficient than
+    #   to test a different version of the deploy command. This is much more efficient than
     #   tearing down the whole sample project and rebuilding it from scratch.
     # We use a git tag to do the reset, instead of trying to capture the initial hash.
     # Note: This tag refers to the version of the project that contains files for all
@@ -200,8 +200,8 @@ def setup_project(tmp_proj_dir, sd_root_dir, cli_options):
     make_sp_call("git commit -am 'Initial commit.'")
     make_sp_call("git tag -am '' 'INITIAL_STATE'")
 
-    # Add simple_deploy to INSTALLED_APPS.
+    # Add django_simple_deploy to INSTALLED_APPS.
     add_simple_deploy(tmp_proj_dir)
 
-    # Make sure we have a clean status before calling simple_deploy.
+    # Make sure we have a clean status before calling deploy.
     make_sp_call("git commit -am 'Added django_simple_deploy to INSTALLED_APPS.'")

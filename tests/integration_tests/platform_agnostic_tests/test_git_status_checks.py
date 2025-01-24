@@ -74,11 +74,11 @@ def add_sd_logs_gitignore(tmp_project):
 
 
 def add_sd_installed_apps(tmp_project):
-    """Add simple_deploy to INSTALLED_APPS, as an uncommitted change.
+    """Add django_simple_deploy to INSTALLED_APPS, as an uncommitted change.
 
     Run this before making other changes.
     """
-    # Reset project to INITIAL_STATE, to remove simple_deploy from INSTALLED_APPS.
+    # Reset project to INITIAL_STATE, to remove django_simple_deploy from INSTALLED_APPS.
     cmd = "git reset --hard INITIAL_STATE"
     output_str = execute_quick_command(tmp_project, cmd).stdout.decode()
     assert "HEAD is now at " in output_str
@@ -90,7 +90,7 @@ def add_sd_installed_apps(tmp_project):
     # 'django_simple_deploy' should no longer be in settings.
     assert "django_simple_deploy" not in settings_text
 
-    # Split settings into lines, and find where to insert 'simple_deploy'.
+    # Split settings into lines, and find where to insert 'django_simple_deploy'.
     settings_lines = settings_text.splitlines()
     for index, line in enumerate(settings_lines):
         if "django_bootstrap5" in line:
@@ -119,7 +119,7 @@ def test_clean_git_status(tmp_project):
 
 
 def test_unacceptable_settings_change(tmp_project):
-    """Call deploy after adding a non-simple_deploy line to settings.py."""
+    """Call deploy after adding a non-dsd line to settings.py."""
     path = tmp_project / "blog" / "settings.py"
     settings_text = path.read_text()
     new_text = "\n# Placeholder comment to create unacceptable git status.\n"
@@ -169,7 +169,7 @@ def test_add_sdlogs_gitignore(tmp_project):
 
 
 def test_add_sd_installed_apps(tmp_project):
-    """Add simple_deploy to INSTALLED_APPS, as an uncommitted change."""
+    """Add django_simple_deploy to INSTALLED_APPS, as an uncommitted change."""
     add_sd_installed_apps(tmp_project)
 
     sd_command = "python manage.py deploy"
@@ -250,7 +250,7 @@ def test_clean_git_status_ignore_unclean_flag(tmp_project):
 
 
 def test_unacceptable_settings_change_ignore_unclean_flag(tmp_project):
-    """Call deploy after adding a non-simple_deploy line to settings.py."""
+    """Call deploy after adding a non-dsd line to settings.py."""
     path = tmp_project / "blog" / "settings.py"
     settings_text = path.read_text()
     new_text = "\n# Placeholder comment to create unacceptable git status."

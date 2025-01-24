@@ -16,9 +16,9 @@ def setup_project(tmp_proj_dir, sd_root_dir, config):
     - Copy the sample project to a temp dir.
     - Set up a venv.
     - Install requirements for the sample project.
-    - Install the local, editable version of simple_deploy.
+    - Install the local, editable version of django-simple-deploy.
     - Make an initial commit.
-    - Add simple_deploy to INSTALLED_APPS.
+    - Add django_simple_deploy to INSTALLED_APPS.
 
     Returns:
     - None
@@ -81,7 +81,7 @@ def setup_project(tmp_proj_dir, sd_root_dir, config):
             ]
         )
 
-    # Install the local version of simple_deploy (the version we're testing).
+    # Install the local version of django-simple-deploy (the version we're testing).
     # An editable install is preferred for two reasons. It's much faster than a non-editable
     # install. It also makes the temp test project *really* useful for debugging, and even
     # development. You can run a test, maybe `pytest -x`, drop into the temp project and
@@ -217,7 +217,7 @@ def reset_test_project(tmp_dir, pkg_manager):
         ["git", "commit", "-am", "Removed unneeded dependency management files."]
     )
 
-    # Add simple_deploy to INSTALLED_APPS.
+    # Add django_simple_deploy to INSTALLED_APPS.
     settings_file_path = tmp_dir / "blog/settings.py"
     settings_content = settings_file_path.read_text()
     new_settings_content = settings_content.replace(

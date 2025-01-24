@@ -50,7 +50,7 @@ def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filen
     else:
         filename = Path(filepath).name
 
-    # Root directory of local simple_deploy project.
+    # Root directory of local django-simple-deploy project.
     sd_root_dir = Path(__file__).parents[3]
     print("sd_root_dir:", sd_root_dir)
 

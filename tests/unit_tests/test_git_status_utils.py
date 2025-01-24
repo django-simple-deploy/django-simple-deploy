@@ -54,7 +54,7 @@ def test_diff_settings_sd_installed_apps():
         --- a/blog/settings.py
         +++ b/blog/settings.py
         @@ -39,0 +40 @@ INSTALLED_APPS = [
-        +    'simple_deploy',
+        +    'django_simple_deploy',
         @@ -134 +135 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'"""
     )
 
@@ -116,7 +116,7 @@ def test_diff_sdlogs_gitignore_sd_installed_apps():
         --- a/blog/settings.py
         +++ b/blog/settings.py
         @@ -39,0 +40 @@ INSTALLED_APPS = [
-        +    'simple_deploy',"""
+        +    'django_simple_deploy',"""
     )
 
     assert dsd_utils._check_git_diff(diff_output)
@@ -133,12 +133,12 @@ def test_clean_diff():
         --- a/blog/settings.py
         +++ b/blog/settings.py
         @@ -39,0 +40 @@ INSTALLED_APPS = [
-        +    'simple_deploy',
+        +    'django_simple_deploy',
         @@ -134 +135 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'"""
     )
 
     cleaned_diff = dsd_utils._clean_diff(diff_output.splitlines())
-    assert cleaned_diff == ["+    'simple_deploy',"]
+    assert cleaned_diff == ["+    'django_simple_deploy',"]
     assert dsd_utils._check_settings_diff(diff_output.splitlines())
 
 

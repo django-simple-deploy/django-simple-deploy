@@ -32,7 +32,7 @@ def check_project_unchanged(tmp_proj_dir):
 
     stdout, stderr = msp.make_git_call(tmp_proj_dir, "git log")
     assert "Removed unneeded dependency management files." in stdout
-    assert "Added simple_deploy to INSTALLED_APPS." in stdout
+    assert "Added django_simple_deploy to INSTALLED_APPS." in stdout
 
 
 # --- Test invalid variations of the `deploy` command ---

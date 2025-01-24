@@ -14,7 +14,7 @@ from ..utils import manage_sample_project as msp
 # --- Helper functions ---
 
 
-# --- Test valid platform-agnostic simple_deploy calls ---
+# --- Test valid platform-agnostic deploy calls ---
 
 
 def test_help_output(tmp_project, capfd):

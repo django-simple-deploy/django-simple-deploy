@@ -63,7 +63,7 @@ def pytest_addoption(parser):
         "--pypi",
         action="store_true",
         default=False,
-        help="Test the PyPI version of simple_deploy.",
+        help="Test the PyPI version of dsd.",
     )
     parser.addoption(
         "--automate-all",
@@ -123,13 +123,13 @@ def tmp_project(tmp_path_factory, pytestconfig, cli_options, request):
     request.config.cache.set("app_name", None)
     request.config.cache.set("project_id", None)
 
-    # Root directory of local simple_deploy project.
+    # Root directory of local django-simple-deploy project.
     sd_root_dir = Path(__file__).parent.parent.parent
     tmp_proj_dir = tmp_path_factory.mktemp("blog_project")
 
     print(f"\nTemp project directory: {tmp_proj_dir}")
 
-    # Copy sample project to tmp dir, and set up the project for using simple_deploy.
+    # Copy sample project to tmp dir, and set up the project for using django-simple-deploy.
     msp.setup_project(tmp_proj_dir, sd_root_dir, cli_options)
 
     # Store the tmp_proj_dir in the pytest cache, so we can access it in the

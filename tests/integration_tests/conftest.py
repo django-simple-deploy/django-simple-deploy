@@ -104,7 +104,7 @@ def tmp_project(tmp_path_factory, pytestconfig):
     # Pause, or the tmpdir won't be usable.
     sleep(0.2)
 
-    # Root directory of local simple_deploy project.
+    # Root directory of local django-simple-deploy project.
     sd_root_dir = Path(__file__).parents[2]
     tmp_proj_dir = tmp_path_factory.mktemp("blog_project")
 
@@ -113,7 +113,7 @@ def tmp_project(tmp_path_factory, pytestconfig):
     #   to tmp_proj_dir.
     # assert not tmp_proj_dir
 
-    # Copy sample project to tmp dir, and set up the project for using simple_deploy.
+    # Copy sample project to tmp dir, and set up the project for using dsd.
     msp.setup_project(tmp_proj_dir, sd_root_dir, pytestconfig)
 
     # Store the tmp_proj_dir in the pytest cache, so we can access it in the
@@ -134,13 +134,13 @@ def reset_test_project(request, tmp_project):
 
 @pytest.fixture(scope="module", autouse=True)
 def run_simple_deploy(reset_test_project, tmp_project, request):
-    """Call simple deploy, targeting the plugin that's currently being tested.
+    """Run the deploy command, targeting the plugin that's currently being tested.
     This auto-runs for all test modules in the /integration_tests/ directory, and
     should run for all default plugins as well.
     """
     # Identify the plugin that's being tested. This is derived from the path of the
     # test module that's currently being run. If no platform is being tested, don't
-    # need to run simple_deploy.
+    # need to run the deploy command.
     # DEV: This is implemented awkwardly. There's probably one dsd- in the path,
     # and if there's more we probably want the last one in the path. plugin_names
     # should probably be path_parts or something like that. Also, consider refactoring
@@ -150,7 +150,7 @@ def run_simple_deploy(reset_test_project, tmp_project, request):
 
     if not plugin_names:
         # The currently running test module is not in a plugin repo, so it doesn't
-        # need to run simple_deploy.
+        # need to run the deploy command.
         return
 
     plugin_name = plugin_names[0]

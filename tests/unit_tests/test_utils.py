@@ -1,4 +1,4 @@
-"""Tests for simple_deploy/management/commands/utils.py.
+"""Tests for django_simple_deploy/management/commands/utils.py.
 
 Note: May need to rethink handling of dsd_config, if tests start to affect each other.
 """

@@ -48,7 +48,7 @@ def get_python_exe(tmp_project):
 
 
 def run_simple_deploy(python_cmd, platform="", automate_all=False):
-    """Run simple_deploy against the test project."""
+    """Run deploy against the test project."""
     print("Running manage.py deploy...")
     if automate_all:
         make_sp_call(f"{python_cmd} manage.py deploy --automate-all --e2e-testing")
@@ -57,7 +57,7 @@ def run_simple_deploy(python_cmd, platform="", automate_all=False):
 
 
 def commit_configuration_changes():
-    """Commit configuration changes made by simple_deploy."""
+    """Commit configuration changes made by dsd."""
     print("\n\nCommitting changes...")
     make_sp_call("git add .")
     make_sp_call("git commit -am 'Configured for deployment.'")
