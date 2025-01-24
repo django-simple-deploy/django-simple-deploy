@@ -92,12 +92,12 @@ def remove_unneeded_files(proj_dir, pkg_manager):
         (proj_dir / "pyproject.toml").unlink()
 
 
-def add_simple_deploy(tmp_dir):
-    """Add simple_deploy to INSTALLED_APPS in the test project."""
+def add_dsd(tmp_dir):
+    """Add django_simple_deploy to INSTALLED_APPS in the test project."""
     settings_file_path = tmp_dir / "blog/settings.py"
     settings_content = settings_file_path.read_text()
     new_settings_content = settings_content.replace(
-        "# Third party apps.", "# Third party apps.\n    'simple_deploy',"
+        "# Third party apps.", "# Third party apps.\n    'django_simple_deploy',"
     )
     settings_file_path.write_text(new_settings_content)
 
@@ -205,7 +205,7 @@ make_sp_call("git commit -am 'Initial commit.'")
 make_sp_call("git tag -am '' 'INITIAL_STATE'")
 
 # Add simple_deploy to INSTALLED_APPS.
-add_simple_deploy(project_dir)
+add_dsd(project_dir)
 
 # Make sure we have a clean status before calling simple_deploy.
 make_sp_call("git commit -am 'Added simple_deploy to INSTALLED_APPS.'")
