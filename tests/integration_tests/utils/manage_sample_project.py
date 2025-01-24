@@ -6,7 +6,7 @@ from pathlib import Path
 from shutil import copytree, rmtree
 from shlex import split
 
-from django_simple_deploy.management.commands.utils import sd_utils
+from django_simple_deploy.management.commands.utils import dsd_utils
 
 import pytest
 
@@ -130,7 +130,7 @@ def setup_project(tmp_proj_dir, sd_root_dir, config):
     #   Better: install whatever plugin is installed locally.
     plugin = config.option.plugin
     if config.option.plugin is None:
-        plugin = sd_utils.get_plugin_name()
+        plugin = dsd_utils.get_plugin_name()
         print("plugin", plugin)
         # breakpoint()
         # pytest.exit()

@@ -2,7 +2,7 @@
 
 from textwrap import dedent
 
-from django_simple_deploy.management.commands.utils import sd_utils
+from django_simple_deploy.management.commands.utils import dsd_utils
 
 import pytest
 
@@ -13,19 +13,19 @@ import pytest
 def test_simple_git_status():
     """Tests for simple `git status --porcelain` and `git diff --unified=0` outputs."""
     status_output, diff_output = "", ""
-    assert sd_utils.check_status_output(status_output, diff_output)
+    assert dsd_utils.check_status_output(status_output, diff_output)
 
     status_output, diff_output = " M .gitignore", ""
-    assert sd_utils.check_status_output(status_output, diff_output)
+    assert dsd_utils.check_status_output(status_output, diff_output)
 
     status_output, diff_output = " M settings.py", ""
-    assert sd_utils.check_status_output(status_output, diff_output)
+    assert dsd_utils.check_status_output(status_output, diff_output)
 
     status_output, diff_output = " M .gitignore\n M settings.py", ""
-    assert sd_utils.check_status_output(status_output, diff_output)
+    assert dsd_utils.check_status_output(status_output, diff_output)
 
     status_output, diff_output = " M blog/settings.py\n?? dsd_logs/", ""
-    assert sd_utils.check_status_output(status_output, diff_output)
+    assert dsd_utils.check_status_output(status_output, diff_output)
 
 
 # --- Tests for checking overall git diff ---
@@ -43,7 +43,7 @@ def test_diff_ignore_sd_logs():
         +dsd_logs/"""
     )
 
-    assert sd_utils._check_git_diff(diff_output)
+    assert dsd_utils._check_git_diff(diff_output)
 
 
 def test_diff_settings_sd_installed_apps():
@@ -58,7 +58,7 @@ def test_diff_settings_sd_installed_apps():
         @@ -134 +135 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'"""
     )
 
-    assert sd_utils._check_git_diff(diff_output)
+    assert dsd_utils._check_git_diff(diff_output)
 
 
 def test_diff_settings_requirements_txt():
@@ -81,7 +81,7 @@ def test_diff_settings_requirements_txt():
         \\ No newline at end of file"""
     )
 
-    assert sd_utils._check_git_diff(diff_output)
+    assert dsd_utils._check_git_diff(diff_output)
 
 
 def test_diff_unacceptable_change():
@@ -98,7 +98,7 @@ def test_diff_unacceptable_change():
         +# Placeholder comment to create unacceptable git status."""
     )
 
-    assert not sd_utils._check_git_diff(diff_output)
+    assert not dsd_utils._check_git_diff(diff_output)
 
 
 def test_diff_sdlogs_gitignore_sd_installed_apps():
@@ -119,7 +119,7 @@ def test_diff_sdlogs_gitignore_sd_installed_apps():
         +    'simple_deploy',"""
     )
 
-    assert sd_utils._check_git_diff(diff_output)
+    assert dsd_utils._check_git_diff(diff_output)
 
 
 # --- Tests for _clean_diff(); also includes test of checking the clean diff ---
@@ -137,9 +137,9 @@ def test_clean_diff():
         @@ -134 +135 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'"""
     )
 
-    cleaned_diff = sd_utils._clean_diff(diff_output.splitlines())
+    cleaned_diff = dsd_utils._clean_diff(diff_output.splitlines())
     assert cleaned_diff == ["+    'simple_deploy',"]
-    assert sd_utils._check_settings_diff(diff_output.splitlines())
+    assert dsd_utils._check_settings_diff(diff_output.splitlines())
 
 
 def test_clean_diff_remove_blank_changes():
@@ -155,9 +155,9 @@ def test_clean_diff_remove_blank_changes():
         +"""
     )
 
-    cleaned_diff = sd_utils._clean_diff(diff_output.splitlines())
+    cleaned_diff = dsd_utils._clean_diff(diff_output.splitlines())
     assert cleaned_diff == ["+# Placeholder comment to create unacceptable git status."]
-    assert not sd_utils._check_settings_diff(diff_output.splitlines())
+    assert not dsd_utils._check_settings_diff(diff_output.splitlines())
 
 
 def test_clean_diff_remove_trailing_newline():
@@ -173,9 +173,9 @@ def test_clean_diff_remove_trailing_newline():
         +\n"""
     )
 
-    cleaned_diff = sd_utils._clean_diff(diff_output.splitlines())
+    cleaned_diff = dsd_utils._clean_diff(diff_output.splitlines())
     assert cleaned_diff == ["+# Placeholder comment to create unacceptable git status."]
-    assert not sd_utils._check_settings_diff(diff_output.splitlines())
+    assert not dsd_utils._check_settings_diff(diff_output.splitlines())
 
 
 def test_clean_diff_gitignore():
@@ -190,9 +190,9 @@ def test_clean_diff_gitignore():
         +dsd_logs/"""
     )
 
-    cleaned_diff = sd_utils._clean_diff(diff_output.splitlines())
+    cleaned_diff = dsd_utils._clean_diff(diff_output.splitlines())
     assert cleaned_diff == ["+dsd_logs/"]
-    assert sd_utils._check_gitignore_diff(diff_output.splitlines())
+    assert dsd_utils._check_gitignore_diff(diff_output.splitlines())
 
 
 def test_clean_diff_settings():
@@ -206,6 +206,6 @@ def test_clean_diff_settings():
         +    'django_simple_deploy',"""
     )
 
-    cleaned_diff = sd_utils._clean_diff(diff_output.splitlines())
+    cleaned_diff = dsd_utils._clean_diff(diff_output.splitlines())
     assert cleaned_diff == ["+    'django_simple_deploy',"]
-    assert sd_utils._check_settings_diff(diff_output.splitlines())
+    assert dsd_utils._check_settings_diff(diff_output.splitlines())

@@ -36,7 +36,7 @@ from django.conf import settings
 import toml
 
 from . import dsd_messages
-from .utils import sd_utils
+from .utils import dsd_utils
 from .utils import plugin_utils
 
 from .utils.plugin_utils import sd_config
@@ -217,7 +217,7 @@ class Command(BaseCommand):
         only have one plugin installed. We inspect the installed packages, and try to
         identify the installed plugin automatically.
         """
-        self.plugin_name = sd_utils.get_plugin_name()
+        self.plugin_name = dsd_utils.get_plugin_name()
         plugin_utils.write_output(f"  Using plugin: {self.plugin_name}")
 
         platform_module = import_module(f"{self.plugin_name}.deploy")
@@ -370,7 +370,7 @@ class Command(BaseCommand):
         diff_output = output_obj.stdout.decode()
         plugin_utils.log_info(f"{diff_output}\n")
 
-        proceed = sd_utils.check_status_output(status_output, diff_output)
+        proceed = dsd_utils.check_status_output(status_output, diff_output)
 
         if proceed:
             msg = "No uncommitted changes, other than django-simple-deploy work."
@@ -467,13 +467,13 @@ class Command(BaseCommand):
 
         if sd_config.pkg_manager == "req_txt":
             sd_config.req_txt_path = sd_config.git_path / "requirements.txt"
-            requirements = sd_utils.parse_req_txt(sd_config.req_txt_path)
+            requirements = dsd_utils.parse_req_txt(sd_config.req_txt_path)
         elif sd_config.pkg_manager == "pipenv":
             sd_config.pipfile_path = sd_config.git_path / "Pipfile"
-            requirements = sd_utils.parse_pipfile(sd_config.pipfile_path)
+            requirements = dsd_utils.parse_pipfile(sd_config.pipfile_path)
         elif sd_config.pkg_manager == "poetry":
             sd_config.pyprojecttoml_path = sd_config.git_path / "pyproject.toml"
-            requirements = sd_utils.parse_pyproject_toml(sd_config.pyprojecttoml_path)
+            requirements = dsd_utils.parse_pyproject_toml(sd_config.pyprojecttoml_path)
 
         # Report findings.
         msg = "  Found existing dependencies:"

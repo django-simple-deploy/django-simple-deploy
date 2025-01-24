@@ -8,7 +8,7 @@ import filecmp
 import sys
 import subprocess
 
-from django_simple_deploy.management.commands.utils import sd_utils
+from django_simple_deploy.management.commands.utils import dsd_utils
 from django_simple_deploy.management.commands.utils import plugin_utils
 from django_simple_deploy.management.commands.utils.plugin_utils import sd_config
 from django_simple_deploy.management.commands.utils.command_errors import (
@@ -65,7 +65,7 @@ def test_get_plugin_name_default_plugins():
         "dsd_flyio",
     ]
 
-    plugin_name = sd_utils._get_plugin_name_from_packages(available_packages)
+    plugin_name = dsd_utils._get_plugin_name_from_packages(available_packages)
     assert plugin_name == "dsd_flyio"
 
 
@@ -77,7 +77,7 @@ def test_get_plugin_name_third_party_plugin():
         "django-bootstrap5",
     ]
 
-    plugin_name = sd_utils._get_plugin_name_from_packages(available_packages)
+    plugin_name = dsd_utils._get_plugin_name_from_packages(available_packages)
     assert plugin_name == "dsd_flyio_thirdparty"
 
 
@@ -89,7 +89,7 @@ def test_get_plugin_name_no_plugins():
     ]
 
     with pytest.raises(DSDCommandError):
-        plugin_name = sd_utils._get_plugin_name_from_packages(available_packages)
+        plugin_name = dsd_utils._get_plugin_name_from_packages(available_packages)
 
 
 def test_get_plugin_name_too_many_plugins():
@@ -106,7 +106,7 @@ def test_get_plugin_name_too_many_plugins():
     ]
 
     with pytest.raises(DSDCommandError):
-        plugin_name = sd_utils._get_plugin_name_from_packages(available_packages)
+        plugin_name = dsd_utils._get_plugin_name_from_packages(available_packages)
 
 
 # --- Parsing requirements ---
@@ -114,7 +114,7 @@ def test_get_plugin_name_too_many_plugins():
 
 def test_parse_req_txt():
     path = Path(__file__).parent / "resources" / "requirements.txt"
-    requirements = sd_utils.parse_req_txt(path)
+    requirements = dsd_utils.parse_req_txt(path)
 
     assert requirements == [
         "asgiref",
@@ -133,7 +133,7 @@ def test_parse_req_txt():
 
 def test_parse_pipfile():
     path = Path(__file__).parent / "resources" / "Pipfile"
-    requirements = sd_utils.parse_pipfile(path)
+    requirements = dsd_utils.parse_pipfile(path)
 
     packages = ["django", "django-bootstrap5", "requests"]
     assert all([pkg in requirements for pkg in packages])
@@ -141,7 +141,7 @@ def test_parse_pipfile():
 
 def test_parse_pyproject_toml():
     path = Path(__file__).parent / "resources" / "pyproject.toml"
-    requirements = sd_utils.parse_pyproject_toml(path)
+    requirements = dsd_utils.parse_pyproject_toml(path)
 
     assert requirements == [
         "Django",
