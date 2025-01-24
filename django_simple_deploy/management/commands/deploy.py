@@ -35,7 +35,7 @@ from django.conf import settings
 
 import toml
 
-from . import sd_messages
+from . import dsd_messages
 from .utils import sd_utils
 from .utils import plugin_utils
 
@@ -380,9 +380,9 @@ class Command(BaseCommand):
 
     def _raise_unclean_error(self):
         """Raise unclean git status error."""
-        error_msg = sd_messages.unclean_git_status
+        error_msg = dsd_messages.unclean_git_status
         if sd_config.automate_all:
-            error_msg += sd_messages.unclean_git_automate_all
+            error_msg += dsd_messages.unclean_git_automate_all
 
         raise DSDCommandError(error_msg)
 
@@ -550,5 +550,5 @@ class Command(BaseCommand):
             plugin_utils.write_output("Automating all steps...")
         else:
             # Quit with a message, but don't raise an error.
-            plugin_utils.write_output(sd_messages.cancel_automate_all)
+            plugin_utils.write_output(dsd_messages.cancel_automate_all)
             sys.exit()

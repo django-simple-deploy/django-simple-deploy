@@ -1,8 +1,5 @@
 """A collection of messages used in deploy.py."""
 
-# Module is called sd_messages to avoid collisions with any message files
-#   associated with plugins.
-#
 # Storing messages here makes for a much shorter deploy.py file, and
 #   makes it easier to see how the messages actually look on screen. The
 #   disadvantage is that it's harder to track what messages are being

@@ -13,7 +13,7 @@ from pathlib import Path
 from django.template.engine import Engine, Context
 from django.utils.safestring import mark_safe
 
-from .. import sd_messages
+from .. import dsd_messages
 from .sd_config import SDConfig
 from .command_errors import DSDCommandError
 
@@ -45,9 +45,9 @@ def add_file(path, contents):
     write_output(f"\n  Looking in {path.parent} for {path.name}...")
 
     if path.exists():
-        proceed = get_confirmation(sd_messages.file_found(path.name))
+        proceed = get_confirmation(dsd_messages.file_found(path.name))
         if not proceed:
-            raise DSDCommandError(sd_messages.file_replace_rejected(path.name))
+            raise DSDCommandError(dsd_messages.file_replace_rejected(path.name))
     else:
         write_output(f"    File {path.name} not found. Generating file...")
 
