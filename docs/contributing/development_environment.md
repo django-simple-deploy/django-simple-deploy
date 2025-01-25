@@ -6,7 +6,7 @@ hide:
 
 # Setting Up a Development Environment
 
-Setting up a development environment will let you make changes to `simple_deploy`, and deploy test projects using your version of `simple_deploy`. If your work improves the project, you can make a Pull Request and we'll review your changes to see if they're ready to be merged into the main project.
+Setting up a development environment will let you make changes to `django-simple-deploy`, and deploy test projects using your version of `django-simple-deploy`. If your work improves the project, you can make a Pull Request and we'll review your changes to see if they're ready to be merged into the main project.
 
 If you're doing any significant work, please open an issue and communicate with the rest of the team first. This project is evolving steadily, and we don't want to see people do a bunch of work that conflicts with other work that's being done, and can't end up being merged to the main project.
 
@@ -68,7 +68,7 @@ Now, considering that you are in the *django-simple-deploy/* directory, create a
     ```
 
 
-## Make a test project to run `simple_deploy` against
+## Make a test project to run `django-simple-deploy` against
 
 In order to work on `django-simple-deploy`, you need a Django project outside the main project directory to run the `deploy` command against. You can either copy a project from the `sample_project/` directory, or clone the [standalone sample project](https://github.com/ehmatthes/dsd_sample_blog_reqtxt).
 
@@ -92,7 +92,7 @@ If you're going to copy a project from this directory, start by copying the enti
 
 ### Copy the standalone test project
 
-The [standalone test project](https://github.com/ehmatthes/dsd_sample_blog_reqtxt) is maintained to make it easier for people to [document a test run](test_run.md). You are welcome to use this project when working on `simple_deploy`.
+The [standalone test project](https://github.com/ehmatthes/dsd_sample_blog_reqtxt) is maintained to make it easier for people to [document a test run](test_run.md). You are welcome to use this project when working on `django-simple-deploy`.
 
 Clone the test repo to a directory outside of the `django-simple-deploy/` directory:
 
@@ -164,12 +164,12 @@ Before you run the `deploy` command, make a commit so you can more easily do rep
 
 ```sh
 $ git add .
-$ git commit -am "Initial state, before using simple_deploy."
+$ git commit -am "Initial state, before using django-simple-deploy."
 ```
 
 ## Make an editable install of `django-simple-deploy`
 
-To use your local version of `django-simple-deploy`, we'll install `simple_deploy` using an [editable install](https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs). Normally `pip install` copies a package's files to your environment. Changes to the source files aren't copied to your environment until you upgrade or reinstall the package. With an editable install, pip instead sets up the project so the package is imported into the environment each time it's used. This means you can make changes in your `django-simple-deploy/` directory, and those changes will be used in your test project the next time you run `simple_deploy`.
+To use your local version of `django-simple-deploy`, we'll install `django-simple-deploy` using an [editable install](https://pip.pypa.io/en/stable/topics/local-project-installs/#editable-installs). Normally `pip install` copies a package's files to your environment. Changes to the source files aren't copied to your environment until you upgrade or reinstall the package. With an editable install, pip instead sets up the project so the package is imported into the environment each time it's used. This means you can make changes in your `django-simple-deploy/` directory, and those changes will be used in your test project the next time you run the `deploy` command.
 
 Here's how to make the editable install:
 
@@ -188,7 +188,7 @@ $ pip install dsd-flyio
 !!! note
     If you want to contribute to a plugin as well, clone the plugin to your system just like you did for django-simple-deploy, and make an editable install of the plugin into your test project as well.
 
-## Run `simple_deploy` against the test project
+## Run `django-simple-deploy` against the test project
 
 Now, visit the [Quick Start](../quick_starts/index.md) page for the platform you want to target, and follow the directions you see there. Make sure you skip the `pip install django-simple-deploy` step, because we've already made the editable install of this package.
 
@@ -208,13 +208,13 @@ At this point, you can destroy the remote resources that were created. Remote re
 
 ### Reset the test project
 
-After verifying that your local version of `django-simple-deploy` works when run against the test project, you'll need to reset the test project. This will let you modify `django-simple-deploy`, and then run `simple_deploy` again and see the effect of your changes.
+After verifying that your local version of `django-simple-deploy` works when run against the test project, you'll need to reset the test project. This will let you modify `django-simple-deploy`, and then run the `deploy` command again and see the effect of your changes.
 
-To reset the project, run `git reset --hard commit_hash`, using the hash of the commit that you made after making sure the test project works locally. Also, run `git status` and make sure you remove any files or directories that are left in the project, such as `simple_deploy_logs/`. The `.platform/` directory also tends to hang around after resetting the test project, when testing against Platform.sh.
+To reset the project, run `git reset --hard commit_hash`, using the hash of the commit that you made after making sure the test project works locally. Also, run `git status` and make sure you remove any files or directories that are left in the project, such as `dsd_logs/`. The `.platform/` directory also tends to hang around after resetting the test project, when testing against Platform.sh. The command `git clean -fd` will remove any new files and directories that were created during configuration.
 
-## Developing `simple_deploy`
+## Developing `django-simple-deploy`
 
-Now you're ready to do your own development work on `simple_deploy`. Make a new branch on your fork of the project, and make any changes you want to the codebase. When you want to see if your changes improve the configuration and deployment process, go back to the [Run `simple_deploy` locally](#run-simple_deploy-against-the-test-project) section and repeat those steps.
+Now you're ready to do your own development work on `django-simple-deploy`. Make a new branch on your fork of the project, and make any changes you want to the codebase. When you want to see if your changes improve the configuration and deployment process, go back to the [Run `django-simple-deploy` locally](#run-simple_deploy-against-the-test-project) section and repeat those steps.
 
 ### Helpful flags for development work
 
@@ -226,7 +226,7 @@ $ python manage.py deploy --unit-testing
 
 This won't run the unit tests, but it will skip the same network calls that are skipped during unit testing. You should see most of the same configuration that's done during a normal run, using sample resource names.
 
-When you've made more changes and want to run `simple_deploy` again, but all you're interested in is the Dockerfile that's generated, run the following two commands:
+When you've made more changes and want to run the `deploy` command again, but all you're interested in is the Dockerfile that's generated, run the following two commands:
 
 ```sh
 $ rm Dockerfile
@@ -264,13 +264,13 @@ $ cd /Users/eric/projects/dsd-dev-project_zepbz
 $ source .venv/bin/activate
 (.venv)$ python manage.py migrate
 (.venv)$ git log --pretty=oneline
-a0ebc9 (HEAD -> main) Added simple_deploy to INSTALLED_APPS.
+a0ebc9 (HEAD -> main) Added django_simple_deploy to INSTALLED_APPS.
 7209f0 (tag: INITIAL_STATE) Initial commit.
 ```
 
-This gives you a project where `simple_deploy` has already been installed and added to `INSTALLED_APPS`. Basically, you should be able to just run the `deploy` command at this point. If you want to run `deploy` more than once, you can git reset back to `INITIAL_STATE`.
+This gives you a project where `django-simple-deploy` has already been installed and added to `INSTALLED_APPS`. Basically, you should be able to just run the `deploy` command at this point. If you want to run `deploy` more than once, you can git reset back to `INITIAL_STATE`.
 
-New contributors should probably go through the longer process once, unless they've used `simple_deploy` previously.
+New contributors should probably go through the longer process once, unless they've used `django-simple-deploy` previously.
 
 You can also pass arguments to *build_dev_env.py* to develop against the package manager of your choice, and you can run manual tests against the PyPI version if you wish as well:
 

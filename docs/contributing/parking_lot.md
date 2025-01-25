@@ -6,7 +6,7 @@ hide:
 
 # Parking Lot
 
-This is a place to dump ideas that aren't yet actionable. This document exists to keep from cluttering up issues with tasks that aren't really closable in a short timeframe. That said, there is a [Parking lot](https://github.com/django-simple-deploy/django-simple-deploy/issues/337) issue, so if you have a small suggestion feel free to add it there.
+This is a place to dump ideas that aren't yet actionable. This document exists to keep from cluttering up issues with tasks that aren't really closable in a short timeframe. There's also a [Parking lot](https://github.com/django-simple-deploy/django-simple-deploy/issues/337) issue, so if you have a small suggestion feel free to add it there.
 
 General ideas
 ---
@@ -26,11 +26,11 @@ General ideas
 - Note talks, articles, discussion etc related to this project. See [#208](https://github.com/django-simple-deploy/django-simple-deploy/issues/208).
 - Consider a stability policy. See [#214](https://github.com/django-simple-deploy/django-simple-deploy/issues/214).
 - Consider a `--dry-run` feature. See [#247](https://github.com/django-simple-deploy/django-simple-deploy/issues/247).
-- Revisit `git status` check in simple_deploy.py. See [#261](https://github.com/django-simple-deploy/django-simple-deploy/issues/261).
+- Revisit `git status` check in deploy.py. See [#261](https://github.com/django-simple-deploy/django-simple-deploy/issues/261).
 - Document use of development tools such as reset_project.py. See [#264](https://github.com/django-simple-deploy/django-simple-deploy/issues/264).
 - Look at consistency of platform messages. See [#270](https://github.com/django-simple-deploy/django-simple-deploy/issues/264).
 - Consider pyupgrade for finding old Python idioms that are no longer needed. See [#299](https://github.com/django-simple-deploy/django-simple-deploy/issues/299).
-- Try simple_deploy with a micro framework such as [django-singlefile](https://github.com/andrewgodwin/django-singlefile) or [nanodjango](https://github.com/radiac/nanodjango).
+- Try django-simple-deploy with a micro framework such as [django-singlefile](https://github.com/andrewgodwin/django-singlefile) or [nanodjango](https://github.com/radiac/nanodjango).
 - Should the project support Poetry?
     - Poetry seems to be well-respected for developing libraries, but I don't know that anyone is really using it to manage dependencies for Django projects. If not, there's no reason to support it in this project.
     - Perhaps support it, but dial back some of the specificity of tests? Poetry is resolving at a finer grain size than we need to pay attention to?

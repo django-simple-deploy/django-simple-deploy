@@ -6,25 +6,25 @@ hide:
 
 # Documenting a Test Run
 
-One of the simplest ways to start contributing is to document a test run of the project. In the pre-1.0 phase of development, every test run is a helpful data point.
+One of the simplest ways to start contributing is to document a test run of the project. Until the project is seeing widespread usage, every test run is a helpful data point.
 
 ## Minimum Requirements
 
-Before jumping in, you should be clear about one aspect of working on `django-simple-deploy`. There's really no way to contribute to the project without an active account on one of the platforms that `simple_deploy` supports. Make sure you read the [testing on your own account](own_account.md) page before continuing.
+Before jumping in, you should be clear about one aspect of working on `django-simple-deploy`. There's really no way to contribute to the project without an active account on one of the platforms that `django-simple-deploy` supports. Make sure you read the [testing on your own account](own_account.md) page before continuing.
 
-The following directions are written with a focus on Fly.io, but can be adapted to any platform that's currently supported by `simple_deploy`.
+The following directions are written with a focus on Fly.io, but can be adapted to any platform that's currently supported by `django-simple-deploy`.
 
 ## Configuration and `--automate-all` Modes
 
-The recommended usage for `simple_deploy` is a "configuration-only" mode. With this usage, you create a new project on the chosen platform, and then run the `deploy` command, which configures your project for deployment to the targeted platform. You then review and commit changes, and run your platform's `push` or `deploy` command. Using the configuration mode will give you a better sense of what the automated mode does for users.
+The recommended usage for `django-simple-deploy` is a "configuration-only" mode. With this usage, you create a new project on the chosen platform, and then run the `deploy` command, which configures your project for deployment to the targeted platform. You then review and commit changes, and run your platform's `push` or `deploy` command. Using the configuration mode will give you a better sense of what the automated mode does for users.
 
-There is an option to have `simple_deploy` automate every step of this process. Please feel free to test this usage as well.
+There is an option to have `django-simple-deploy` automate every step of this process. Please feel free to test this usage as well.
 
-Both approaches require an actual deployment, because `simple_deploy` can't configure a local project for deployment without a specific app to target. For example, creating an app often creates a remote project, database, and some config settings. `simple_deploy` needs to inspect the local project, and query the remote project in order to complete configuration.
+Both approaches require an actual deployment, because `django-simple-deploy` can't configure a local project for deployment without a specific app to target. For example, creating an app often creates a remote project, database, and some config settings. `django-simple-deploy` needs to inspect the local project, and query the remote project in order to complete configuration.
 
 ## Brief Description
 
-For a test run, feel free to try `simple_deploy` against the provided sample project, or against a project of your own. The sample project is a blog-making platform, which includes user accounts, meaningful use of a database, and Bootstrap styling. If you're testing against your own project, it's really helpful if your project is publicly accessible. If not, we can't really do much with any error reports that your test run generates.
+For a test run, feel free to try `django-simple-deploy` against the provided sample project, or against a project of your own. The sample project is a blog-making platform, which includes user accounts, meaningful use of a database, and Bootstrap styling. If you're testing against your own project, it's really helpful if your project is publicly accessible. If not, we can't really do much with any error reports that your test run generates.
 
 Here are the overall steps you'll take:
 
@@ -77,7 +77,7 @@ Clone the example project, and run it locally:
 At this point you may want to visit the site and make an account, and maybe make a post. You may also want to visit the admin page, and verify that everything's working locally.
 
 !!! note
-    I've used `b_env` in place of the usual `.venv` here, because it's been helpful to have a distinct name for the environment that the test project is running in. Otherwise you might not be sure whether you're in the test project's environment, or your `simple_deploy` development environment.
+    I've used `b_env` in place of the usual `.venv` here, because it's been helpful to have a distinct name for the environment that the test project is running in. Otherwise you might not be sure whether you're in the test project's environment, or your `django-simple-deploy` development environment.
 
 ### Run functionality tests against the local project
 
@@ -93,9 +93,9 @@ The tests are meant to be run against a freshly-deployed version of the project,
 (b_env)$ python test_deployed_app_functionality.py --flush-db --url http://localhost:8000/
 ```
 
-### Run `simple_deploy` against the sample project
+### Run `django-simple-deploy` against the sample project
 
-Now you have a simple but nontrivial Django project that works locally, with no deployment-specific configuration. This is exactly the situation that `simple_deploy` is meant to handle.
+Now you have a simple but nontrivial Django project that works locally, with no deployment-specific configuration. This is exactly the situation that `django-simple-deploy` is meant to handle.
 
 Visit the [Quick Start](../quick_starts/index.md) document for the platform you're targeting, and follow the directions you see there.
 
@@ -117,7 +117,7 @@ Make sure you destroy your test deployment. This is entirely your responsibility
 
 ### Final thoughts
 
-If you have any final thoughts about how `simple_deploy` works, please share them in the issue you created to track your test run. Thank you for helping out!
+If you have any final thoughts about how `django-simple-deploy` works, please share them in the issue you created to track your test run. Thank you for helping out!
 
 ## What next?
 
