@@ -19,4 +19,4 @@ The test suite will identify a plugin that's installed in editable mode, and run
 
 ## More information
 
-See the other pages in this section about [plugin utility functions](plugin_utils.md) and the `sd_config` [object](sd_config.md).
+See the other pages in this section about [plugin utility functions](plugin_utils.md) and the `dsd_config` [object](dsd_config.md).

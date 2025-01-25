@@ -5,7 +5,7 @@ class DSDConfig:
     """Class for managing attributes of Command that need to be shared with plugins.
 
     This is instantiated once at the module level in plugin_utils. That instance is
-    imported into simple_deploy, where Command defines all relevant attributes, and
+    imported into deploy.py, where Command defines all relevant attributes, and
     calls validate().
 
     Plugins then import the dsd_config instance from plugin_utils. If mutability is an

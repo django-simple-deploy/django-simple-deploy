@@ -1,6 +1,6 @@
-"""Utilities for simple_deploy, to be used by platform-specific plugins.
+"""Utilities for django-simple-deploy, to be used by platform-specific plugins.
 
-Note: Some of these utilities are also used in core simple_deploy.
+Note: Some of these utilities are used by django-simple-deploy internally as well.
 """
 
 import logging
@@ -18,7 +18,7 @@ from .dsd_config import DSDConfig
 from .command_errors import DSDCommandError
 
 
-# Create dsd_config once right here. The attributes are set by simple_deploy,
+# Create dsd_config once right here. The attributes are set in deploy.py,
 # and then accessible by plugins. This approach keeps from having to pass the config
 # instance between core, plugins, and these utility functions.
 dsd_config = DSDConfig()
@@ -441,7 +441,7 @@ def get_string_from_output(output):
     need to display both, consider redirecting stderr to stdout:
         subprocess.run(cmd_parts, stderr=subprocess.STDOUT, ...)
     This has not been necessary yet; if it becomes necessary we'll probably need to
-    modify simple_deploy.run_quick_command() to accomodate the necessary args.
+    modify run_quick_command() to accomodate the necessary args.
     """
     if isinstance(output, str):
         return output
@@ -479,7 +479,7 @@ def _strip_secret_key(line):
 
 def add_pipenv_pkg(pipfile_path, package, version):
     """Add a package to Pipfile."""
-    # A method in simple_deploy may pass an empty string, which would override a
+    # A caller may pass an empty version string, which would override a
     # default argument value of "*".
     if not version:
         version = "*"

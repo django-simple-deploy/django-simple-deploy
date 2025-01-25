@@ -1,10 +1,10 @@
 ---
-title: "The sd_config object"
+title: "The dsd_config object"
 hide:
     - footer
 ---
 
-# The `sd_config` object
+# The `dsd_config` object
 
 Most of your work as a plugin author is done in `platform_deployer.py`. This module imports `dsd_config`, which contains information that should be useful about the user's project.
 
