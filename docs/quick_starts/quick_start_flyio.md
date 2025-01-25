@@ -20,12 +20,12 @@ Deployment to Fly.io requires three things:
 
 ## Configuration-only deployment
 
-First, install `django-simple-deploy` and add `simple_deploy` to `INSTALLED_APPS` in *settings.py*:
+First, install `django-simple-deploy` and add `django_simple_deploy` to `INSTALLED_APPS` in *settings.py*:
 
 ```sh
 $ pip install django-simple-deploy[fly_io]
-# Add "simple_deploy" to INSTALLED_APPS in settings.py.
-$ git commit -am "Added simple_deploy to INSTALLED_APPS."
+# Add "django_simple_deploy" to INSTALLED_APPS in settings.py.
+$ git commit -am "Added django_simple_deploy to INSTALLED_APPS."
 ```
 
 !!! note
@@ -51,7 +51,7 @@ $ fly deploy
 $ fly apps open
 ```
 
-You can find a record of the deployment process in `simple_deploy_logs`. It contains most of the output you saw when running `deploy`.
+You can find a record of the deployment process in `dsd_logs`. It contains most of the output you saw when running `deploy`.
 
 ## Automated deployment
 
@@ -59,7 +59,7 @@ If you want, you can automate this entire process. This involves just three step
 
 ```sh
 $ pip install django-simple-deploy[fly_io]
-# Add `simple_deploy` to INSTALLED_APPS in settings.py.
+# Add `django_simple_deploy` to INSTALLED_APPS in settings.py.
 $ python manage.py deploy --automate-all
 ```
 
@@ -67,7 +67,7 @@ You should see a bunch of output as Fly.io resources are created for you, your p
 
 ## Pushing further changes
 
-After the initial deployment, you're almost certainly going to make further changes to your project. When you've updated your project and it works locally, you can commit these changes and push your project again, without using `simple_deploy`:
+After the initial deployment, you're almost certainly going to make further changes to your project. When you've updated your project and it works locally, you can commit these changes and push your project again, without using `django-simple-deploy`:
 
 ```sh
 $ git status
@@ -87,8 +87,6 @@ $ fly ssh console
 ## Troubleshooting
 
 If deployment doesn't work, feel free to open an [issue](https://github.com/django-simple-deploy/django-simple-deploy/issues). Please share the OS you're  using locally, and the specific error message or unexpected behavior you saw. If the project you're deploying is hosted in a public repository, please share that as well.
-
-Please remember that `django-simple-deploy` is in a preliminary state. That said, I'd love to know the specific issues people are running into so we can reach a 1.0 state in a reasonable time frame.
 
 ## A note about `fly` and `flyctl`
 

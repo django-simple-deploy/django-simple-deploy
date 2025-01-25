@@ -6,8 +6,6 @@ hide:
 
 # Quick Start Guides
 
-`django-simple-deploy` aims to make deployment simple, so we offer a quick-start guide for each platform that's currently supported.
-
 For help deploying to a specific platform, start here:
 
 - [Deploying to Fly.io](quick_start_flyio.md)
