@@ -6,7 +6,7 @@ hide:
 
 End-to-end tests recreate the exact steps we expect users to take on their own system, ending in a live deployment to the platform that's being tested.
 
-Each test makes a copy of the sample project, runs the `deploy` command, and makes a full deployment. If you want to run these tests, you'll need an account on the platform you're testing against. The test will create an app under your account, and it should prompt you to destroy that app if the test runs successfully. If the test script fails, it may exit before destroying some deployed resources. **You should verify that the app and any related resources were actually destroyed, because these resources will almost certainly accrue charges on your account.**
+Each test makes a copy of the sample project, runs the `deploy` command, and makes a full deployment. If you want to run these tests, you'll need an account on the platform you're testing against. The test will create an app under your account, and it should prompt you to destroy that app if the test runs successfully. If the test script fails, it may exit before destroying some deployed resources. **You should verify that the app and any related resources were actually destroyed, because these resources will almost certainly accrue charges on your account.** (If you have any questions or concerns about this, see the section [Testing on Your Own Account](../../contributing/own_account).)
 
 E2e tests can take 3-10 minutes per deployment, and they almost always generate resources on a remote server that cost money if not destroyed properly. I have not set up an automated matrix of e2e tests like I have for integration tests. I don't want 3, 9, 27, etc full deployments accruing charges if something goes wrong! In practice, this has been fine. Integration tests cover things well enough for now that I haven't needed to test every full deployment path on every merge, or even every release.
 
@@ -49,11 +49,11 @@ You won't notice a whole lot of difference compared to e2e tests without this fl
 
 ### Tests as a development tool
 
-If you're investigating a bug that integration tests aren't helping with, a really efficient approach is to run the e2e test for the platform and workflow you're focusing on. Then open the test project in a new terminal window, activate its virtual environment, and do your development and debugging work there. You can reset the project to any state you want, modify `simple_deploy` and/or the relevant plugin, and rerun the `deploy` command as many times as you need. This is often much more efficient than making a sample project and doing a manual push using `simple_deploy`.
+If you're investigating a bug that integration tests aren't helping with, a really efficient approach is to run the e2e test for the platform and workflow you're focusing on. Then open the test project in a new terminal window, activate its virtual environment, and do your development and debugging work there. You can reset the project to any state you want, modify `django-simple-deploy` and/or the relevant plugin, and rerun the `deploy` command as many times as you need. This is often much more efficient than making a sample project and doing a manual push using `django-simple-deploy`.
 
 ### Testing the PyPI release
 
-After making a new release, it's reassuring to test the released version. One benefit is that it can catch issues with the overall packaging of the project.
+After making a new release, it's reassuring to test the released version. You can do this with the `--pypi` flag. One benefit is that it can catch issues with the overall packaging of the project.
 
 ```sh
 (.venv)django-simple-deploy$ pytest tests/e2e_tests --plugin dsd_flyio --pypi -s
@@ -62,4 +62,3 @@ After making a new release, it's reassuring to test the released version. One be
 After building the test project in a tmp dir, this will install `django-simple-deploy` and the relevant plugin from PyPI, instead of making editable installs of the local versions of these projects.
 
 When you're testing right after a new release was made, make sure you're actually testing the new release. Caching issues, both locally and remote, can lead to a test of the previous release. You might need to [clear your pip cache](https://pip.pypa.io/en/stable/cli/pip_cache/) (`pip cache purge`) in order to test the new release.
-

@@ -13,7 +13,7 @@ The challenge
 
 The challenge of writing integration tests is that `deploy` is a standalone management command. The project has no settings of its own. There are no apps, no *manage.py* file, or anything like that.
 
-My current approach to integration testing is to copy the example project to a temp dir, and then run `manage.py deploy` against that temp project. Including the `--integration-testing` flag when running `simple_deploy` prevents any network calls from being made.
+The current approach to integration testing is to copy the example project to a temp dir, and then run `manage.py deploy` against that temp project. Including the `--integration-testing` flag when running the `deploy` command prevents any network calls from being made.
 
 It's also a challenge that the `deploy` command needs to be called repeatedly against the same temp project. The test suite issues Git commands to manage the state of the temp project during the test run.
 
@@ -28,9 +28,11 @@ Integration tests require that Poetry and Pipenv are installed. The tests call `
 
 ### Testing and plugins
 
-To fully test django-simple-deploy, you need to have a plugin installed in editable mode. That plugin needs to have an appropriate set of integration tests. When developing the core project, I use the `dsd-flyio` plugin. (Installing a plugin through PyPI does not include the plugin's tests.)
+To fully test `django-simple-deploy`, you need to have a plugin installed in editable mode. That plugin needs to have an appropriate set of integration tests. When developing the core project, I use the `dsd-flyio` plugin. (Installing a plugin through PyPI does not include the plugin's tests.)
 
 You can run tests without a plugin installed, but they are very minimal tests. You won't actually be testing the changes that simple deploy makes to a user's project, and you won't be testing the core-plugin interface.
+
+It's probably worth developing a plugin that's purely used for integration testing. The test plugin would make generic changes to the user's project such as modifying settings and adding new files, without being specific to any one platform.
 
 ### Consider using the `-s` flag
 
@@ -62,13 +64,19 @@ The integration tests are quite useful for ongoing development work. For example
 
 This will create a temp project that uses requirements.txt to manage dependencies, and run a slight variation of `python manage.py deploy` against the project.
 
-The `-s` flag will show you exactly where that temp project is. You can open a terminal, cd to that directory, activate the project's virtual environment, and poke around as much as you need to. You can modify simple_deploy, and run the `deploy` command again. You can run `git status` and `git log`, and reset the project to an earlier state, and run the `deploy` command as many times as you want.
+The `-s` flag will show you exactly where that temp project is. You can open a terminal, cd to that directory, activate the project's virtual environment, and poke around as much as you need to. You can modify `django-simple-deploy`, and run the `deploy` command again. You can run `git status` and `git log`, and reset the project to an earlier state, and run the `deploy` command as many times as you want.
 
 This is often *much* easier than just working in a test project that you set up manually. And if tests are not passing, you can run `pytest tests/integration_tests -x` repeatedly with the same kind of workflow. This has been a really powerful workflow in developing the project so far.
 
+If you run the `deploy` command in this way, use the `--unit-testing` flag as well. That will avoid any network calls, and use appropriate project names. In the output of the integration test, you can see exactly what the `deploy` command looks like in testing:
+
+```txt
+*** dsd_command: /private/.../pytest-48/blog_project1/b_env/bin/python manage.py deploy --unit-testing --deployed-project-name my_blog_project ***
+```
+
 ### Look at the logs
 
-If you're troubleshooting a failed test, run `pytest tests/integration_tests --lf -s` to rerun the last failed test. Go to the temp project directory, and look at the log that was generated in `simple_deploy_logs/`. That log file will often tell you exactly where the command failed. Again, you can use Git to reset the test project, and run the `deploy` command again to recreate the issue manually.
+If you're troubleshooting a failed test, run `pytest tests/integration_tests --lf -s` to rerun the last failed test. Go to the temp project directory, and look at the log that was generated in `dsd_logs/`. That log file will often tell you exactly where the command failed. Again, you can use Git to reset the test project, and run the `deploy` command again to recreate the issue manually.
 
 ### Experimental feature
 
