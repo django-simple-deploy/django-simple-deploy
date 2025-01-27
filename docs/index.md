@@ -26,6 +26,8 @@ For help deploying to a specific platform, start here:
 - [Deploying to Platform.sh](quick_starts/quick_start_platformsh.md)
 - [Deploying to Heroku](quick_starts/quick_start_heroku.md)
 
+For other deployment options, see the list of [available plugins](plugins/available_plugins.md).
+
 ## More resources
 
 - If you're not sure which platform to choose, here's an [overview](general_documentation/choosing_platform.md) of the different platforms.
