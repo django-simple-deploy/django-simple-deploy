@@ -49,7 +49,7 @@ It may be worth using an issue template to implement ADRs as a specific type of 
 
 ---
 
-## `simple_deploy` ADRs
+## `django-simple-deploy` ADRs
 
 ### Reassess current CLI architecture
 

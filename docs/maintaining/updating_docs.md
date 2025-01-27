@@ -4,7 +4,7 @@ hide:
     - footer
 ---
 
-It's important to keep the documentation updated as the project evolves. Here are some brief notes about how to think about documentation for `simple_deploy`, and some how-tos for maintaining the project's documentation.
+It's important to keep the documentation updated as the project evolves. Here are some brief notes about how to think about documentation for `django-simple-deploy`, and some how-tos for maintaining the project's documentation.
 
 ## Guiding principles
 
@@ -12,9 +12,9 @@ It's important to keep the documentation updated as the project evolves. Here ar
 
 There are four main audiences for the documentation:
 
-- **End users**: People who want to use `simple_deploy` to deploy a project, and don't care about the internals of the project.
-- **Authors and creators**: People who want to use `simple_deploy` to teach others how to deploy and work with Django projects.
-- **Developers**: People who want to help develop `simple_deploy`, and keep it up to date. These are people who are working on `simple_deploy` locally, and who submit PRs to the project.
+- **End users**: People who want to use `django-simple-deploy` to deploy a project, and don't care about the internals of the project.
+- **Authors and creators**: People who want to use `django-simple-deploy` to teach others how to deploy and work with Django projects.
+- **Developers**: People who want to help develop `django-simple-deploy`, and keep it up to date. These are people who are working on `django-simple-deploy` locally, and who submit PRs to the project.
 - **Maintainers**: People who are managing the long-term development and stability of the project. These are people who can merge PRs and make new releases.
 
 All documentation should target one or more of these specific groups.
@@ -23,17 +23,17 @@ All documentation should target one or more of these specific groups.
 
 **End-user** documentation should be clear and to the point.
 
-- People use `simple_deploy` in order to simplify deployment. The documentation that's written for them should support this mindset.
+- People use `django-simple-deploy` in order to simplify deployment. The documentation that's written for them should support this mindset.
 - The main sections for this audience are the Introduction and Quick Start sections.
 
 Documentation for **authors and creators** should include more detailed information and explanations, without focusing on the project's internals.
 
-- These people need to know a little more about how `simple_deploy` can be used, so they can best determine how to write or speak about it, or otherwise integrate it into their work.
+- These people need to know a little more about how `django-simple-deploy` can be used, so they can best determine how to write or speak about it, or otherwise integrate it into their work.
 - The main pages focused on this group are in the General Documentation section.
 
 Documentation for **developers** should focus on design principles and project internals.
 
-- These people need to understand some of the internals of `simple_deploy`.
+- These people need to understand some of the internals of `django-simple-deploy`.
 - The Contributing, Design Documentation, and Testing sections are relevant to this group.
 
 Documentation for **maintainers** should focus on project architecture,  and maintenance tasks.
@@ -60,4 +60,4 @@ To view the documentation locally, run `mkdocs serve` in the root directory of t
 
 ## Releasing documentation
 
-Updated documentation is automatically pushed to RtD once it's on the main branch. Every merge that involves documentation gets pushed automatically.
+Updated documentation is automatically pushed to *Read the Docs* once it's on the main branch. Every merge that involves documentation gets pushed automatically.
