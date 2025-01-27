@@ -1,7 +1,7 @@
-name: Supporting a new platform
-description: Proposal to build support for a platform that `django-simple-deploy` does not currently support.
-title: "[New platform support]: "
-labels: "feature request"
+name: Building a new plugin
+description: Proposal to build a new plugin, targeting an unsupported platform or a different approach to deploying to that platform.
+title: "[New plugin]: "
+labels: ["plugin work", "feature request"
 
 body:
   - type: markdown
@@ -9,20 +9,22 @@ body:
       value: |
         Thank you for trying to make it easier to deploy Django projects. :)
 
+        This issue template was written before the plugin system was implemented. The questions in this template are worth thinking through, but don't feel the need to fill them all out here. Some of them are no longer relavant; this template is going to be converted to a documentation page in the the [plugins](https://django-simple-deploy.readthedocs.io/en/latest/plugins/) section. If you haven't already seen it, take a look at the [plugin template](https://github.com/django-simple-deploy/dsd-plugin-template) repository.
+
   - type: input
     attributes:
       label: Platform
-      description: What platform are you proposing we build support for?
+      description: What platform are you proposing to build support for?
 
   - type: textarea
     attributes:
       label: Your connection
-      description: What is your connection with this platform?
+      description: What's your connection with this platform? (Do you work for this company, have you used it a lot, or are you just looking to build support for the platform?)
 
   - type: markdown
     attributes:
       value: |
-        Platforms that are a good fit for `django-simple-deploy` support have a mostly scriptable deployment process. If there's much work that needs to be done on a web portal, for example, the platform may not be a good fit for `django-simple-deploy`. However, I can see situations where `simple_deploy` is good for automating configuration, regardless of what other steps are necessary to complete the deployment.
+        Platforms that are a good fit for `django-simple-deploy` support have a mostly scriptable deployment process. If there's much work that needs to be done on a web portal, for example, the platform may not be a good fit for `django-simple-deploy`. (It's difficult to write e2e tests for processes that aren't fully scriptable.) However, I can see situations where `simple_deploy` is good for automating configuration, regardless of what other steps are necessary to complete the deployment.
 
   - type: textarea
     attributes:
@@ -87,27 +89,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Since there isn't formal documentation about building out support for a new platform yet, here's a brief description of what it would take:
-
-        - Implementing support
-            - Add a new directory to `simple_deploy/management/commands/`. The name of this directory should be the same name you want people to use in the command `manage.py simple_deploy --platform PLATFORM_NAME`.
-            - Add your platform arg to `_validate_platform_arg()` in `simple_deploy.py`. This should be the only change necessary to `simple_deploy.py`.
-            - In `cli.py`, add your platform arg as an option for the `--platform` argument. This is informational; validation happens in `simple_deploy.py`.
-            - Write a `deploy.py` script. Using the script from the `fly_io/` folder is probably a good approach at this point.
-            - Write a `deploy_messages.py` file for any platform-specific output messages you'll need.
-            - Include a `templates/` directory in your platform's folder for any new files that will need to be created, or any sections that need to be added to existing files.
-        - Unit Testing
-            - Add a new folder in `unit_tests/platforms/` for your platform.
-            - Make a `reference_files/` directory, and add any test files you need here.
-            - Write a new file for your platform, called `test_PLATFORMNAME_config.py`. It should test that the sample project is configured correctly when run against your platform. Again, use `test_flyio_config.py` as a template.
-        - Integration Testing
-            - Add a new file to `integration_tests/` called `test_PLATFORMNAME_deployment.sh`. Running `./integration_tests/test_deploy_process.sh -p PLATFORM_NAME` should carry out a full deployment which pops up in a new browser tab, and runs the functionality tests for the sample project.
-        - Documentation
-            - Add a Quick Start page for your platform.
-            - Add this platform to the home page.
-            - Add an entry about this platform on the Choosing a Platform page.
-
-        For more information, see [General Approach to Supporting Platforms](https://github.com/ehmatthes/django-simple-deploy/blob/main/old_docs/supporting_platforms.md). This is in `old_docs/`, so it may be somewhat out of date, but it should still be helpful. It will be fully updated and moved to the official documentation at some point before the 1.0 release.
+        For more information about writing a new plugin, see the [plugin template](https://github.com/django-simple-deploy/dsd-plugin-template) repository.
 
   - type: markdown
     attributes:
