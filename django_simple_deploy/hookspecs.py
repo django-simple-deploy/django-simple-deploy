@@ -1,6 +1,5 @@
 """Hook specs for django-simple-deploy."""
 
-
 import pluggy
 
 hookspec = pluggy.HookspecMarker("django_simple_deploy")

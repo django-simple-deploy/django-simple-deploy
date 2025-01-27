@@ -431,7 +431,9 @@ class Command(BaseCommand):
             return "req_txt"
 
         # Exit if we haven't found any requirements.
-        error_msg = f"Couldn't find any specified requirements in {dsd_config.git_path}."
+        error_msg = (
+            f"Couldn't find any specified requirements in {dsd_config.git_path}."
+        )
         raise DSDCommandError(error_msg)
 
     def _check_using_poetry(self):

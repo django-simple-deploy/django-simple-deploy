@@ -23,7 +23,9 @@ class SimpleDeployCLI:
         #   output for `manage.py deploy --help`
         help_group = parser.add_argument_group("Get help")
         required_group = parser.add_argument_group("Required arguments")
-        behavior_group = parser.add_argument_group("Customize django-simple-deploy's behavior")
+        behavior_group = parser.add_argument_group(
+            "Customize django-simple-deploy's behavior"
+        )
         deployment_config_group = parser.add_argument_group(
             "Customize deployment configuration"
         )

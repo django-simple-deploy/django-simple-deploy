@@ -121,10 +121,7 @@ def check_status_output(status_output, diff_output):
 
     if len(untracked_changes) > 1:
         return False
-    if (
-        len(untracked_changes) == 1
-        and "dsd_logs/" not in untracked_changes[0]
-    ):
+    if len(untracked_changes) == 1 and "dsd_logs/" not in untracked_changes[0]:
         return False
 
     # Process modified files.

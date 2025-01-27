@@ -226,7 +226,9 @@ def reset_test_project(tmp_dir, pkg_manager):
     settings_file_path.write_text(new_settings_content)
 
     # Make sure we have a clean status before calling deploy.
-    subprocess.run(["git", "commit", "-am", "Added django_simple_deploy to INSTALLED_APPS."])
+    subprocess.run(
+        ["git", "commit", "-am", "Added django_simple_deploy to INSTALLED_APPS."]
+    )
 
 
 def call_deploy(tmp_dir, dsd_command, platform=None):
