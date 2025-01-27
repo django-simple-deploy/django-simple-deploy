@@ -4,4 +4,6 @@ hide:
     - footer
 ---
 
-While in the pre-1.0 phase, the roadmap focuses on building out functionality across platforms and OSes, and working out a robust and stable deployment process for each platform.
+The 1.0 release indicates reliable performance for all officially-supported plugins, and a stable platform on which to expand the plugin ecosystem.
+
+Ongoing 1.0 development will focus on improving the internal codebase, and making it easier to build and maintain plugins.
