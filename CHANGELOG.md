@@ -6,6 +6,20 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 0.9 - Simplified usage
 ---
 
+### 0.9.3
+
+#### External changes
+
+- Better documentation of `plugin_utils` and `dsd_config`.
+- Main app renamed, from `simple_deploy` to `django_simple_deploy`. The app name now matches the package name. There is only the name `django-simple-deploy` its variant `django_simple_deploy`, and the `deploy` command. There should no longer be any reference to `simple_deploy`, which was sometimes used as an actual name and sometimes as shorthand for the overall project.
+- Reviewed all public-facing messages and documentation for current usage.
+- Removed most references to "pre-1.0" state.
+- New doc page listing all known available plugins.
+
+#### Internal changes
+
+- Update many names to better reflect current state of the project, and remove historical baggage. Also, use some abbreviations such as `dsd_logs/` instead of `django_simple_deploy_logs/`.
+
 ### 0.9.2
 
 #### External changes
