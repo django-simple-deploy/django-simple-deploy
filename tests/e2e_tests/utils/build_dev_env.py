@@ -208,8 +208,8 @@ make_sp_call("git tag -am '' 'INITIAL_STATE'")
 add_dsd(project_dir)
 
 # Make sure we have a clean status before calling the deploy command.
-make_sp_call("git commit -am 'Added simple_deploy to INSTALLED_APPS.'")
-make_sp_call("git tag -am '' 'ADDED_SD'")
+make_sp_call("git commit -am 'Added django_simple_deploy to INSTALLED_APPS.'")
+make_sp_call("git tag -am '' 'ADDED_DSD'")
 
 # Repeat the project directory, so user can go there easily.
 print("\n\n --- Finished setup ---")
