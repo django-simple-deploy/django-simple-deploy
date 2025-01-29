@@ -21,13 +21,14 @@ from django_simple_deploy.management.commands.utils.command_errors import (
 )
 
 
-def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filename=""):
+def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filename="", reference_filepath=None):
     """Check that the test version of the file matches the reference version
     of the file.
 
     - filepath: relative path from tmp_proj_dir to test file
     - reference_filename: the name of the  reference file, if it has a
       different name than the generated file
+    - reference_filepath: absolute path to reference file
     - plugin_name: used to find the path to reference files.
 
     Asserts:
@@ -56,7 +57,9 @@ def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filen
 
     # Only plugins use reference files for now. Assume plugin dir is in same directory as
     # django-simple-deploy.
-    if plugin_name:
+    if reference_filepath:
+        fp_reference = reference_filepath
+    elif plugin_name:
         plugin_root_dir = sd_root_dir.parent / plugin_name
         assert plugin_root_dir.exists()
 
