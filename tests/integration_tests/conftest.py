@@ -3,6 +3,7 @@
 import subprocess, re, sys, os, tempfile
 from pathlib import Path
 from time import sleep
+from importlib.metadata import version
 
 import pytest
 
@@ -168,3 +169,18 @@ def pkg_manager(request):
     - String representing package manager: req_txt | poetry | pipenv
     """
     return request.node.callspec.params.get("reset_test_project")
+
+@pytest.fixture(scope="session")
+def dsd_version():
+    """Get the version of django-simple-deploy that's being tested.
+
+    This is used to dynamically generate reference files which include a reference
+    to the current version. For example the `deploy` command adds a requirement like this:
+    django-simple-deploy==0.9.3
+
+    A static reference file doesn't work.
+
+    Returns:
+        Str: version of django-simple-deploy that's being tested.
+    """
+    return version("django-simple-deploy")
