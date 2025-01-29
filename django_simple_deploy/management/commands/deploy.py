@@ -498,7 +498,8 @@ class Command(BaseCommand):
         """
         msg = "\nLooking for django-simple-deploy in requirements..."
         plugin_utils.write_output(msg)
-        plugin_utils.add_package("django-simple-deploy")
+        version_string = f"=={dsd_config.version}"
+        plugin_utils.add_package("django-simple-deploy", version=version_string)
 
     def _validate_plugin(self, pm):
         """Check that all required hooks are implemeted by plugin.
