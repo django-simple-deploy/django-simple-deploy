@@ -21,7 +21,7 @@ from django_simple_deploy.management.commands.utils.command_errors import (
 )
 
 
-def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filename="", reference_filepath=None):
+def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filename="", reference_filepath=None, context=None, tmp_path=None):
     """Check that the test version of the file matches the reference version
     of the file.
 
@@ -30,6 +30,10 @@ def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filen
       different name than the generated file
     - reference_filepath: absolute path to reference file
     - plugin_name: used to find the path to reference files.
+    - context: used to fill in placeholders in the reference file; reference file is not modified
+    - tmp_path: If a context is provided, also provide a tmp path where the generated reference file
+      can be stored. This approach means it will be a pytest-generated path, which can be found in a way
+      that's consistent with other tmp files generated during testing.
 
     Asserts:
     - Asserts that the file at `filepath` matches the reference file of the
@@ -67,6 +71,19 @@ def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filen
             plugin_root_dir / f"tests/integration_tests/reference_files/{filename}"
         )
         assert fp_reference.exists()
+
+    # If caller has provided a context, use it to generate a temp reference file with placeholders
+    # filled in.
+    if context:
+        contents = fp_reference.read_text()
+        for placeholder, replacement in context.items():
+            # contents = contents.replace("{" + placeholder + "}", replacement)
+            contents = contents.replace(f"{{{placeholder}}}", replacement)
+
+        fp_reference = tmp_path / filename
+        breakpoint()
+        fp_reference.write_text(contents)
+
 
     # The test file and reference file will always have different modified
     #   timestamps, so no need to use default shallow=True.
