@@ -21,7 +21,15 @@ from django_simple_deploy.management.commands.utils.command_errors import (
 )
 
 
-def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filename="", reference_filepath=None, context=None, tmp_path=None):
+def check_reference_file(
+    tmp_proj_dir,
+    filepath,
+    plugin_name="",
+    reference_filename="",
+    reference_filepath=None,
+    context=None,
+    tmp_path=None,
+):
     """Check that the test version of the file matches the reference version
     of the file.
 
@@ -81,9 +89,7 @@ def check_reference_file(tmp_proj_dir, filepath, plugin_name="", reference_filen
             contents = contents.replace(f"{{{placeholder}}}", replacement)
 
         fp_reference = tmp_path / filename
-        breakpoint()
         fp_reference.write_text(contents)
-
 
     # The test file and reference file will always have different modified
     #   timestamps, so no need to use default shallow=True.
