@@ -85,7 +85,6 @@ def check_reference_file(
     if context:
         contents = fp_reference.read_text()
         for placeholder, replacement in context.items():
-            # contents = contents.replace("{" + placeholder + "}", replacement)
             contents = contents.replace(f"{{{placeholder}}}", replacement)
 
         fp_reference = tmp_path / filename
