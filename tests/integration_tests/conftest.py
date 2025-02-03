@@ -146,7 +146,11 @@ def run_dsd(reset_test_project, tmp_project, request):
     # and if there's more we probably want the last one in the path. plugin_names
     # should probably be path_parts or something like that. Also, consider refactoring
     # this into a test utility function; see similar block in e2e conftest.
+    # DEV: Even worse is that the plugin name identified here is used in call_deploy()
+    #   to decide whether to add a --deployed-project-name arg to the call. That should
+    #   be decided by the plugin itself.
     module_path = request.module.__file__
+    breakpoint()
     plugin_names = [name for name in module_path.split("/") if "dsd-" in name]
 
     if not plugin_names:
