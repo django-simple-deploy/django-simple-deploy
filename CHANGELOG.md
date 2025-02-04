@@ -14,7 +14,8 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 #### Internal changes
 
-- NA
+- Uses a cross-platform approach to identifying which plugin is being tested.
+- Added windows-compatible dependencies to vendor/ for integration tests. All tests pass on Windows.
 
 ### 0.9.4
 
