@@ -41,6 +41,7 @@ jobs:
           # Configure git.
           git config --global user.email "ci_tester@example.com"
           git config --global user.name "Ci Tester"
+          git config --global init.defaultBranch main
 
       # Fly is used for CI testing.
       # - name: Install Fly.io CLI (Linux/macOS)
