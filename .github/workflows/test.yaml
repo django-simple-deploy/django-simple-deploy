@@ -34,11 +34,11 @@ jobs:
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
 
-      - name: Set up env on macOS
-        if: startsWith(matrix.os, 'macos-')
-        run: |
-          source $HOME/.local/bin/env
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      # - name: Set up env on macOS
+      #   if: startsWith(matrix.os, 'macos-')
+      #   run: |
+      #     source $HOME/.local/bin/env
+      #     echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: |
