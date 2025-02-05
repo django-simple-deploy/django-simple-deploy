@@ -54,13 +54,13 @@ jobs:
       - name: Install dependencies on Windows
         if: startsWith(matrix.os, 'windows-')
         run: |
-          uv venv .venv
-          .venv\Scripts\activate
+          # uv venv .venv
+          # .venv\Scripts\activate
 
-          uv pip install -r requirements.txt
-          uv pip install poetry
+          uv venv run uv pip install -r requirements.txt
+          uv venv run uv pip install poetry
           git clone https://github.com/django-simple-deploy/dsd-flyio.git ..\dsd-flyio
-          uv pip install -e ..\dsd-flyio
+          uv venv run uv pip install -e ..\dsd-flyio
 
       - name: Configure Git
         run: |
