@@ -52,5 +52,8 @@ jobs:
       #   run: |
       #     flyctl version
 
-      - name: Run pytest
+      - name: Run unit tests
         run: pytest tests/unit_tests -x
+
+      - name: Run integration tests
+        run: pytest tests/integratino_tests -x
