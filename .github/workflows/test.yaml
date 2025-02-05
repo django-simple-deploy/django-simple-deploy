@@ -30,12 +30,21 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
+      - name: Install uv
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Set up env on macOS
+        if: startsWith(matrix.os, "macos-")
+        run: |
+          source $HOME/.local/bin/env
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: |
           uv venv .venv
           source .venv/bin/activate
-          # python -m pip install --upgrade pip
+          
           uv pip install -r requirements.txt
           uv pip install poetry
           git clone https://github.com/django-simple-deploy/dsd-flyio.git ../dsd-flyio
