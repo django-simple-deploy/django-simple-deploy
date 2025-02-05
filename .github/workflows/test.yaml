@@ -46,19 +46,6 @@ jobs:
           git config --global user.name "Ci Tester"
           git config --global init.defaultBranch main
 
-      # Fly is used for CI testing.
-      # - name: Install Fly.io CLI (Linux/macOS)
-      #   if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
-      #   uses: superfly/flyctl-actions/setup-flyctl@master
-      # - name: Install Fly.io CLI (Windows)
-      #   if: startsWith(matrix.os, 'windows-')
-      #   run: |
-      #     iwr https://fly.io/install.ps1 -useb | iex
-      #     echo "$HOME/.fly/bin" >> $GITHUB_PATH
-      # - name: Check Fly.io CLI installation
-      #   run: |
-      #     flyctl version
-
       - name: Run unit tests
         run: |
           source .venv/bin/activate
