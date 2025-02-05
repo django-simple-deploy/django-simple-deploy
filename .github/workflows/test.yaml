@@ -56,4 +56,4 @@ jobs:
         run: pytest tests/unit_tests -x
 
       - name: Run integration tests
-        run: pytest tests/integratino_tests -x
+        run: pytest tests/integration_tests -x
