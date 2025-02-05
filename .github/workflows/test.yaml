@@ -35,7 +35,7 @@ jobs:
           curl -LsSf https://astral.sh/uv/install.sh | sh
 
       - name: Set up env on macOS
-        if: startsWith(matrix.os, "macos-")
+        if: startsWith(matrix.os, 'macos-)
         run: |
           source $HOME/.local/bin/env
           echo "$HOME/.local/bin" >> $GITHUB_PATH
@@ -44,7 +44,7 @@ jobs:
         run: |
           uv venv .venv
           source .venv/bin/activate
-          
+
           uv pip install -r requirements.txt
           uv pip install poetry
           git clone https://github.com/django-simple-deploy/dsd-flyio.git ../dsd-flyio
