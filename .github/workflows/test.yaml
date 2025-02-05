@@ -32,11 +32,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install poetry
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          # python -m pip install --upgrade pip
+          uv pip install -r requirements.txt
+          uv pip install poetry
           git clone https://github.com/django-simple-deploy/dsd-flyio.git ../dsd-flyio
-          pip install -e ../dsd-flyio
+          uv pip install -e ../dsd-flyio
 
           # Configure git.
           git config --global user.email "ci_tester@example.com"
