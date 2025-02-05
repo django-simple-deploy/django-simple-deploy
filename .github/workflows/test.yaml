@@ -36,6 +36,8 @@ jobs:
           pip install -r requirements.txt
           # pip install dsd-flyio
           pip install poetry
+          git clone https://github.com/django-simple-deploy/dsd-flyio.git
+          pip install -e dsd-flyio
 
       # Fly is used for CI testing.
       # - name: Install Fly.io CLI (Linux/macOS)
