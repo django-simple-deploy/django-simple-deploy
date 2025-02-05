@@ -30,11 +30,18 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install uv
+      - name: Install uv on macOS and Linux
+        if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
 
-      - name: Install dependencies
+      - name: Install uv on Windows
+        if: startsWith(matrix.os, 'windows-')
+        run: |
+          powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+
+      - name: Install dependencies on macOS and Linux
+        if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
         run: |
           uv venv .venv
           source .venv/bin/activate
@@ -44,17 +51,41 @@ jobs:
           git clone https://github.com/django-simple-deploy/dsd-flyio.git ../dsd-flyio
           uv pip install -e ../dsd-flyio
 
-          # Configure git.
+      - name: Install dependencies on Windows
+        if: startsWith(matrix.os, 'windows-')
+        run: |
+          uv venv .venv
+          .venv\Scripts\activate
+
+          uv pip install -r requirements.txt
+          uv pip install poetry
+          git clone https://github.com/django-simple-deploy/dsd-flyio.git ..\dsd-flyio
+          uv pip install -e ..\dsd-flyio
+
+      - name: Configure Git
+        run: |
           git config --global user.email "ci_tester@example.com"
           git config --global user.name "Ci Tester"
           git config --global init.defaultBranch main
 
-      - name: Run unit tests
+      - name: Run unit tests on macOS and Linux
+        if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
         run: |
           source .venv/bin/activate
           pytest tests/unit_tests -x
 
-      - name: Run integration tests
+      - name: Run integration tests on macOS and Linux
+        if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
         run: |
           source .venv/bin/activate
           pytest tests/integration_tests -x
+
+      - name: Run unit tests on Windows
+        if: startsWith(matrix.os, 'windows-')
+        run: |
+          uv venv run pytest tests/unit_tests -x
+
+      - name: Run integration tests on Windows
+      if: startsWith(matrix.os, 'windows-')
+        run: |
+          uv venv run pytest tests/integration_tests -x
