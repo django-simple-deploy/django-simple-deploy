@@ -60,7 +60,11 @@ jobs:
       #     flyctl version
 
       - name: Run unit tests
-        run: pytest tests/unit_tests -x
+        run: |
+          source .venv/bin/activate
+          pytest tests/unit_tests -x
 
       - name: Run integration tests
-        run: pytest tests/integration_tests -x
+        run: |
+          source .venv/bin/activate
+          pytest tests/integration_tests -x
