@@ -86,6 +86,6 @@ jobs:
           uv venv run pytest tests/unit_tests -x
 
       - name: Run integration tests on Windows
-      if: startsWith(matrix.os, 'windows-')
+        if: startsWith(matrix.os, 'windows-')
         run: |
           uv venv run pytest tests/integration_tests -x
