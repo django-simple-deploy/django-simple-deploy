@@ -4,7 +4,7 @@ The functions in this module are not specific to any one platform. If a function
   starts to be used by tests for more than one platform, it should be moved here.
 """
 
-import subprocess, shlex, sys, time, os
+import subprocess, shlex, sys, time, os, signal
 from pathlib import Path
 from textwrap import dedent
 
@@ -89,14 +89,26 @@ def check_local_app_functionality(python_cmd):
     print("\n  Testing local functionality with runserver...")
     make_sp_call(f"{python_cmd} manage.py migrate")
 
-    run_server = subprocess.Popen(f"{python_cmd} manage.py runserver 8008", shell=True)
+    # Start the runserver process.
+    # On Linux, runserver will spawn child processes, which need to be handled as a group.
+    if sys.platform == "linux":
+        run_server = subprocess.Popen(f"{python_cmd} manage.py runserver 8008", shell=True, preexec_fn=os.setpgrp)
+    else:
+        run_server = subprocess.Popen(f"{python_cmd} manage.py runserver 8008", shell=True)
+    
     time.sleep(1)
 
+    # Test the local project using the runserver process.
     test_output = make_sp_call(
         f"{python_cmd} test_deployed_app_functionality.py --url http://localhost:8008/",
         capture_output=True,
     ).stdout.decode()
-    run_server.terminate()
+    
+    # Kill the runserver process.
+    if sys.platform == "linux":
+        os.killpg(run_server.pid, signal.SIGKILL)
+    else:
+        run_server.terminate()
 
     print(test_output)
     print("    Finished testing local functionality.")
