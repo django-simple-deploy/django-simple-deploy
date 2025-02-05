@@ -2,7 +2,12 @@ name: django-simple-deploy CI tests
 
 on:
   pull_request:
-    
+
+  push:
+    branches:
+      - main
+      - start_ci
+
   workflow_dispatch:
 
 jobs:
