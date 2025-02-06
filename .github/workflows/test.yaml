@@ -76,11 +76,12 @@ jobs:
           where.exe uv
           uv --version
 
-          # # Build and activate virtual environment
-          # uv venv .venv
+          # Build and activate virtual environment
+          uv venv .venv
+          .venv\Scripts\activate
 
-          # # Install dependencies
-          # uv venv run uv pip install -r requirements.txt
+          # Install dependencies
+          uv pip install -r requirements.txt
           # uv venv run uv pip install poetry
           # git clone https://github.com/django-simple-deploy/dsd-flyio.git ..\dsd-flyio
           # uv venv run uv pip install -e ..\dsd-flyio
