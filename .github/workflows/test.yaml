@@ -89,4 +89,4 @@ jobs:
           pytest tests\unit_tests -x
 
           # Run integration tests
-          uv venv run pytest tests\integration_tests -x
+          pytest tests\integration_tests -x
