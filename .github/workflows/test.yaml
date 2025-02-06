@@ -70,11 +70,6 @@ jobs:
           powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
           $env:Path = "C:\Users\runneradmin\.local\bin;$env:Path"
 
-          # Verify uv installation
-          echo "PATH: $env:PATH"
-          where.exe uv
-          uv --version
-
           # Build and activate virtual environment
           uv venv .venv
           .venv\Scripts\activate
