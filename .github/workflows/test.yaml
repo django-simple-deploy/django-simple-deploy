@@ -82,17 +82,17 @@ jobs:
 
           # Install dependencies
           uv pip install -r requirements.txt
-          # uv venv run uv pip install poetry
-          # git clone https://github.com/django-simple-deploy/dsd-flyio.git ..\dsd-flyio
-          # uv venv run uv pip install -e ..\dsd-flyio
+          uv pip install poetry
+          git clone https://github.com/django-simple-deploy/dsd-flyio.git ..\dsd-flyio
+          uv pip install -e ..\dsd-flyio
 
-          # # Configure Git
-          # git config --global user.email "ci_tester@example.com"
-          # git config --global user.name "Ci Tester"
-          # git config --global init.defaultBranch main
+          # Configure Git
+          git config --global user.email "ci_tester@example.com"
+          git config --global user.name "Ci Tester"
+          git config --global init.defaultBranch main
 
-          # # Run unit tests
-          # uv venv run pytest tests\unit_tests -x
+          # Run unit tests
+          pytest tests\unit_tests -x
 
           # # Run integration tests
           # uv venv run pytest tests\integration_tests -x
