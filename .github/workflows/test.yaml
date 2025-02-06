@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest] #[ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest] #[ubuntu-latest, macos-latest, windows-latest]
         python-version: ["3.12"] #["3.11", "3.12"]
 
     steps:
@@ -30,70 +30,34 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install uv on macOS and Linux
+      # --- macOS and Linux tests ---
+
+      - name: Run macOS and Linux tests
+
         if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
         run: |
+          # Install uv
           curl -LsSf https://astral.sh/uv/install.sh | sh
 
-      - name: Install uv on Windows
-        if: startsWith(matrix.os, 'windows-')
-        run: |
-          powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-          echo "$HOME/.local/bin" | Out-File -Append -Encoding utf8 $env:GITHUB_PATH
-
-      - name: Verify uv installation
-        if: startsWith(matrix.os, 'windows-')
-        run: |
-          echo "PATH: $env:PATH"
-          where.exe uv
-          uv --version
-
-      - name: Install dependencies on macOS and Linux
-        if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
-        run: |
+          # Build and activate virtual environment
           uv venv .venv
           source .venv/bin/activate
 
+          # Install dependencies
           uv pip install -r requirements.txt
           uv pip install poetry
           git clone https://github.com/django-simple-deploy/dsd-flyio.git ../dsd-flyio
           uv pip install -e ../dsd-flyio
 
-      - name: Install dependencies on Windows
-        if: startsWith(matrix.os, 'windows-')
-        run: |
-          # uv venv .venv
-          # .venv\Scripts\activate
-
-          uv venv run uv pip install -r requirements.txt
-          uv venv run uv pip install poetry
-          git clone https://github.com/django-simple-deploy/dsd-flyio.git ..\dsd-flyio
-          uv venv run uv pip install -e ..\dsd-flyio
-
-      - name: Configure Git
-        run: |
+          # Configure Git
           git config --global user.email "ci_tester@example.com"
           git config --global user.name "Ci Tester"
           git config --global init.defaultBranch main
 
-      - name: Run unit tests on macOS and Linux
-        if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
-        run: |
+          # Run unit tests
           source .venv/bin/activate
           pytest tests/unit_tests -x
 
-      - name: Run integration tests on macOS and Linux
-        if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
-        run: |
+          # Run integration tests
           source .venv/bin/activate
           pytest tests/integration_tests -x
-
-      - name: Run unit tests on Windows
-        if: startsWith(matrix.os, 'windows-')
-        run: |
-          uv venv run pytest tests/unit_tests -x
-
-      - name: Run integration tests on Windows
-        if: startsWith(matrix.os, 'windows-')
-        run: |
-          uv venv run pytest tests/integration_tests -x
