@@ -39,7 +39,14 @@ jobs:
         if: startsWith(matrix.os, 'windows-')
         run: |
           powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-          echo "C:\Users\runneradmin\.local\bin" | Out-File -Append -Encoding utf8 $env:GITHUB_PATH
+          echo "$HOME/.local/bin" | Out-File -Append -Encoding utf8 $env:GITHUB_PATH
+
+      - name: Verify uv installation
+        if: startsWith(matrix.os, 'windows-')
+        run: |
+          echo "PATH: $env:PATH"
+          where.exe uv
+          uv --version
 
       - name: Install dependencies on macOS and Linux
         if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
