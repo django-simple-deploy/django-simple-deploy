@@ -68,7 +68,6 @@ jobs:
         run: |
           # Install uv
           powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
-          # echo "$HOME/.local/bin" | Out-File -Append -Encoding utf8 $env:GITHUB_PATH
           $env:Path = "C:\Users\runneradmin\.local\bin;$env:Path"
 
           # Verify uv installation
@@ -94,5 +93,5 @@ jobs:
           # Run unit tests
           pytest tests\unit_tests -x
 
-          # # Run integration tests
-          # uv venv run pytest tests\integration_tests -x
+          # Run integration tests
+          uv venv run pytest tests\integration_tests -x
