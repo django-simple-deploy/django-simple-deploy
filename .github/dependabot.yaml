@@ -1,0 +1,14 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+  # Reduce frequency of alerts about sample project and reference files?
+  - package-ecosystem: "pip"
+    directories:
+      - "/sample_project"
+      - "/tests"
+    schedule:
+      interval: "monthly"
