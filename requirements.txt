@@ -8,7 +8,6 @@ click==8.1.8
 colorama==0.4.6
 distlib==0.3.9
 django==5.1.6
--e file:///Users/eric/projects/django-simple-deploy
 docutils==0.21.2
 filelock==3.17.0
 ghp-import==2.1.0
