@@ -7,7 +7,7 @@ The goal is to cover all core functionality, without over-testing.
   load times. Thorough testing would take an excessively long time. So,
   if a core aspect of the project has been tested already, there's no need
   to test that aspect in other pages.
-- So, we test creation of blogs and posts because that proves that db access 
+- So, we test creation of blogs and posts because that proves that db access
   is working. But we don't need to test editing and deletion.
 - This test script assumes an empty db. It also will fail if run twice without flushing,
   because it will try to create the same user a second time.

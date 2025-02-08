@@ -1,6 +1,6 @@
 """Manage deployement to a variety of platforms.
 
-Configuration-only mode: 
+Configuration-only mode:
     $ python manage.py deploy
     Configures project for deployment to the specified platform.
 
@@ -11,7 +11,7 @@ Automated mode:
 
 Overview:
     This is the command that's called to manage the configuration. In the automated
-    mode, it also makes the actual deployment. The entire process is coordinated in 
+    mode, it also makes the actual deployment. The entire process is coordinated in
     handle():
     - Parse the CLI options that were passed.
     - Start logging, unless suppressed.

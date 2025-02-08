@@ -1,5 +1,4 @@
-"""Check the output of valid platform-agnostic cli commands.
-"""
+"""Check the output of valid platform-agnostic cli commands."""
 
 from pathlib import Path
 import subprocess

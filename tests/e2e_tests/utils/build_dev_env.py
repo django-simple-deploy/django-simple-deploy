@@ -10,7 +10,7 @@ Notes:
 - Final output:
     --- Finished setup ---
       Your project is ready to use at: /Users/eric/projects/dsd-dev-project_zepbz
-- Currently, does not run migrate.      
+- Currently, does not run migrate.
 """
 
 import os, sys, subprocess, random, string, shlex, argparse

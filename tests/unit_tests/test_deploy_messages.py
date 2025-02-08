@@ -1,7 +1,7 @@
 """Tests for cross-platform deploy messages.
 
 These functions simply return strings. However, it can be easy to forget a
-return statement at the end of a dynamic function, and it can be easy to get 
+return statement at the end of a dynamic function, and it can be easy to get
 inconsistent spacing in the messages that are returned.
 
 A test here should mean that the spacing has been verified as appropriate in an actual
