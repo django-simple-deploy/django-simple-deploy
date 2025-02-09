@@ -4,41 +4,12 @@ hide:
     - footer
 ---
 
+# Roadmap
+
 The 1.0 release indicates reliable performance for all officially-supported plugins, and a stable platform on which to expand the plugin ecosystem.
 
 Ongoing development is focused on improving the internal codebase, and making it easier to build and maintain plugins.
 
-# Roadmap
-
-This page lays out the items that need to be completed before we can release a 1.0 version of `django-simple-deploy`. The 1.0 release will signify that this tool can be used reliably and predictably for all the anticipated use cases.
-
-| Symbol | Status |
-| :---: | :--- |
-| :fontawesome-regular-square: | Not yet implemented |
-| :fontawesome-regular-square-check: | Preliminary implementation |
-| :fontawesome-solid-square-check: | Full implementation |
-
-## Support the most popular Python package managers
-
-| Platform | Bare `requirements.txt` file | Poetry | Pipenv |
-| :------: | :--------------------------: | :----: | :----: |
-| Fly.io   | :fontawesome-solid-square-check: | :fontawesome-solid-square-check: | :fontawesome-solid-square-check: |
-| Platform.sh | :fontawesome-solid-square-check: | :fontawesome-regular-square-check: | :fontawesome-solid-square-check: |
-| Heroku | :fontawesome-solid-square-check: | :fontawesome-solid-square-check: | :fontawesome-solid-square-check: |
-
-!!! note
-    When using Poetry on Platform.sh, we generate a `requirements.txt` file on the server. We should be able to strictly use Poetry instead.
-
-## Support each major operating system
-
-| Platform | Windows | macOS | Linux (Debian flavors) |
-| :------: | :--------------------------: | :----: | :----: |
-| Fly.io   | :fontawesome-solid-square-check: | :fontawesome-solid-square-check: | :fontawesome-regular-square-check: |
-| Platform.sh | :fontawesome-solid-square-check: | :fontawesome-solid-square-check: | :fontawesome-regular-square-check: |
-| Heroku | :fontawesome-solid-square-check: | :fontawesome-solid-square-check: | :fontawesome-regular-square-check: |
-
-!!! note
-    - I've done almost all of my development work on macOS, so initially that's the best-supported platform.
 
 ## Friendly summary of deployment process
 
@@ -66,24 +37,3 @@ This matters to platforms because some platforms look for `manage.py` in the roo
 
 !!! note
     Some work has been done to attempt support on Heroku, but that's probably the most difficult platform to support. This table will fill in more quickly when there's time to look at projects that use a Dockerfile, where we can move files around during every deployment push without affecting the local project.
-
-## Overall stability of deployment process
-
-Support for a new platform starts out as a proof-of-concept, showing that deployment to that platform can be automated. Full stability means people can use `simple_deploy` on a variety of projects with predictable, stable results. It also means the deployment is configured using best practices for that platform. For example, if it's a container-based platform, we produce a Dockerfile that you can build on as your deployment grows.
-
-| Fly.io | Platform.sh | Heroku |
-| :--------------------------: | :----: | :----: |
-| :fontawesome-solid-square-check: | :fontawesome-solid-square-check: | :fontawesome-solid-square-check: |
-
-## Other notes
-
-There are a number of other questions to answer formally, and tasks to complete, before releasing a 1.0 version:
-
-- [ ] Is the API stable enough for a 1.0 release?
-- [x] Should we adopt a plugin-based approach?
-    - [ ] If not, what's the plan when a number of additional platforms want to build support into `django-simple-deploy`?
-    - [ ] One of the goals of this project is to insulate the community from a platform that lets its docs and support tools go stale. If we have a plugin model, how do we keep the deployment process up to date when a platform isn't maintaining its plugin? Is there a submodule-based approach where the plugins can live here, and staff from platforms can have commit access to their submodule?
-    - [x] Should this be an org, and each plugin is in a repo on the org? Does that give us commit access to all plugins? (Officially-supported plugins are in the org.)
-- [ ] Write a deprecation plan for platforms that go out of business, or are no longer appropriate for `simple_deploy` to support.
-- [ ] Write a stability policy.
-- [ ] Review all open issues, and label everything as pre-1.0 and post-1.0. Complete all pre-1.0 tasks.
