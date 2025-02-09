@@ -64,10 +64,7 @@ nav:
     - 'Managing Releases': 'maintaining/managing_releases.md'
     - 'Updating Documentation': 'maintaining/updating_docs.md'
     - 'Architectural Design Record': 'maintaining/adr.md'
-  - 'Roadmap':
-    - 'roadmap/index.md'
-    - 'roadmap/reaching_one_point_o.md'    
-    
+  - 'Roadmap': 'roadmap/index.md'
 
 
 theme: 

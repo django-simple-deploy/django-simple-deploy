@@ -1,10 +1,10 @@
 ---
-title: "Roadmap to 1.0"
+title: "Roadmap"
 hide:
     - footer
 ---
 
-# Roadmap to 1.0
+# Roadmap
 
 This page lays out the items that need to be completed before we can release a 1.0 version of `django-simple-deploy`. The 1.0 release will signify that this tool can be used reliably and predictably for all the anticipated use cases.
 
