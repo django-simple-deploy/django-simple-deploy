@@ -65,6 +65,7 @@ nav:
     - 'Updating Documentation': 'maintaining/updating_docs.md'
     - 'Architectural Design Record': 'maintaining/adr.md'
   - 'Roadmap': 'roadmap/index.md'
+  - 'Announcements': 'announcements/index.md'
 
 
 theme: 
