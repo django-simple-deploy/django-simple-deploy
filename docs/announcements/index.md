@@ -22,7 +22,7 @@ From this point forward, deploying a relatively simple Django project to platfor
 
 django-simple-deploy should be stable from this point forward in two main ways. The user-facing API should remain stable for the foreseeable future. That means teachers, authors, and other content creators should be able to use django-simple-deploy in Django-focused resources, without having to update their resources on a regular basis. When a platform's deployment process changes, plugins may have to be updated, but end users won't notice any difference. They'll still install django-simple-deploy and a plugin, add `django_simple_deploy` to `INSTALLED_APPS`, and then run the `deploy` command.
 
-Also, the core-plugin interface should be stable from this point forward. That means plugin developers should be able to build out support for new platforms, and a variety of approaches for some platforms, without worrying about breaking changes coming from this project.
+Also, the core-plugin interface should be stable from this point forward. That means plugin developers should be able to build out support for new platforms, and a variety of approaches for some platforms, without worrying about breaking changes coming from this project. Any changes that do affect the core-plugin interface will be handled in a way that prioritizes clear communication with plugin developers, and backwards compatibility.
 
 ### Looking forward
 
