@@ -3,10 +3,12 @@ Changelog: django-simple-deploy
 
 For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.com/en/0.3.0/).
 
-0.9 - Simplified usage
+1.0 - Stable release
 ---
 
-### 0.9.5 (unreleased)
+This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
+
+### 1.0.0 - Stable release
 
 #### External changes
 
@@ -24,6 +26,10 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 - Add dependabot config.
   - Daily for main requirements.
   - Monthly for sample_project and tests/, until tests refactored to pull version from sample_project/.
+
+
+0.9 - Simplified usage
+---
 
 ### 0.9.4
 
