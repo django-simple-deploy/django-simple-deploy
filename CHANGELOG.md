@@ -11,6 +11,7 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 #### External changes
 
 - Updated main image and name of log directory in main README.
+- Updated roadmap for post-1.0 phase of development.
 
 #### Internal changes
 
