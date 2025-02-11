@@ -60,5 +60,5 @@ sqlparse==0.5.3
 toml==0.10.2
 twine==6.1.0
 urllib3==2.3.0
-virtualenv==20.29.1
+virtualenv==20.29.2
 watchdog==6.0.0
