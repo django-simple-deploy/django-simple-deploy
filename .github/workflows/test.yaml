@@ -33,7 +33,7 @@ jobs:
 
       - name: Run macOS and Linux tests
 
-        if: startsWith(matrix.os, 'macos-') || startsWith(matrix.os, 'ubuntu-')
+        if: runner.os == 'Linux' || runner.os == 'macOS'
         run: |
           # Install uv
           curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -63,7 +63,7 @@ jobs:
 
       - name: Run Windows tests
 
-        if: startsWith(matrix.os, 'windows-')
+        if: runner.os == 'Windows'
         run: |
           # Install uv
           powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
