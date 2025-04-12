@@ -441,7 +441,7 @@ def get_string_from_output(output):
     need to display both, consider redirecting stderr to stdout:
         subprocess.run(cmd_parts, stderr=subprocess.STDOUT, ...)
     This has not been necessary yet; if it becomes necessary we'll probably need to
-    modify run_quick_command() to accomodate the necessary args.
+    modify run_quick_command() to accommodate the necessary args.
     """
     if isinstance(output, str):
         return output

@@ -7,7 +7,7 @@ hide:
 Even as `django-simple-deploy` reaches the 1.0 release, the internal codebase is steadily evolving. Unit tests should be written only for the following:
 
 - Specific functions and methods that are critical to current behavior;
-- Functions and methods that are likly to be stable for multiple major releases.
+- Functions and methods that are likely to be stable for multiple major releases.
 - If someone reports a bug, or you find one, definitely consider writing a unit test that prevents that bug from reappearing.
 
 For all unit tests, try to write them in a way that they're not overly dependent on implementation. If you need to change the structure of the project to support that, feel free to suggest that change. For example there's probably a good deal of functionality that can be moved out of a class and into a utility function that's easier to test in isolation.

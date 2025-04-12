@@ -204,7 +204,7 @@ The goal for the 0.7 series is to support an internal plugin model. There should
 - All platforms use a plugin model internally.
 - Developer resources moved to platform-specific subdirs.
 - All imports in plugins are relative to the plugin, rather than using simple_deploy paths.
-- Simpler implemenation of `write_file_from_template()` utility function.
+- Simpler implementation of `write_file_from_template()` utility function.
 - `PlatformDeployer` class moved to separate file for all plugins.
 - Core simple_deploy verifies that selected plugin implements required hooks.
     - All plugins must implement `simple_deploy_automate_all_supported()`, which returns a boolean indicating whether the plugin supports the `--automate-all` flag. If `--automate-all` is supported, the plugin must also implement `simple_deploy_get_automate_all_msg()`, which provides a platform-specific message for confirming the usage of `--automate-all`.
@@ -278,7 +278,7 @@ Deployments should work on all three platforms, for all major OSes. Any fixes fr
 #### External changes
 
 - Detects missing Heroku CLI on Ubuntu.
-- Creates a Postgres databse on Heroku as needed.
+- Creates a Postgres database on Heroku as needed.
 - Updates roadmap.
 
 #### Internal changes
@@ -329,7 +329,7 @@ Deployment to Platform.sh should be stable. Resumes preliminary support for Fly.
 - Updates to documentation:
     - Updated information in Choosing a Platform.
     - Many smaller documentation improvements from multiple people looking closely at docs.
-    - Started official documenation for integration tests.
+    - Started official documentation for integration tests.
 - Fly.io:
     - Assumes you have no existing Fly apps.
     - Identifies lowest-latency region to deploy to; defaults to 'sea' if that information is unattainable.
@@ -344,7 +344,7 @@ Deployment to Platform.sh should be stable. Resumes preliminary support for Fly.
     - No longer use shell scripts;
     - Check for Poetry and Pipenv before running;
     - No longer require any platform's CLI to be installed;
-    - Fixed `rum` mispelling of `rm` in unit tests using Poetry, which should improve accuracy of unit testing when using Poetry.
+    - Fixed `rum` misspelling of `rm` in unit tests using Poetry, which should improve accuracy of unit testing when using Poetry.
     - Pass on Windows as well as macOS and Linux.
     - Add `simple_deploy` to Poetry and Pipenv requirements for fly configurations.
 - Integration tests

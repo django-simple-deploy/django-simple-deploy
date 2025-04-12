@@ -1,4 +1,4 @@
-"""Manage deployement to a variety of platforms.
+"""Manage deployment to a variety of platforms.
 
 Configuration-only mode:
     $ python manage.py deploy
@@ -142,7 +142,7 @@ class Command(BaseCommand):
         self._confirm_automate_all(pm)
 
         # At this point dsd_config is fully defined, so we can validate it before handing
-        # responsiblity off to plugin.
+        # responsibility off to plugin.
         dsd_config.validate()
 
         # Platform-agnostic work is finished. Hand off to plugin.
@@ -502,7 +502,7 @@ class Command(BaseCommand):
         plugin_utils.add_package("django-simple-deploy", version=version_string)
 
     def _validate_plugin(self, pm):
-        """Check that all required hooks are implemeted by plugin.
+        """Check that all required hooks are implemented by plugin.
 
         Also, load and validate plugin config object.
 
