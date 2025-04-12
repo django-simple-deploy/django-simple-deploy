@@ -72,7 +72,7 @@ assert "Log out" not in r.text
 
 
 # --- Anonymous empty all_blogs ---
-print("  Checking empty anonmyous all_blogs page...")
+print("  Checking empty anonymous all_blogs page...")
 url = f"{app_url}all_blogs"
 r = requests.get(url)
 
@@ -84,7 +84,7 @@ assert "Create a new blog" not in r.text
 
 
 # --- Anonymous empty latest_posts ---
-print("  Checking empty anonmyous latest_posts page...")
+print("  Checking empty anonymous latest_posts page...")
 url = f"{app_url}latest_posts"
 r = requests.get(url)
 

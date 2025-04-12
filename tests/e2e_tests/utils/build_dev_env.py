@@ -114,7 +114,7 @@ sample_project_dir = sd_root_dir / "sample_project/blog_project"
 copytree(sample_project_dir, project_dir, dirs_exist_ok=True)
 remove_unneeded_files(project_dir, pkg_manager)
 
-# Create a virtual envronment. Set the path to the environemnt, instead of
+# Create a virtual envronment. Set the path to the environment, instead of
 #   activating it. It's easier to use the venv directly than to activate it,
 #   with all these separate subprocess.run() calls.
 venv_dir = project_dir / ".venv"
