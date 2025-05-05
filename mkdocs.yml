@@ -66,6 +66,7 @@ nav:
     - 'Architectural Design Record': 'maintaining/adr.md'
   - 'Roadmap': 'roadmap/index.md'
   - 'Announcements': 'announcements/index.md'
+  - 'Media': 'media/index.md'
 
 
 theme: 
