@@ -23,7 +23,6 @@ General ideas
 - Look at settings in [django-production](https://github.com/lincolnloop/django-production). See [#147](https://github.com/django-simple-deploy/django-simple-deploy/issues/147).
 - Set up CI. See [#148](https://github.com/django-simple-deploy/django-simple-deploy/issues/148).
 - Identify current branch? Warn about non-main branch? See [#150](https://github.com/django-simple-deploy/django-simple-deploy/issues/150).
-- Note talks, articles, discussion etc related to this project. See [#208](https://github.com/django-simple-deploy/django-simple-deploy/issues/208).
 - Consider a stability policy. See [#214](https://github.com/django-simple-deploy/django-simple-deploy/issues/214).
 - Consider a `--dry-run` feature. See [#247](https://github.com/django-simple-deploy/django-simple-deploy/issues/247).
 - Revisit `git status` check in deploy.py. See [#261](https://github.com/django-simple-deploy/django-simple-deploy/issues/261).
