@@ -6,6 +6,12 @@ Deployment, for Djangonauts with deadlines.
 
 The full documentation for this project is at [Read the Docs](https://django-simple-deploy.readthedocs.io/en/latest/).
 
+## Recent media
+
+[Django Simple Deploy and other DevOps Things](https://talkpython.fm/episodes/show/500/django-simple-deploy-and-other-devops-things) (Episode 500 of Talk Python)
+
+It was an honor to be the guest on episode 500, that's a fantastic milestone for a podcast! This episode focuses on the state of `django-simple-deploy` as it reached the 1.0 release.
+
 ## Quickstart
 
 `django-simple-deploy` gives you a management command that configures your project for an initial deployment. It currently supports deployments to [Fly.io](https://fly.io), [Platform.sh](https://platform.sh), and [Heroku](https://heroku.com). Each platform is supported by an external plugin, which means it's relatively straightforward to build support for additional hosting platforms. A [plugin](https://github.com/django-simple-deploy/dsd-vps) supporting VPS-based deployments is currently in development.
