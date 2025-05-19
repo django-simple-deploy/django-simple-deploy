@@ -16,7 +16,7 @@ Deployment to Fly.io requires three things:
 
 - You must be using Git to track your project.
 - You need to be tracking your dependencies with a `requirements.txt` file, or be using Poetry or Pipenv.
-- The [Fly.io CLI](https://fly.io/docs/hands-on/install-flyctl/) must be installed on your system.
+- You must have a Fly.io account created (with credit card) and the [Fly.io CLI](https://fly.io/docs/hands-on/install-flyctl/) installed in you local path.
 
 ## Configuration-only deployment
 
