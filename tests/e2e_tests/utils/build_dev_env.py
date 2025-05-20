@@ -38,6 +38,13 @@ parser.add_argument(
     help='The target environment (e.g., "development_version", "pypi")',
 )
 
+parser.add_argument(
+    "--location",
+    type=str,
+    default="",
+    help="Where the sample project will be created.",
+)
+
 args = parser.parse_args()
 
 pkg_manager = args.pkg_manager
@@ -107,7 +114,11 @@ def add_dsd(tmp_dir):
 sd_root_dir = Path(__file__).parents[3]
 
 random_id = "".join(random.choices(string.ascii_letters + string.digits, k=5)).lower()
-project_dir = Path.home() / f"projects/dsd-dev-project_{random_id}"
+if not args.location:
+    # project_dir = Path.home() / f"projects/dsd-dev-project_{random_id}"
+    project_dir = sd_root_dir.parent / f"dsd-dev-project_{random_id}"
+else:
+    project_dir = Path(args.location) / f"dsd-dev-project_{random_id}"
 
 # Copy sample project to project dir.
 sample_project_dir = sd_root_dir / "sample_project/blog_project"
