@@ -114,11 +114,11 @@ def add_dsd(tmp_dir):
 sd_root_dir = Path(__file__).parents[3]
 
 random_id = "".join(random.choices(string.ascii_letters + string.digits, k=5)).lower()
-if not args.location:
-    # project_dir = Path.home() / f"projects/dsd-dev-project_{random_id}"
-    project_dir = sd_root_dir.parent / f"dsd-dev-project_{random_id}"
-else:
+if args.location:
     project_dir = Path(args.location) / f"dsd-dev-project_{random_id}"
+else:
+    project_dir = sd_root_dir.parent / f"dsd-dev-project_{random_id}"
+breakpoint()
 
 # Copy sample project to project dir.
 sample_project_dir = sd_root_dir / "sample_project/blog_project"
