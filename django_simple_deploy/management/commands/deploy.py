@@ -207,7 +207,8 @@ class Command(BaseCommand):
         Returns:
             bool: True if created directory, False if already one present.
         """
-        self.log_dir_path = settings.BASE_DIR / "dsd_logs"
+        # We're primarily calling Path() because wagtail still uses string paths!
+        self.log_dir_path = Path(settings.BASE_DIR) / "dsd_logs"
         if not self.log_dir_path.exists():
             self.log_dir_path.mkdir()
             return True
@@ -283,7 +284,7 @@ class Command(BaseCommand):
         dsd_config.local_project_name = settings.ROOT_URLCONF.replace(".urls", "")
         plugin_utils.log_info(f"Local project name: {dsd_config.local_project_name}")
 
-        dsd_config.project_root = settings.BASE_DIR
+        dsd_config.project_root = Path(settings.BASE_DIR)
         plugin_utils.log_info(f"Project root: {dsd_config.project_root}")
 
         # Find .git location, and make sure there's a clean status.
