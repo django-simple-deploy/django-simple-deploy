@@ -297,24 +297,6 @@ class Command(BaseCommand):
 
         dsd_config.settings_path = self._get_settings_path()
 
-        # # Look for a standard settings.py file first.
-        # dsd_config.settings_path = (
-        #     dsd_config.project_root / dsd_config.local_project_name / "settings.py"
-        # )
-        # if not dsd_config.settings_path.exists():
-        #     # Try a settings dir, with production.py. This is Wagtail's structure.
-        #     dsd_config.settings_path = (
-        #         dsd_config.project_root / dsd_config.local_project_name / "settings" / "production.py"
-        #         # dsd_config.project_root / dsd_config.local_project_name / "settings" / "base.py"
-        #     )
-
-        # if not dsd_config.settings_path.exists():
-        #     standard_path = dsd_config.project_root / dsd_config.local_project_name / "settings.py"
-        #     wagtail_path = dsd_config.project_root / dsd_config.local_project_name / "settings" / "production.py"
-        #     # wagtail_path = dsd_config.project_root / dsd_config.local_project_name / "settings" / "base.py"
-        #     error_msg = f"Couldn't find a settings file. Tried {standard_path.as_posix()} and {wagtail_path.as_posix()}"
-        #     raise DSDCommandError(error_msg)
-
         # Find out which package manager is being used: req_txt, poetry, or pipenv
         dsd_config.pkg_manager = self._get_dep_man_approach()
         msg = f"Dependency management system: {dsd_config.pkg_manager}"
