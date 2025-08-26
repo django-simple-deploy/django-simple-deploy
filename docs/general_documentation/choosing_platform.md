@@ -6,20 +6,20 @@ hide:
 
 # Choosing a Platform
 
-Choosing a platform for your first deployment might seem difficult, because there are many options to choose from these days. It's hard to say that any one platform is better than any other, because they all take different approaches to a complex problem - pushing your project to a remote server in a way that lets it run reliably, at a reasonable cost.
+Choosing a platform to deploy to might seem difficult, because there are many to choose from these days. It's hard to say that any one platform is better than any other, because they all take different approaches to a complex problem - pushing your project to a remote server in a way that lets it run reliably, at a reasonable cost.
 
-`django-simple-deploy` aims to make it easier to choose a platform by simplifying your first deployments to a new platform. You don't have to do a deep dive into each platform's documentation in order to get a deployment up and running. Typically, you can make an account with the platform you're interested in, install that platform's CLI, install the deployment plugin for that platform, and then push your project. You get a working deployment with very little effort, which makes further exploration of each platform much easier and much less frustrating.
+`django-simple-deploy` aims to make it easier to choose a platform by simplifying your first deployments to a variety of hosts. You don't have to do a deep dive into each platform's documentation in order to get a deployment up and running. Typically, you can make an account with the platform you're interested in, install that platform's CLI, install the plugin for that platform, and then push your project. You get a working deployment with very little effort, which makes further exploration of each platform much easier and much less frustrating.
 
-This page summarizes the major strengths and potential drawbacks of each platform.
+This page summarizes the strengths and potential drawbacks of each platform.
 
-*Note: Best efforts are made to keep this page up to date. If you see something that is no longer accurate, please [open an issue](https://github.com/django-simple-deploy/django-simple-deploy/issues) and include a link to the updated information.*
+*Note: Best efforts are made to keep this page up to date. If you see something that's no longer accurate, please [open an issue](https://github.com/django-simple-deploy/django-simple-deploy/issues) and include a link to the updated information.*
 
 ## Quick comparison
 
 |                       | Fly.io             | Platform.sh             | Heroku                                                      |
 | --------------------- | ------------------ | ----------------------- | ----------------------------------------------------------- |
-| Credit Cards required for trial | Yes                | No                      | Yes |
-| Free trial length     | Unlimited time | 30 days | No free trial |
+| Credit Cards required for trial | N/A                | No                      | N/A |
+| Free trial length     | No free trial | 30 days | No free trial |
 | Cheapest paid plan    | $1.94/mo              | $10/mo                  | [$10/mo](https://blog.heroku.com/new-low-cost-plans) ($5 Eco dyno + $5 Mini Postgres)                     |
 | Company founded       | 2017               | 2012                    | 2007                                                        |
 
@@ -33,19 +33,19 @@ This page summarizes the major strengths and potential drawbacks of each platfor
 
     **Strengths**
 
-    * Fly.io does not require a credit card for its free trial, and the free trial does not have a time limit.
-    * Even after you enter a credit card, the free offering is enough to keep a small app running.
     * Offers a [public forum](https://community.fly.io) for support, and allows you to search for issues (and resolutions) that others have had.
-    * Fly.io seems to be well regarded in the post-Heroku era.
+    * The cheapest plan is currently about $2/month, but that machine only has 256MB of RAM. A 1GB is currently less than $6/month.
+    * The documentation [states](https://fly.io/docs/about/billing/#if-you-dont-have-a-credit-card) that you can use a prepaid card to buy credits. The minimum purchase of credits is $25.
 
     **Issues**
 
-    * I am not aware of any specific issues with Fly.io at the moment, but the distributed server model may not be suitable for all projects.
+    * The distributed server model may not be suitable for all projects.
+    * Fly has been growing for a while, and has had some outages along the way that have frustrated some users.
 
     **Links**
 
     * [Fly.io home page](https://fly.io/)
-    * [Pricing](https://fly.io/docs/about/pricing/)
+    * [Pricing](https://fly.io/docs/about/pricing/) | [Pricing calculator](https://fly.io/calculator)
     * [Docs home page](https://fly.io/docs/)
     * [CLI installation](https://fly.io/docs/hands-on/install-flyctl/)
     * [CLI reference](https://fly.io/docs/flyctl/)
