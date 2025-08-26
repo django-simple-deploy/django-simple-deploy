@@ -20,12 +20,11 @@ This page summarizes the strengths and potential drawbacks of each platform.
 | --------------------- | ------------------ | ----------------------- | ----------------------------------------------------------- |
 | Credit Cards required for trial | N/A                | N/A                      | N/A |
 | Free trial length     | No free trial | No free trial ^1^ | No free trial |
-| Cheapest paid plan    | $1.94/mo              | $12/mo                  | $10/mo ^2^ ($5 [Eco dyno](https://www.heroku.com/pricing/) + $5 [Essential 0 Postgres](https://elements.heroku.com/addons/heroku-postgresql))                     |
+| Cheapest paid plan    | $1.94/mo              | $12/mo                  | $10/mo ^2^                     |
 | Company founded       | 2017               | 2012                    | 2007                                                        |
 
-1: The new PAAS service [UpSun](https://upsun.com) from Platform.sh offers a free trial, but django-simple-deploy does not support deployment to UpSun at this point.
-
-2: This uses a $5/month [Eco dyno](https://www.heroku.com/pricing/) and a $5/month [Essential 0 Postgres](https://elements.heroku.com/addons/heroku-postgresql) database.
+1. The new PAAS service [UpSun](https://upsun.com) from Platform.sh offers a free trial, but django-simple-deploy does not support deployment to UpSun at this point.
+2. Using a $5/month [Eco dyno](https://www.heroku.com/pricing/) and a $5/month [Essential 0 Postgres](https://elements.heroku.com/addons/heroku-postgresql) database.
 
 ## Detailed notes
 
@@ -98,7 +97,7 @@ This page summarizes the strengths and potential drawbacks of each platform.
 
     **Issues**
 
-    * Heroku was a great platform in the late 2000s through the mid 2010s, but then it began to stagnate. Packages that were recommended for deployment were archived and unmaintained, even though they were officially still recommended. Heroku "just worked" for a long time, but recently that neglect has caught up to them. They are in the midst of restructuring their platform, and people are reasonably concerned about Heroku's long-term stability.
+    * Heroku was a great platform in the late 2000s through the mid 2010s, but then it began to stagnate. Packages that were recommended for deployment were archived and unmaintained, even though they were officially still recommended. Heroku "just worked" for a long time, but recently that neglect has caught up to them. They've been restructuring their platform for a long time now, and people are reasonably concerned about Heroku's long-term stability.
     * Heroku has had major incidents and outages in recent years, which they took a long time to resolve and communicated poorly about. This is the more significant reason many people have moved away from them in recent years.
     * Heroku was famous for a very generous free tier, where you could deploy up to 5 apps at a time including a small Heroku Postgres database. This kind of offering sounds nice, but it also draws abuse. Heroku was constantly fighting things like auto-deployed crypto miners. They no longer offer a free tier. Their cheapest plans are still reasonably priced, though, so the end of the free tier should not rule them out as a hosting option.
 
@@ -106,13 +105,12 @@ This page summarizes the strengths and potential drawbacks of each platform.
 
     * [Heroku home page](https://www.heroku.com)
     * [Pricing](https://www.heroku.com/pricing)
-        * *Note: Heroku's lowest-priced tiers were recently [restructured](https://blog.heroku.com/new-low-cost-plans).*
     * [Docs home page](https://devcenter.heroku.com)
     * [CLI installation](https://devcenter.heroku.com/articles/heroku-cli)
     * [CLI reference](https://devcenter.heroku.com/categories/command-line)
     * [Python on Heroku](https://devcenter.heroku.com/categories/python-support)
     * [Getting Started on Heroku with Python](https://devcenter.heroku.com/articles/getting-started-with-python?singlepage=true)
-    * [Deploying Python and Django Apps on Heroku](https://devcenter.heroku.com/articles/deploying-python)
+    * [Working with Django (on Heroku)](https://devcenter.heroku.com/categories/working-with-django)
 
     **Using `django-simple-deploy` with Heroku**
 
