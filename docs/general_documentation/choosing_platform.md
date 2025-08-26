@@ -20,10 +20,12 @@ This page summarizes the strengths and potential drawbacks of each platform.
 | --------------------- | ------------------ | ----------------------- | ----------------------------------------------------------- |
 | Credit Cards required for trial | N/A                | N/A                      | N/A |
 | Free trial length     | No free trial | No free trial ^1^ | No free trial |
-| Cheapest paid plan    | $1.94/mo              | $12/mo                  | [$10/mo](https://blog.heroku.com/new-low-cost-plans) ($5 Eco dyno + $5 Mini Postgres)                     |
+| Cheapest paid plan    | $1.94/mo              | $12/mo                  | $10/mo ^2^ ($5 [Eco dyno](https://www.heroku.com/pricing/) + $5 [Essential 0 Postgres](https://elements.heroku.com/addons/heroku-postgresql))                     |
 | Company founded       | 2017               | 2012                    | 2007                                                        |
 
 1: The new PAAS service [UpSun](https://upsun.com) from Platform.sh offers a free trial, but django-simple-deploy does not support deployment to UpSun at this point.
+
+2: This uses a $5/month [Eco dyno](https://www.heroku.com/pricing/) and a $5/month [Essential 0 Postgres](https://elements.heroku.com/addons/heroku-postgresql) database.
 
 ## Detailed notes
 
