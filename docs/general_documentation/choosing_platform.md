@@ -18,10 +18,12 @@ This page summarizes the strengths and potential drawbacks of each platform.
 
 |                       | Fly.io             | Platform.sh             | Heroku                                                      |
 | --------------------- | ------------------ | ----------------------- | ----------------------------------------------------------- |
-| Credit Cards required for trial | N/A                | No                      | N/A |
-| Free trial length     | No free trial | 30 days | No free trial |
-| Cheapest paid plan    | $1.94/mo              | $10/mo                  | [$10/mo](https://blog.heroku.com/new-low-cost-plans) ($5 Eco dyno + $5 Mini Postgres)                     |
+| Credit Cards required for trial | N/A                | N/A                      | N/A |
+| Free trial length     | No free trial | No free trial ^1^ | No free trial |
+| Cheapest paid plan    | $1.94/mo              | $12/mo                  | [$10/mo](https://blog.heroku.com/new-low-cost-plans) ($5 Eco dyno + $5 Mini Postgres)                     |
 | Company founded       | 2017               | 2012                    | 2007                                                        |
+
+1: The new PAAS service [UpSun](https://upsun.com) from Platform.sh offers a free trial, but django-simple-deploy does not support deployment to UpSun at this point.
 
 ## Detailed notes
 
@@ -62,14 +64,13 @@ This page summarizes the strengths and potential drawbacks of each platform.
 
     **Strengths**
 
-    * Platform.sh does not require a credit card for its free trial.
     * Once you have an environment set up with the Platform.sh tools, pushing a project and maintaining it is as straightforward as it is on any other comparable platform.
 
 
     **Issues**
 
     * Error messages about resource usage are unclear. For example, new users are limited to two new apps per day until they have been billed successfully three times. Since billing occurs once a month, this limit applies for several months, even though you're willing to pay for usage. Also, if you try to create a new project and it fails because of this issue, you don't get a specific error message. You have to contact support to find out if this is the reason for failure, or if something else went wrong.
-    * The CLI requires PHP for installation, and requires a bash shell for deployment. This isn't particularly difficult on macOS or Linux, but installation is not straightforward on Windows if you don't already have Windows Subsystem for Linux (WSL) installed, or a comparable bash-compatible environment.
+    * The CLI requires a bash shell for deployment. This isn't particularly difficult on macOS or Linux, but installation is not straightforward on Windows if you don't already have Windows Subsystem for Linux (WSL) installed, or a comparable bash-compatible environment.
 
     **Links**
 
