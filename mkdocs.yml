@@ -4,6 +4,9 @@ repo_url: https://github.com/django-simple-deploy/django-simple-deploy/
 
 markdown_extensions:
   - attr_list
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
