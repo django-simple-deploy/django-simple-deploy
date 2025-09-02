@@ -20,7 +20,6 @@ def dsd_get_plugin_config():
 def dsd_get_plugin_cli_args(parser):
     """Get plugin-specific CLI args."""
 
-
 @hookspec
 def dsd_deploy():
     """Carry out all platform-specific configuration and deployment work."""

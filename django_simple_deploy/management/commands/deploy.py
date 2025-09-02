@@ -74,14 +74,13 @@ class Command(BaseCommand):
         # Ensure that --skip-checks is not included in help output.
         self.requires_system_checks = []
 
-        super().__init__()
-
-        # Initialize access to plugin. This is needed in `add_arguments()`, so needs
-        # to be done here..
         # Import the platform-specific plugin module. This performs some validation, so
-        # it's best to call this before modifying project in any way.
+        # it's best to call this before modifying project in any way. Also, the plugin
+        # manager is needed in `add_arguments()`, so it needs to be defined here.
         platform_module = self._load_plugin()
         pm.register(platform_module)
+
+        super().__init__()
 
     def create_parser(self, prog_name, subcommand, **kwargs):
         """Customize the ArgumentParser object that will be created."""
@@ -100,11 +99,10 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         """Define CLI options."""
-        breakpoint()
+        # Add core django-simple-deploy CLI args.
         sd_cli = cli.SimpleDeployCLI(parser)
 
-        # Parse plugin-specific CLI args. We want to fail before inspecting system and
-        # project, if a CLI-related failure is going to happen.
+        # Add plugin-specific CLI args.
         pm.hook.dsd_get_plugin_cli_args(parser=parser)
 
     def handle(self, *args, **options):
@@ -136,18 +134,12 @@ class Command(BaseCommand):
         # Get installed version.
         dsd_config.version = version("django-simple-deploy")
 
-        # # Import the platform-specific plugin module. This performs some validation, so
-        # # it's best to call this before modifying project in any way.
-        # platform_module = self._load_plugin()
-        # pm.register(platform_module)
+        # DEV: It may be reasonable to validate the plugin earlier.
         self._validate_plugin(pm)
 
         platform_name = self.plugin_config.platform_name
         plugin_utils.write_output(f"\nDeployment target: {platform_name}")
-
-        # # Parse plugin-specific CLI args. We want to fail before inspecting system and
-        # # project, if a CLI-related failure is going to happen.
-        # pm.hook.get_plugin_cli_args(parser)
+        plugin_utils.write_output(f"  Using plugin: {self.plugin_name}")
 
         # Inspect the user's system and project, and make sure django-simple-deploy is included
         # in project requirements.
@@ -239,7 +231,6 @@ class Command(BaseCommand):
         identify the installed plugin automatically.
         """
         self.plugin_name = dsd_utils.get_plugin_name()
-        # plugin_utils.write_output(f"  Using plugin: {self.plugin_name}")
 
         platform_module = import_module(f"{self.plugin_name}.deploy")
         return platform_module
