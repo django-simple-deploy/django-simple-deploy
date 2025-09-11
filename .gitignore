@@ -19,3 +19,4 @@ build/
 # Ignores the virtualenv directory
 .venv/
 *_env/
+.idea
