@@ -336,7 +336,7 @@ class Command(BaseCommand):
             dsd_config.git_path = dsd_config.project_root
             plugin_utils.write_output(f"Found .git dir at {dsd_config.git_path}.")
             dsd_config.nested_project = False
-        elif (self.project_root.parent / ".git").exists():
+        elif (dsd_config.project_root.parent / ".git").exists():
             dsd_config.git_path = dsd_config.project_root.parent
             plugin_utils.write_output(f"Found .git dir at {dsd_config.git_path}.")
             dsd_config.nested_project = True
