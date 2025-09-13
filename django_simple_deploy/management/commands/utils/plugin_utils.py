@@ -560,7 +560,8 @@ def logs_to_console(logger=None):
     for handler in logger.handlers:
         # breakpoint()
         # if isinstance(handler, logging.StreamHandler) and getattr(handler, "stream", None) is sys.stdout:
-        if isinstance(handler, logging.StreamHandler) and handler.stream.name in ("<stdout>", "<stderr>"):
+        # if isinstance(handler, logging.StreamHandler) and handler.stream.name in ("<stdout>", "<stderr>"):
+        if isinstance(handler, logging.StreamHandler) and (handler.stream is sys.stderr or handler.stream is sys.stdout):
             return True
     if logger.propagate and logger.parent:
         return logs_to_console(logger.parent)
