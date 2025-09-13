@@ -312,7 +312,7 @@ def write_output(output, write_to_console=True, skip_logging=False):
     """
     output_str = get_string_from_output(output)
 
-    if write_to_console:
+    if write_to_console and not logs_to_console():
         dsd_config.stdout.write(output_str)
 
     if not skip_logging:
@@ -537,3 +537,31 @@ def add_req_txt_pkg(req_txt_path, package, version):
     contents = req_txt_path.read_text()
     pkg_string = f"\n{package + version}"
     req_txt_path.write_text(contents + pkg_string)
+
+def logs_to_console(logger=None):
+    """Check if logging is configured to stream to stdout."""
+    import sys
+
+    # breakpoint()
+    # logger = logging.getLogger()
+    # log_handler = logger.handlers[0]
+    # breakpoint()
+
+    # if isinstance(log_handler, logging.StreamHandler) and getattr(log_handler, "stream", None) is sys.stdout:
+    #     return True
+
+    # if logger.propagate and logger.parent:
+    #     return logging_streams_to_stdout(logger.parent)
+
+    # # Logger does not write to stdout.
+    # return False
+    if not logger:
+        logger = logging.getLogger(__name__)
+    for handler in logger.handlers:
+        # breakpoint()
+        # if isinstance(handler, logging.StreamHandler) and getattr(handler, "stream", None) is sys.stdout:
+        if isinstance(handler, logging.StreamHandler) and handler.stream.name in ("<stdout>", "<stderr>"):
+            return True
+    if logger.propagate and logger.parent:
+        return logs_to_console(logger.parent)
+    return False
