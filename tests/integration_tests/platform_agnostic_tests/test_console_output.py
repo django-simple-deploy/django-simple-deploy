@@ -47,8 +47,7 @@ def test_standard_output(tmp_project):
          "You can find a full record of this configuration in the dsd_logs directory.",
     ]
 
+    # Make sure output is not doubled (ie logging written to log and stdout).
     for expected_string in expected_output_strings:
         assert expected_string in stdout
-
-
-
+        assert stdout.count(expected_string) == 1
