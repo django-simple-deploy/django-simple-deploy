@@ -8,11 +8,19 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
-### (Unreleased)
+### 1.1.0
 
 #### External changes
 
 - Update information about all three platforms on the [Choosing a Platform](https://django-simple-deploy.readthedocs.io/en/latest/general_documentation/choosing_platform/) page.
+- Does not write directly to stdout if log is already streaming to stdout.
+
+#### Internal changes
+
+- Tests for certain key lines of output that should be written to stdout.
+- Tests that those lines are not in output when logging streams to stdout.
+- Registers plugin earlier, so plugins can extend the CLI.
+- Adds a hook that allows plugins to extend the CLI.
 
 ### 1.1.0
 
