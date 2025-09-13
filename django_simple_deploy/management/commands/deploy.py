@@ -172,6 +172,9 @@ class Command(BaseCommand):
         dsd_config.unit_testing = options["unit_testing"]
         dsd_config.e2e_testing = options["e2e_testing"]
 
+        # Validate plugin CLI options now.
+        pm.hook.dsd_validate_cli(options=options)
+
     def _start_logging(self):
         """Set up for logging.
 
