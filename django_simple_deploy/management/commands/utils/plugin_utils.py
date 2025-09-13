@@ -540,21 +540,20 @@ def add_req_txt_pkg(req_txt_path, package, version):
     req_txt_path.write_text(contents + pkg_string)
 
 def logs_to_console(logger=None):
-    """Check if logging is configured to stream to stdout or stderr.
-
-    If so, we'll avoid writing to console, because users will see doubled output.
-    """
+    """Check if logging is configured to stream to stdout or stderr."""
     if not logger:
         logger = logging.getLogger(__name__)
 
     for handler in logger.handlers:
-        is_handler = isinstance(handler, logging.StreamHandler)
-        streams_stdout = getattr(handler, "stream", None) is sys.stdout
-        streams_stderr = getattr(handler, "stream", None) is sys.stderr
+        if not isinstance(handler, logging.StreamHandler):
+            continue
 
-        if is_handler and (streams_stdout or streams_stderr):
+        if handler.stream in (sys.stdout, sys.stderr):
             return True
 
     if logger.propagate and logger.parent:
         return logs_to_console(logger.parent)
+
+    # Logging is not configured to stream to stdout or stderr.
     return False
+    
