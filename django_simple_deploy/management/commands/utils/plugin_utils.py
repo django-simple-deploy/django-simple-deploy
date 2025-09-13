@@ -7,6 +7,7 @@ import logging
 import re
 import subprocess
 import shlex
+import sys
 import toml
 from pathlib import Path
 
@@ -539,30 +540,21 @@ def add_req_txt_pkg(req_txt_path, package, version):
     req_txt_path.write_text(contents + pkg_string)
 
 def logs_to_console(logger=None):
-    """Check if logging is configured to stream to stdout."""
-    import sys
+    """Check if logging is configured to stream to stdout or stderr.
 
-    # breakpoint()
-    # logger = logging.getLogger()
-    # log_handler = logger.handlers[0]
-    # breakpoint()
-
-    # if isinstance(log_handler, logging.StreamHandler) and getattr(log_handler, "stream", None) is sys.stdout:
-    #     return True
-
-    # if logger.propagate and logger.parent:
-    #     return logging_streams_to_stdout(logger.parent)
-
-    # # Logger does not write to stdout.
-    # return False
+    If so, we'll avoid writing to console, because users will see doubled output.
+    """
     if not logger:
         logger = logging.getLogger(__name__)
+
     for handler in logger.handlers:
-        # breakpoint()
-        # if isinstance(handler, logging.StreamHandler) and getattr(handler, "stream", None) is sys.stdout:
-        # if isinstance(handler, logging.StreamHandler) and handler.stream.name in ("<stdout>", "<stderr>"):
-        if isinstance(handler, logging.StreamHandler) and (handler.stream is sys.stderr or handler.stream is sys.stdout):
+        is_handler = isinstance(handler, logging.StreamHandler)
+        streams_stdout = getattr(handler, "stream", None) is sys.stdout
+        streams_stderr = getattr(handler, "stream", None) is sys.stderr
+
+        if is_handler and (streams_stdout or streams_stderr):
             return True
+
     if logger.propagate and logger.parent:
         return logs_to_console(logger.parent)
     return False
