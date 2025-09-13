@@ -52,15 +52,18 @@ def test_standard_output(tmp_project):
         assert expected_string in stdout
         assert stdout.count(expected_string) == 1
 
-@pytest.mark.skip("Needs more config to test behavior correctly.")
 def test_logging_streaming_to_stdout(tmp_project):
     """Test that output is not doubled when logging is configured to stream to stdout.
 
-    DEV: The interaction between pytest, logging, and stdout is more complex than this
-    test currently represents. To actually detect doubled output, this test needs to 
+    DEV: The interaction between pytest, logging, and stdout is fairly complex.
+
+    To actually detect doubled output, this test would probably need to 
     intercept the logging stream that pytest captures as well as stdout. That doesn't seem
-    worthwhile at the moment. If there are more issues with doubled output, we can revisit
-    this.
+    worthwhile at the moment.
+
+    Instead, we'll just check that pytest doesn't see any stdout when logging streams
+    to stdout. Pytest grabs the log stream so we don't see it here, but the user should
+    see that stream.
     """
     # For now, this test only works if the dsd-flyio plugin is being tested.
     # Skip if that's not available.
@@ -86,15 +89,5 @@ def test_logging_streaming_to_stdout(tmp_project):
     dsd_command = "python manage.py deploy"
     stdout, stderr = msp.call_deploy(tmp_project, dsd_command)
 
-    # We shouldn't need to check for more specific output than this.
-    expected_output_strings = [
-        "Configuring project for deployment...\nLogging run of `manage.py deploy`...",
-        "Deployment target: Fly.io\n  Using plugin: dsd_flyio",
-         "--- Your project is now configured for deployment on Fly.io ---",
-         "You can find a full record of this configuration in the dsd_logs directory.",
-    ]
-
-    # Make sure output is not doubled (ie logging written to log and stdout).
-    for expected_string in expected_output_strings:
-        assert expected_string in stdout
-        assert stdout.count(expected_string) == 1
+    # We shouldn't see anything in stdout, in the testing environment.
+    assert not stdout
