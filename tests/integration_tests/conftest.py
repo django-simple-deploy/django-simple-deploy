@@ -139,6 +139,12 @@ def run_dsd(reset_test_project, tmp_project, request):
     This auto-runs for all test modules in the /integration_tests/ directory, and
     should run for all default plugins as well.
     """
+    # Allow tests to skip this automatic call. This is mostly used to allow a plugin
+    # to make its own calls, with plugin-specific CLI args.
+    # if "skip_auto_dsd_call" in request.keywords:
+    if request.node.get_closest_marker("skip_auto_dsd_call"):
+        return
+
     # Identify the plugin that's being tested. This is derived from the path of the
     # test module that's currently being run. If no platform is being tested, don't
     # need to run the deploy command.
