@@ -401,6 +401,22 @@ def get_template_string(template_path, context):
     return template.render(Context(context))
 
 
+def remove_doubled_blank_lines(contents):
+    """Remove doubled blank lines from a content string.
+
+    Template tags often render as blank lines. Dealing with this in the
+    template usually makes the template much less readable.
+
+    Let plugin authors call this explicitly. If we put this in 
+    get_template_string(), you could never have intentional double blank
+    lines in rendered templates.
+    """
+    while "\n\n\n" in contents:
+        contents = contents.replace("\n\n\n", "\n\n")
+
+    return contents
+
+
 def read_log():
     """Get the contents of the current log file."""
     if not dsd_config.log_output:
