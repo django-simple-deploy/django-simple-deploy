@@ -26,4 +26,10 @@ def test_help_output(tmp_project, capfd):
         current_test_dir / "reference_files/sd_help_output.txt"
     ).read_text()
 
-    assert stdout == reference_help_output
+    # Plugins may add CLI args, which means they can modify help output.
+    # So, we can only check for individual lines from core that should
+    # appear in help output, not entire output.
+    help_lines = [l for l in reference_help_output.splitlines() if l]
+
+    for help_line in help_lines:
+        assert help_line in stdout
