@@ -141,7 +141,6 @@ def run_dsd(reset_test_project, tmp_project, request):
     """
     # Allow tests to skip this automatic call. This is mostly used to allow a plugin
     # to make its own calls, with plugin-specific CLI args.
-    # if "skip_auto_dsd_call" in request.keywords:
     if request.node.get_closest_marker("skip_auto_dsd_call"):
         return
 
