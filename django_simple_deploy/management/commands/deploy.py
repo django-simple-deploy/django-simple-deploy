@@ -110,7 +110,7 @@ class Command(BaseCommand):
         sd_cli = cli.SimpleDeployCLI(parser)
 
         # Add plugin-specific CLI args.
-        pm.hook.dsd_get_plugin_cli_args(parser=parser)
+        pm.hook.dsd_get_plugin_cli(parser=parser)
 
     def handle(self, *args, **options):
         """Manage the overall configuration process.
