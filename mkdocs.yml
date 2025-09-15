@@ -51,6 +51,7 @@ nav:
     - 'plugins/index.md'
     - 'plugins/plugin_utils.md'
     - 'plugins/dsd_config.md'
+    - 'plugins/extending_cli.md'
     - 'plugins/available_plugins.md'
   - 'Design Documentation':
     - 'Rationale': 'design_docs/rationale.md'
