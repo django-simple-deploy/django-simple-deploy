@@ -77,8 +77,15 @@ class Command(BaseCommand):
         # Import the platform-specific plugin module. This performs some validation, so
         # it's best to call this before modifying project in any way. Also, the plugin
         # manager is needed in `add_arguments()`, so it needs to be defined here.
-        platform_module = self._load_plugin()
-        pm.register(platform_module)
+        # 
+        # If there are no plugins available, this will raise DSDCommandError, but the handler
+        # hasn't been set up yet to handle that. Catch it, and show the message.
+        try:
+            platform_module = self._load_plugin()
+        except DSDCommandError as e:
+            sys.exit(e.message)
+        else:
+            pm.register(platform_module)
 
         super().__init__()
 

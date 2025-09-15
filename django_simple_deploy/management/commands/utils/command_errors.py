@@ -23,3 +23,7 @@ class DSDCommandError(CommandError):
         log_info("\nDSDCommandError:")
         log_info(message)
         super().__init__(message)
+
+        # If this exception is raised before setup is complete, it doesn't get
+        # handled by Django. We need message available in a try-except block.
+        self.message = message

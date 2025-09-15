@@ -230,10 +230,12 @@ def _get_plugin_name_from_packages(available_packages):
     if len(plugin_names) == 0:
         msg = f"Could not find any plugins. Officially-supported plugins are:" ""
         msg += "\n  dsd-flyio dsd-platformsh dsd-heroku"
-        msg += "\nYou can install any of these with pip:"
+        msg += "\n\nYou can install any of these with pip:"
         msg += "\n  $ pip install dsd-flyio"
-        msg += "\nPlease install the plugin for the platform you want to deploy to,"
+        msg += "\n\nPlease install the plugin for the platform you want to deploy to,"
         msg += "\nand then run the deploy command again."
+        msg += "\n\nFull documentation can be found at:"
+        msg += "\n  https://django-simple-deploy.readthedocs.io/en/latest/"
         raise DSDCommandError(msg)
 
     if len(plugin_names) == 1:
