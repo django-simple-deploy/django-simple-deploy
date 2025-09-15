@@ -94,13 +94,14 @@ def pytest_addoption(parser):
 # Bundle these options into a single object.
 class CLIOptions:
     def __init__(
-        self, pkg_manager, pypi, automate_all, skip_confirmations, plugin_name
+        self, pkg_manager, pypi, automate_all, skip_confirmations, plugin_name, plugin_args_string, 
     ):
         self.pkg_manager = pkg_manager
         self.pypi = pypi
         self.automate_all = automate_all
         self.skip_confirmations = skip_confirmations
         self.plugin_name = plugin_name
+        self.plugin_args_string = plugin_args_string
 
 
 @pytest.fixture(scope="session")
@@ -111,6 +112,7 @@ def cli_options(request):
         automate_all=request.config.getoption("--automate-all"),
         skip_confirmations=request.config.getoption("--skip-confirmations"),
         plugin_name=request.config.getoption("--plugin"),
+        plugin_args_string=request.config.getoption("--plugin-args-string")
     )
 
 
