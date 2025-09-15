@@ -8,6 +8,16 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
+### (Unreleased)
+
+#### External changes
+
+- N/A
+
+#### Internal changes
+
+- When running e2e tests, the `--plugin-args-string` argument can be used to pass plugin-specific CLI args for the e2e `deploy` call. ie `$ pytest tests/e2e_tests --plugin dsd_flyio -s --plugin-args-string "--vm-size shared-cpu-2x"`.
+
 ### 1.2.1
 
 #### External changes
