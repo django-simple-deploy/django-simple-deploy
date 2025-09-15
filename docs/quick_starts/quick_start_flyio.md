@@ -84,6 +84,19 @@ To run management commands such as `migrate` against the deployed project, use t
 $ fly ssh console
 ```
 
+## Customizing the deployment
+
+A deployment with no options configures smaller, cheaper resources. You can customize your deployment by passing extra CLI args. Currently there is one Fly-specific option, `--vm-size`:
+
+```sh
+$ python manage.py deploy --help
+...
+Options for dsd-flyio:
+  --vm-size VM_SIZE     Name for a preset vm-size configuration on Fly.io, ie `shared-cpu-2x`.
+```
+
+To see the full set of options for `--vm-size`, see the [Started Fly Machines](https://fly.io/docs/about/pricing/#started-fly-machines) section on Fly's pricing page. You can also see a full list of options by running `fly platform vm-sizes`.
+
 ## Troubleshooting
 
 If deployment doesn't work, feel free to open an [issue](https://github.com/django-simple-deploy/django-simple-deploy/issues). Please share the OS you're  using locally, and the specific error message or unexpected behavior you saw. If the project you're deploying is hosted in a public repository, please share that as well.
