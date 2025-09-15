@@ -40,6 +40,8 @@ Customize deployment configuration:
 For more help, see the full documentation at: https://django-simple-deploy.readthedocs.io
 ```
 
+Plugins can add their own section to the help output, so you may see more options depending on which plugin you install.
+
 ## Customizing behavior
 
 There are several options to customize `django-simple-deploy`'s behavior. You can automate the entire deployment process, skip logging, and ignore the output of `git status` when deploying.
