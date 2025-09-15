@@ -47,13 +47,13 @@ def get_python_exe(tmp_project):
     return python_exe.as_posix()
 
 
-def run_simple_deploy(python_cmd, platform="", automate_all=False):
+def run_simple_deploy(python_cmd, platform="", automate_all=False, plugin_args_string=""):
     """Run deploy against the test project."""
     print("Running manage.py deploy...")
     if automate_all:
-        make_sp_call(f"{python_cmd} manage.py deploy --automate-all --e2e-testing")
+        make_sp_call(f"{python_cmd} manage.py deploy --automate-all --e2e-testing {plugin_args_string}")
     else:
-        make_sp_call(f"{python_cmd} manage.py deploy --e2e-testing")
+        make_sp_call(f"{python_cmd} manage.py deploy --e2e-testing {plugin_args_string} ")
 
 
 def commit_configuration_changes():

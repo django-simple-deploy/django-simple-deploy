@@ -77,6 +77,12 @@ def pytest_addoption(parser):
         default=False,
         help="Skip all confirmations",
     )
+    parser.addoption(
+        "--plugin-args-string",
+        action="store",
+        default="",
+        help="Custom plugin-specific CLI args to include in the deploy call.",
+    )
     # parser.addoption(
     #     "--plugin",
     #     action="store",
