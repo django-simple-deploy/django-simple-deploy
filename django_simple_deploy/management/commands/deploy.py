@@ -442,6 +442,12 @@ class Command(BaseCommand):
         if wagtail_path.exists():
             return wagtail_path
 
+        # Don't reject nanodjango projects.
+        # nanodjango doesn't use a traditional settings.py file. If we detect nanodjango,
+        # return None without raising an error.
+        if sys.argv[0].endswith("nanodjango"):
+            return None
+
         # Can't identify a settings path, so we need to bail.
         error_msg = f"Couldn't find a settings file. Tried {standard_path.as_posix()} and {wagtail_path.as_posix()}"
         raise DSDCommandError(error_msg)
