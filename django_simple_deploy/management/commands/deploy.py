@@ -448,6 +448,7 @@ class Command(BaseCommand):
         if sys.argv[0].endswith("nanodjango"):
             # This is the first place we detect this, so set dsd_config.nanodjango_project here.
             dsd_config.nanodjango_project = True
+            dsd_config.nanodjango_script = sys.argv[2]
             return None
 
         # Can't identify a settings path, so we need to bail.

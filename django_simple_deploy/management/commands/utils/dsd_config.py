@@ -32,6 +32,7 @@ class DSDConfig:
         self.requirements = None
         self.nested_project = None
         self.nanodjango_project = None
+        self.nanodjango_script = None
 
         # Paths in user's local project.
         self.project_root = None
