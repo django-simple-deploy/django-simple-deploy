@@ -31,6 +31,7 @@ class DSDConfig:
         self.pkg_manager = ""
         self.requirements = None
         self.nested_project = None
+        self.nanodjango_project = None
 
         # Paths in user's local project.
         self.project_root = None
@@ -70,7 +71,7 @@ class DSDConfig:
             msg = "Could not identify project's root directory."
             raise DSDCommandError(msg)
 
-        if self.settings_path is None:
+        if self.settings_path is None and not self.nanodjango_project:
             msg = "Could not identify path to settings.py."
             raise DSDCommandError(msg)
 

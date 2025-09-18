@@ -446,6 +446,8 @@ class Command(BaseCommand):
         # nanodjango doesn't use a traditional settings.py file. If we detect nanodjango,
         # return None without raising an error.
         if sys.argv[0].endswith("nanodjango"):
+            # This is the first place we detect this, so set dsd_config.nanodjango_project here.
+            dsd_config.nanodjango_project = True
             return None
 
         # Can't identify a settings path, so we need to bail.
