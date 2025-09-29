@@ -90,8 +90,6 @@ def pytest_sessionfinish(session, exitstatus):
 def check_prerequisites(pytestconfig):
     """Make sure dev environment supports integration tests."""
     ihf.check_plugin_available(pytestconfig)
-    # ihf.check_package_manager_available("poetry")
-    ihf.check_package_manager_available("pipenv")
 
 
 @pytest.fixture(scope="session")
@@ -124,11 +122,9 @@ def tmp_project(tmp_path_factory, pytestconfig):
     # Return the location of the temp project.
     return tmp_proj_dir
 
-
-# @pytest.fixture(scope="module", params=["req_txt", "poetry", "pipenv"])
-# pkg_managers = ["poetry"]
-# pkg_managers = ["req_txt", "poetry", "pipenv"]
-
+# Determine which package managers to reset sample project for.
+# If available, we'll test for a requirements.txt-based workflow, a Poetry
+# workflow, and a Pipenv workflow.
 pkg_managers = ["req_txt"]
 if ihf.check_package_manager_available("poetry"):
     pkg_managers.append("poetry")
