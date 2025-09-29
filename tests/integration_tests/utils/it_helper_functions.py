@@ -126,15 +126,15 @@ def check_package_manager_available(pkg_manager):
     else:
         msg = dedent(
             f"""
-        --- To run the full set of tests, {pkg_manager.title()} should be installed. ---
 
-        Instructions for installing {pkg_manager.title()} can be found here:
+        --- To run the full set of tests, {pkg_manager.title()} should be installed. ---
+          Instructions for installing {pkg_manager.title()} can be found here:
         """
         )
 
         if pkg_manager == "poetry":
-            msg += "https://python-poetry.org/docs/#installation"
+            msg += "  https://python-poetry.org/docs/#installation\n"
         elif pkg_manager == "pipenv":
-            msg += "https://pipenv.pypa.io/en/latest/install/#installing-pipenv"
+            msg += "  https://pipenv.pypa.io/en/latest/install/#installing-pipenv\n"
 
         print(msg)
