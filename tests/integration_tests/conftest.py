@@ -90,7 +90,7 @@ def pytest_sessionfinish(session, exitstatus):
 def check_prerequisites(pytestconfig):
     """Make sure dev environment supports integration tests."""
     ihf.check_plugin_available(pytestconfig)
-    ihf.check_package_manager_available("poetry")
+    # ihf.check_package_manager_available("poetry")
     ihf.check_package_manager_available("pipenv")
 
 
@@ -125,7 +125,17 @@ def tmp_project(tmp_path_factory, pytestconfig):
     return tmp_proj_dir
 
 
-@pytest.fixture(scope="module", params=["req_txt", "poetry", "pipenv"])
+# @pytest.fixture(scope="module", params=["req_txt", "poetry", "pipenv"])
+# pkg_managers = ["poetry"]
+# pkg_managers = ["req_txt", "poetry", "pipenv"]
+
+pkg_managers = ["req_txt"]
+if ihf.check_package_manager_available("poetry"):
+    pkg_managers.append("poetry")
+if ihf.check_package_manager_available("pipenv"):
+    pkg_managers.append("pipenv")
+
+@pytest.fixture(scope="module", params=pkg_managers)
 def reset_test_project(request, tmp_project):
     """Reset the test project, so it can be used again by another test module,
     which may be another platform.

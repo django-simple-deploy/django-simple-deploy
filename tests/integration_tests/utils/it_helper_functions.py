@@ -138,3 +138,5 @@ def check_package_manager_available(pkg_manager):
             msg += "  https://pipenv.pypa.io/en/latest/install/#installing-pipenv\n"
 
         print(msg)
+
+        return False
