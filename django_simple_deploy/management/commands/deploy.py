@@ -440,6 +440,9 @@ class Command(BaseCommand):
 
         wagtail_path = dsd_config.project_root / dsd_config.local_project_name / "settings" / "production.py"
         if wagtail_path.exists():
+            # Mark this as a Wagtail project.
+            dsd_config.wagtail_project = True
+            
             return wagtail_path
 
         # Don't reject nanodjango projects.
