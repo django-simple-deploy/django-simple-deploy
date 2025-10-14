@@ -160,6 +160,9 @@ class Command(BaseCommand):
         # responsibility off to plugin.
         dsd_config.validate()
 
+        # Before handoff, log all dsd_config values.
+        self._log_dsd_config()
+
         # Platform-agnostic work is finished. Hand off to plugin.
         pm.hook.dsd_deploy()
 
@@ -218,6 +221,12 @@ class Command(BaseCommand):
         plugin_utils.log_info(f"\nCLI args:")
         for option, value in options.items():
             plugin_utils.log_info(f"  {option}: {value}")
+
+    def _log_dsd_config(self):
+        """Log all values in dsd_config."""
+        plugin_utils.log_info(f"\ndsd_config values:")
+        for k, v in dsd_config.__dict__.items():
+            plugin_utils.log_info(f"  {k}: {v}")
 
     def _create_log_dir(self):
         """Create a directory to hold log files, if not already present.
@@ -442,7 +451,7 @@ class Command(BaseCommand):
         if wagtail_path.exists():
             # Mark this as a Wagtail project.
             dsd_config.wagtail_project = True
-            
+
             return wagtail_path
 
         # Don't reject nanodjango projects.
