@@ -8,7 +8,7 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
-### (Unreleased)
+### 1.3.1
 
 #### External changes
 
@@ -17,6 +17,8 @@ This release will have a stable public interface for end users, and for plugin d
 #### Internal changes
 
 - No longer requires Poetry or Pipenv to run base set of integration tests.
+- Adds a `dsd_config.wagtail_project` flag when project is identified as a Wagtail project.
+- Logs all `dsd_config` values before handing off to plugin.
 
 ### 1.3.0
 
