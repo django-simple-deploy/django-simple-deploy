@@ -258,7 +258,7 @@ def call_deploy(tmp_dir, dsd_command, platform=None):
     # written.
     if platform:
         dsd_command = f"{dsd_command}"
-    if platform in ("fly_io", "flyio", "platform_sh", "platformsh"):
+    if platform in ("fly_io", "flyio", "upsun"):
         # These platforms need a project name to carry out configuration.
         dsd_command = f"{dsd_command} --deployed-project-name my_blog_project"
 
