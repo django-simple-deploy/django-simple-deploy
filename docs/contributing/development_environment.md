@@ -179,7 +179,7 @@ $ pip install -e /local/path/to/django-simple-deploy/
 
 ## Install the correct plugin for your platform
 
-There are currently three plugins available: [dsd-flyio](https://github.com/django-simple-deploy/dsd-flyio), [dsd-platformsh](https://github.com/django-simple-deploy/dsd-platformsh), and [dsd-heroku](https://github.com/django-simple-deploy/dsd-heroku). Pick the one that you want to use for deployment, and install it just like any PyPI package:
+There are currently three plugins available: [dsd-flyio](https://github.com/django-simple-deploy/dsd-flyio), [dsd-upsun](https://github.com/django-simple-deploy/dsd-upsun), and [dsd-heroku](https://github.com/django-simple-deploy/dsd-heroku). Pick the one that you want to use for deployment, and install it just like any PyPI package:
 
 ```sh
 $ pip install dsd-flyio
