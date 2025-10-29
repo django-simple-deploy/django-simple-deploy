@@ -8,15 +8,18 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
-### (Unreleased)
+### 1.3.2
 
 #### External changes
 
-- N/A
+- Migrates support for dsd-platformsh to dsd-upsun, in response to the rebranding of Platform.sh to Upsun.
+- Installation option `pip install django-simple-deploy[upsun]` in place of `pip install django-simple-deploy[platform_sh]`.
 
 #### Internal changes
 
 - Sets `--deployed-project-name` when running `dsd-upsun` integration tests.
+- Most Platform.sh-based names changed to Upsun-based equivalents.
+- Some Platform.sh-based names remain, because Upsun is still using those names in places.
 
 ### 1.3.1
 
