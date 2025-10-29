@@ -210,7 +210,7 @@ At this point, you can destroy the remote resources that were created. Remote re
 
 After verifying that your local version of `django-simple-deploy` works when run against the test project, you'll need to reset the test project. This will let you modify `django-simple-deploy`, and then run the `deploy` command again and see the effect of your changes.
 
-To reset the project, run `git reset --hard commit_hash`, using the hash of the commit that you made after making sure the test project works locally. Also, run `git status` and make sure you remove any files or directories that are left in the project, such as `dsd_logs/`. The `.platform/` directory also tends to hang around after resetting the test project, when testing against Platform.sh. The command `git clean -fd` will remove any new files and directories that were created during configuration.
+To reset the project, run `git reset --hard commit_hash`, using the hash of the commit that you made after making sure the test project works locally. Also, run `git status` and make sure you remove any files or directories that are left in the project, such as `dsd_logs/`. The `.platform/` directory also tends to hang around after resetting the test project, when testing against Upsun (formely Platform.sh). The command `git clean -fd` will remove any new files and directories that were created during configuration.
 
 ## Developing `django-simple-deploy`
 

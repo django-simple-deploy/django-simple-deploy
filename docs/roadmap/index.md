@@ -52,7 +52,7 @@ This would clearly help beginners, but it would be just as useful for experience
 
 ## Refine core plugins
 
-There are three official plugins: [dsd-flyio](https://github.com/django-simple-deploy/dsd-flyio), [dsd-platformsh](https://github.com/django-simple-deploy/dsd-platformsh), and [dsd-heroku](https://github.com/django-simple-deploy/dsd-heroku). These plugins should serve as exemplars. They should be well-structured, well-commented, and demonstrate how people might create plugins for other platforms. Capture any feedback from people who know these platforms well, so we end up with an exemplary deployment process on each platform.
+There are three official plugins: [dsd-flyio](https://github.com/django-simple-deploy/dsd-flyio), [dsd-upsun](https://github.com/django-simple-deploy/dsd-upsun), and [dsd-heroku](https://github.com/django-simple-deploy/dsd-heroku). These plugins should serve as exemplars. They should be well-structured, well-commented, and demonstrate how people might create plugins for other platforms. Capture any feedback from people who know these platforms well, so we end up with an exemplary deployment process on each platform.
 
 ## Expand plugin system to demonstrate specific capabilities
 
