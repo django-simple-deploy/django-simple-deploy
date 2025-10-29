@@ -60,7 +60,7 @@ class SimpleDeployCLI:
 
         # Allow users to set the deployed project name. This is the name that will be
         # used by the platform, which may be different than the name used in the
-        # `startproject` command. See the Platform.sh script for use of this flag.
+        # `startproject` command. See the Upsun (formerly Platform.sh) script for use of this flag.
         deployment_config_group.add_argument(
             "--deployed-project-name",
             type=str,
