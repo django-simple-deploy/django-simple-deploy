@@ -16,15 +16,15 @@ This page summarizes the strengths and potential drawbacks of each platform.
 
 ## Quick comparison
 
-|                       | Fly.io             | Platform.sh             | Heroku                                                      |
+|                       | Fly.io             | Upsun                   | Heroku                                                      |
 | --------------------- | ------------------ | ----------------------- | ----------------------------------------------------------- |
-| Credit Cards required for trial | N/A                | N/A                      | N/A |
-| Free trial length     | No free trial | No free trial ^1^ | No free trial |
-| Cheapest paid plan    | $1.94/mo ^2^              | $12/mo                  | $10/mo ^3^                     |
+| Credit Cards required for trial | N/A                | No?                      | N/A |
+| Free trial length     | No free trial | 15 days | No free trial |
+| Cheapest paid plan    | $1.94/mo ^1^              | $12/mo ^2^                  | $10/mo ^3^                     |
 | Company founded       | 2017               | 2012                    | 2007                                                        |
 
-1. The new PAAS service [UpSun](https://upsun.com) from Platform.sh offers a free trial, but django-simple-deploy does not support deployment to UpSun at this point.
-2. This is for the machine that runs the Django project. With a database and some traffic, the actual amount will likely be higher.
+1. This is for the machine that runs the Django project. With a database and some traffic, the actual amount will likely be higher.
+2. This is the Development plan on [Upsun Fixed](https://upsun.com/fixed-pricing/).
 3. Using a $5/month [Eco dyno](https://www.heroku.com/pricing/) and a $5/month [Essential 0 Postgres](https://elements.heroku.com/addons/heroku-postgresql) database.
 
 ## Detailed notes
@@ -60,33 +60,39 @@ This page summarizes the strengths and potential drawbacks of each platform.
 
     - [Quick start: Deploying to Fly.io](../quick_starts/quick_start_flyio.md)
 
-=== "Platform.sh"
+=== "Upsun"
 
     **Known for**
 
-    * Platform.sh is a managed hosting platform that focuses on making continuous deployment easy and safe. They even tell you it's okay to deploy on Fridays. :)
+    * Upsun is a managed hosting platform that focuses on making continuous deployment easy and safe.
 
     **Strengths**
 
-    * Once you have an environment set up with the Platform.sh tools, pushing a project and maintaining it is as straightforward as it is on any other comparable platform.
+    * Once you have an environment set up with the Upsun tools, pushing a project and maintaining it is as straightforward as it is on any other comparable platform.
 
 
     **Issues**
 
-    * Error messages about resource usage are unclear. For example, new users are limited to two new apps per day until they have been billed successfully three times. Since billing occurs once a month, this limit applies for several months, even though you're willing to pay for usage. Also, if you try to create a new project and it fails because of this issue, you don't get a specific error message. You have to contact support to find out if this is the reason for failure, or if something else went wrong.
-    * The CLI requires a bash shell for deployment. This isn't particularly difficult on macOS or Linux, but installation is not straightforward on Windows if you don't already have Windows Subsystem for Linux (WSL) installed, or a comparable bash-compatible environment.
+    * Error messages about resource usage are sometimes unclear.
+    * Upsun is a rebrand of the older Platform.sh host. Most workflows have been updated, but there's still some Platform.sh-based names that can be confusing at times.
 
     **Links**
 
-    * [Platform.sh home page](https://platform.sh)
-    * [Pricing](https://platform.sh/pricing/)
-    * [Docs home page](https://docs.platform.sh)
-    * [CLI installation](https://docs.platform.sh/administration/cli.html)
-    * [Platform.sh Status page](https://status.platform.sh)
+    * [Upsun home page](https://upsun.com)
+    * Pricing:
+        * [Fixed](https://upsun.com/fixed-pricing/) plans
+        * [Flex](https://upsun.com/pricing/) plans
+    * [Main Docs home page](https://devcenter.upsun.com)
+        * [Fixed](https://fixed.docs.upsun.com) docs
+        * [Django on Fixed plans](https://fixed.docs.upsun.com/guides/django.html)
+        * [Flex](https://docs.upsun.com) docs
+        * [Django on Flex plans](https://docs.upsun.com/get-started/stacks/django.html)
+    * [CLI installation](https://docs.upsun.com/administration/cli.html)
+    * [Upsun Status page](https://status.platform.sh)
 
-    **Using `django-simple-deploy` with Platform.sh**
+    **Using `django-simple-deploy` with Upsun**
 
-    - [Quick start: Deploying to Platform.sh](../quick_starts/quick_start_platformsh.md)
+    - [Quick start: Deploying to Upsun](../quick_starts/quick_start_upsun.md)
 
 === "Heroku"
 

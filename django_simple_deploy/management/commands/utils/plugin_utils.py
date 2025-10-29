@@ -167,7 +167,7 @@ def run_quick_command(cmd, check=False, skip_logging=False):
     the output.
 
     The `check` parameter is included because some callers will need to handle
-    exceptions. For example, see prep_automate_all() in deploy_platformsh.py. Most
+    exceptions. For example, see prep_automate_all() in dsd-upsun. Most
     callers will only check stderr, or maybe the returncode; they won't need to
     involve exception handling.
 

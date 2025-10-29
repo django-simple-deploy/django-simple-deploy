@@ -62,10 +62,10 @@ django-simple-deploy makes.
 
 #         --- The platform "{requested_platform}" is not currently supported. ---
 
-#         - Current options are: fly_io, platform_sh, and heroku
+#         - Current options are: fly_io, upsun, and heroku
 #         - Example usage:
 #           $ python manage.py simple_deploy --platform fly_io
-#           $ python manage.py simple_deploy --platform platform_sh
+#           $ python manage.py simple_deploy --platform upsun
 #           $ python manage.py simple_deploy --platform heroku
 
 #     """

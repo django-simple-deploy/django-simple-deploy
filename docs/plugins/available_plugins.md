@@ -13,7 +13,7 @@ hide:
 There are currently three officially supported plugins:
 
 - [dsd-flyio](https://github.com/django-simple-deploy/dsd-flyio)
-- [dsd-platformsh](https://github.com/django-simple-deploy/dsd-platformsh)
+- [dsd-upsun](https://github.com/django-simple-deploy/dsd-upsun)
 - [dsd-heroku](https://github.com/django-simple-deploy/dsd-heroku)
 
 ## Third-party plugins

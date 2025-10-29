@@ -41,7 +41,7 @@ dependencies = [
 
 [project.optional-dependencies]
 fly_io = ["dsd-flyio"]
-platform_sh = ["dsd-platformsh"]
+upsun = ["dsd-upsun"]
 heroku = ["dsd-heroku"]
 
 dev = [
