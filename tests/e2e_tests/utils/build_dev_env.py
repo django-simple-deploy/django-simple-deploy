@@ -79,9 +79,17 @@ def make_sp_call(cmd, capture_output=False):
 
 def activate_and_run(command, project_dir):
     """Run a command that needs to be run using a venv."""
-    activate_path = project_dir / ".venv" / "bin" / "activate"
-    full_command = f". {activate_path} && {command}"
-    subprocess.run(full_command, shell=True, check=True, cwd=project_dir)
+    if os.name == "nt":
+        activate_path = project_dir / ".venv" / "Scripts" / "activate.bat"
+        # subprocess.run(['cmd', '/c', f'call {activate_path} && {command}'], check=True, cwd=project_dir)
+
+        full_command = f"cmd /c call {activate_path} && {command}"
+        breakpoint()
+
+    else:
+        activate_path = project_dir / ".venv" / "bin" / "activate"
+        full_command = f". {activate_path} && {command}"
+        subprocess.run(full_command, shell=True, check=True, cwd=project_dir)
 
 
 def remove_unneeded_files(proj_dir, pkg_manager):
