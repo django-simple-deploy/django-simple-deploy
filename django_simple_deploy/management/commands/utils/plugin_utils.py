@@ -221,13 +221,17 @@ def run_slow_command(cmd, skip_logging=False):
         # Would it work to build a TextIOWrapper instance with encoding="utf-8"?
         # I'm not sure why this has worked for other plugins on Windows, but not for dsd-upsun.
         # Most Windows testing has been in a VM on macOS.
-        try:
-            for line in p.stderr:
-                write_output(line, skip_logging=skip_logging)
-        except UnicodeDecodeError:
-            p.encoding="utf-8"
-            for line in p.stderr:
-                write_output(line, skip_logging=skip_logging)
+        # try:
+        #     for line in p.stderr:
+        #         write_output(line, skip_logging=skip_logging)
+        # except UnicodeDecodeError:
+        #     p.encoding="utf-8"
+        #     for line in p.stderr:
+        #         write_output(line, skip_logging=skip_logging)
+
+        import io
+        for line in io.TextIOWrapper(p.stderr, encoding="utf-8", errors="replace"):
+            write_output(line, skip_logging=skip_logging)
 
     if p.returncode != 0:
         raise subprocess.CalledProcessError(p.returncode, p.args)
