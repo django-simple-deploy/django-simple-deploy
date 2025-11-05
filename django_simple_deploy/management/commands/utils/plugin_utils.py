@@ -213,7 +213,7 @@ def run_slow_command(cmd, skip_logging=False):
         cmd_parts,
         stderr=subprocess.PIPE,
         bufsize=1,
-        universal_newlines=True,
+        text=False,
         shell=dsd_config.use_shell,
     ) as p:
         # This is a bit ugly, but it came up when troubleshooting dsd-upsun on Windows.
