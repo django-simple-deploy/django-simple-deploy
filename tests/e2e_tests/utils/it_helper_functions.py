@@ -101,11 +101,6 @@ def check_local_app_functionality(python_cmd):
         run_server = subprocess.Popen(
             cmd_parts,
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.STDOUT,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
         )
     else:
         run_server = subprocess.Popen(
