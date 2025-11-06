@@ -95,6 +95,13 @@ def check_local_app_functionality(python_cmd):
         run_server = subprocess.Popen(
             f"{python_cmd} manage.py runserver 8008", shell=True, preexec_fn=os.setpgrp
         )
+    elif sys.platform=="win32":
+        cmd = f"{python_cmd} manage.py runserver 8008 --noreload"
+        cmd_parts = shlex.split(cmd)
+        run_server = subprocess.Popen(
+            cmd_parts,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+        )
     else:
         run_server = subprocess.Popen(
             f"{python_cmd} manage.py runserver 8008", shell=True
@@ -111,6 +118,8 @@ def check_local_app_functionality(python_cmd):
     # Kill the runserver process.
     if sys.platform == "linux":
         os.killpg(run_server.pid, signal.SIGKILL)
+    elif sys.platform == "win32":
+        run_server.send_signal(signal.CTRL_BREAK_EVENT)
     else:
         run_server.terminate()
 

@@ -3,6 +3,7 @@
 Note: Some of these utilities are used by django-simple-deploy internally as well.
 """
 
+import io
 import logging
 import re
 import subprocess
@@ -212,11 +213,10 @@ def run_slow_command(cmd, skip_logging=False):
     with subprocess.Popen(
         cmd_parts,
         stderr=subprocess.PIPE,
-        bufsize=1,
-        universal_newlines=True,
+        text=False,
         shell=dsd_config.use_shell,
     ) as p:
-        for line in p.stderr:
+        for line in io.TextIOWrapper(p.stderr, encoding="utf-8", errors="replace"):
             write_output(line, skip_logging=skip_logging)
 
     if p.returncode != 0:
