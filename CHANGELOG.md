@@ -8,6 +8,17 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
+### 1.3.3
+
+#### External changes
+
+- Fixes an encoding issue that can come up when running long commands, ie `upsun push` on Windows.
+
+#### Internal changes
+
+- The command `python tests/e2e_tests/utils/build_dev_env.py` works on Windows. The path to the activation script for the virtual environment was not correct on Windows.
+- Does a better job of killing the development server that runs at the end of e2e tests on Windows. This is the part of the test that verifies local behavior is unaffected by the deployment work.
+
 ### 1.3.2
 
 #### External changes
