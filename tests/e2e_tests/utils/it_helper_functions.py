@@ -124,7 +124,6 @@ def check_local_app_functionality(python_cmd):
     if sys.platform == "linux":
         os.killpg(run_server.pid, signal.SIGKILL)
     elif sys.platform == "win32":
-        breakpoint()
         run_server.send_signal(signal.CTRL_BREAK_EVENT)
     else:
         run_server.terminate()
