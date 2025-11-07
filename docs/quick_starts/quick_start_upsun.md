@@ -31,19 +31,10 @@ $ git commit -am "Added django_simple_deploy to INSTALLED_APPS."
 !!! note
     If you're using zsh, you need to put quotes around the package name when you install it: `$ pip install "django-simple-deploy[upsun]"`. Otherwise zsh interprets the square brackets as glob patterns.
 
-Now create a new Upsun project using the CLI. The `create` command will ask you for a project name; a good choice is the name you used when running `django startproject`:
+Now create a new Upsun app using the CLI, and run the `deploy` command to configure your app:
 
 ```sh
 $ upsun create
-$ git add .
-$ git commit -m "Created new Upsun project."
-```
-
-The `create` command adds a new `.upsun/` directory with information such as the project ID. It's a good idea to commit those files before making configuration changes to the project.
-
-Now run the `deploy` command to configure your app:
-
-```sh
 $ python manage.py deploy
 ```
 
