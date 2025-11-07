@@ -83,6 +83,13 @@ $ git commit -m "Updated project."
 $ upsun push
 ```
 
+Destroying projects
+---
+
+If you want to destroy a project on Upsun, be aware that there's a distinction between a *plan* and a *project*. If you destroy a plan, it usually destroys any projects associated with that plan. If you destroy a project, it may not destroy the associated plan.
+
+Look at your [Upsun dashboard](https://console.upsun.com/), and make sure you're aware of any long-running projects that will accrue charges. You can destroy plans and projects by going to the Settings tab, and scrolling to the Delete button at the end of the page.
+
 ## Troubleshooting
 
 If deployment doesn't work, please feel free to open an [issue](https://github.com/django-simple-deploy/django-simple-deploy/issues). Please share the OS you're  using locally, and the specific error message or unexpected behavior you saw. If the project you're deploying is hosted in a public repository, please share that as well.
