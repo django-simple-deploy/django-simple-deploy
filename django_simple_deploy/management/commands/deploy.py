@@ -146,7 +146,8 @@ class Command(BaseCommand):
 
         # Allow the plugin to do pre-inspection work. See note in hook spec;
         # this should be used sparingly.
-        pm.hook.dsd_pre_inspect()
+        if (msg_pre_inspect := pm.hook.dsd_pre_inspect()[0]):
+            plugin_utils.write_output(msg_pre_inspect)
 
         platform_name = self.plugin_config.platform_name
         plugin_utils.write_output(f"\nDeployment target: {platform_name}")
