@@ -34,14 +34,11 @@ $ git commit -am "Added django_simple_deploy to INSTALLED_APPS."
 
 When you install `dsd-upsun`, it automatically installs `django-simple-deploy` as well.
 
-Now create a new Upsun app using the CLI. You'll need to choose a name for your deployed project; a good choice is the same name as the one you used when running `django startproject`. Whatever name you choose, use that where you see `<project-name>`.
+Now create a new Upsun project using the CLI. You'll need to choose a name for your deployed project; a good choice is the same name as the one you used when running `django startproject`. Whatever name you choose, use that where you see `<project-name>`.
 
 ```sh
 $ upsun create --title <project-name>
 ```
-
-!!! note
-    After creating a project, you'll find some auto-generated files in a new `.upsun/local/` directory. This directory is supposed to be ignored by Git, but that's currently [not working](https://github.com/platformsh/cli/issues/286) on Windows. You can add `.upsun/local/` to your .gitignore file on Windows for now, and this directory will be ignored. You'll need to commit this change before continuing, because django-simple-deploy looks for a clean Git status before making configuration changes in your project.
 
 Now run the `deploy` command, using the same project name you used with the `upsun create` command:
 
