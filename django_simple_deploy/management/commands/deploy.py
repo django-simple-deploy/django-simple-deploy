@@ -144,6 +144,12 @@ class Command(BaseCommand):
         # DEV: It may be reasonable to validate the plugin earlier.
         self._validate_plugin(pm)
 
+        # Allow the plugin to do pre-inspection work. See note in hook spec;
+        # this should be used sparingly.
+        if (msgs := pm.hook.dsd_pre_inspect()):
+            msg_pre_inspect = msgs[0]
+            plugin_utils.write_output(msg_pre_inspect)
+
         platform_name = self.plugin_config.platform_name
         plugin_utils.write_output(f"\nDeployment target: {platform_name}")
         plugin_utils.write_output(f"  Using plugin: {self.plugin_name}")
