@@ -1,4 +1,7 @@
-"""Hook specs for django-simple-deploy."""
+"""Hook specs for django-simple-deploy.
+
+The order here should match the order in which hooks are called by core.
+"""
 
 import pluggy
 
