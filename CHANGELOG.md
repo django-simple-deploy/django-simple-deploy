@@ -8,6 +8,16 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
+### 1.4.0
+
+#### External changes
+
+- N/A
+
+#### Internal changes
+
+- The `dsd_pre_inspect()` hook allows plugins to do some work before core inspects the user's project and system. It should be used sparingly, but it allows plugins to correct some bugs that platform CLIs occasionally induce in the user's project.
+
 ### 1.3.3
 
 #### External changes
