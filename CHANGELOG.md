@@ -8,11 +8,15 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
-### 1.4.0 (unreleased)
+### 1.4.0
 
 #### External changes
 
-- N/A
+- Upsun documentation updates:
+    - Notes differences between Flex and Fixed plans.
+    - Quick Start installs just `dsd-upsun`, rather than django-simple-deploy with `upsun` extras.
+    - Uses `--title` when calling `upsun create`, and `--deployed-project-name` when calling `manage.py deploy`.
+    - Includes note about destroying projects, specifically distinction between "plans" and "projects".
 
 #### Internal changes
 
