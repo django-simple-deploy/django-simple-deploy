@@ -10,32 +10,40 @@ hide:
 
 Deployment to Upsun can be fully automated, but the configuration-only approach is recommended. This allows you to review the changes that are made to your project before committing them and making the initial push. The fully automated approach configures your project, commits these changes, and pushes the project to Upsun's servers.
 
+## Upsun Flex and Upsun Fixed
+
+Upsun has two kinds of deployment plans, Flex and Fixed. Flex deployments allow you to make a wider range of choices when specifying resources, such as CPU and RAM. Once a Flex deployment has been made, you can adjust resource sizes as needed, or let Upsun adjust resource sizes for you. With Fixed deployments, you choose a plan with a fixed set of resources to start with. As your project grows, you have the option to upgrade to higher plan levels.
+
 ## Prerequisites
 
 Deployment to Upsun requires three things:
 
 - You must be using Git to track your project.
 - You need to be tracking your dependencies with a `requirements.txt` file, or be using Poetry or Pipenv.
-- The [Upsun CLI](https://docs.upsun.com/administration/cli.html) must be installed on your system.
+- The [Upsun CLI](https://docs.upsun.com/administration/cli.html) must be installed on your system, and you must have an Upsun account set up for their Fixed plan.
 
 ## Configuration-only deployment
 
-First, install `django-simple-deploy`, and add `django_simple_deploy` to `INSTALLED_APPS` in *settings.py*:
+First, install the `dsd-upsun` plugin, and add `django_simple_deploy` to `INSTALLED_APPS` in *settings.py*:
 
 ```sh
-$ pip install django-simple-deploy[upsun]
+$ pip install dsd-upsun
 # Add "django_simple_deploy" to INSTALLED_APPS in settings.py.
 $ git commit -am "Added django_simple_deploy to INSTALLED_APPS."
 ```
 
-!!! note
-    If you're using zsh, you need to put quotes around the package name when you install it: `$ pip install "django-simple-deploy[upsun]"`. Otherwise zsh interprets the square brackets as glob patterns.
+When you install `dsd-upsun`, it automatically installs `django-simple-deploy` as well.
 
-Now create a new Upsun app using the CLI, and run the `deploy` command to configure your app:
+Now create a new Upsun project using the CLI. You'll need to choose a name for your deployed project; a good choice is the same name as the one you used when running `django startproject`. Whatever name you choose, use that where you see `<project-name>`.
 
 ```sh
-$ upsun create
-$ python manage.py deploy
+$ upsun create --title <project-name>
+```
+
+Now run the `deploy` command, using the same project name you used with the `upsun create` command:
+
+```
+$ python manage.py deploy --deployed-project-name <project-name>
 ```
 
 At this point, you should review the changes that were made to your project. Running `git status` will show you which files were modified, and which new files were created.
@@ -73,6 +81,13 @@ $ git add .
 $ git commit -m "Updated project."
 $ upsun push
 ```
+
+Destroying projects
+---
+
+If you want to destroy a project on Upsun, be aware that there's a distinction between a *plan* and a *project*. If you destroy a plan, it usually destroys any projects associated with that plan. If you destroy a project, it may not destroy the associated plan.
+
+Look at your [Upsun dashboard](https://console.upsun.com/), and make sure you're aware of any long-running projects that will accrue charges. You can destroy plans and projects by going to the Settings tab, and scrolling to the Delete button at the end of the page.
 
 ## Troubleshooting
 
