@@ -18,8 +18,9 @@ This page summarizes the strengths and potential drawbacks of each platform.
 
 |                       | Fly.io             | Upsun                   | Heroku                                                      |
 | --------------------- | ------------------ | ----------------------- | ----------------------------------------------------------- |
-| Credit Cards required for trial | N/A                | No?                      | N/A |
-| Free trial length     | No free trial | 15 days | No free trial |
+| Free trial            | No | Yes | No |
+| Free trial length     | - | 15 days | - |
+| Credit Cards required for trial | -                | Yes                      | - |
 | Cheapest paid plan    | $1.94/mo ^1^              | $12/mo ^2^                  | $10/mo ^3^                     |
 | Company founded       | 2017               | 2012                    | 2007                                                        |
 
