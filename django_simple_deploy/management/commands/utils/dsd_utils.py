@@ -227,6 +227,18 @@ def _get_plugin_name_from_packages(available_packages):
     plugin_names = [
         pkg_name for pkg_name in available_packages if plugin_prefix in pkg_name
     ]
+
+    # Support editable installs for packages that don't reliably show up in available_packages.
+    # ie, dsd-pythonanywhere uses Hatch, which doesn't show up in editable mode.
+    # This is fixed long-term by addressing #430
+    #   https://github.com/django-simple-deploy/django-simple-deploy/issues/430
+    if len(plugin_names) == 0:
+        import importlib.metadata as md
+        pkg_names = [dist.metadata["Name"].replace("-", "_") for dist in md.distributions()]
+        plugin_names = [
+            pkg_name for pkg_name in pkg_names if plugin_prefix in pkg_name
+        ]
+
     if len(plugin_names) == 0:
         msg = f"Could not find any plugins. Officially-supported plugins are:" ""
         msg += "\n  dsd-flyio dsd-upsun dsd-heroku"
