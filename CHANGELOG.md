@@ -8,6 +8,16 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
+### Unreleased
+
+#### External changes
+
+- N/A
+
+#### Internal changes
+
+- Comment out `DEBUG` check in functionality test in sample project. It's been flaky during development, because it's helpful to set `DEBUG` to `True` while developing plugins.
+
 ### 1.4.0
 
 #### External changes
