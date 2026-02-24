@@ -79,7 +79,6 @@ def check_deployed_app_functionality(python_cmd, url):
 
     print(test_output)
     print("    Finished testing functionality of deployed project.")
-    breakpoint()
 
     return "--- All tested functionality works. ---" in test_output
 
