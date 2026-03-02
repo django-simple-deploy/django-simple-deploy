@@ -12,7 +12,7 @@ This release will have a stable public interface for end users, and for plugin d
 
 #### External changes
 
-- N/A
+- Added a Contributing Quick Start page to the docs.
 
 #### Internal changes
 

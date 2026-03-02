@@ -40,6 +40,7 @@ nav:
     - 'Command Line Reference': 'general_documentation/cli_reference.md'
   - 'Contributing':
     - 'contributing/index.md'
+    - 'Contributing Quick Start': 'contributing/quick_start.md'
     - 'Documenting a Test Run': 'contributing/test_run.md'
     - 'Testing on Your Own Account': 'contributing/own_account.md'
     - 'Setting Up a Development Environment': 'contributing/development_environment.md'
