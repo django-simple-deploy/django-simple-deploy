@@ -22,7 +22,7 @@ django-simple-deploy$ uv pip install -e '.[dev]'
 django-simple-deploy$ pytest
 ```
 
-All tests should pass.
+About 30 tests should pass, and about 30 tests should be skipped.
 
 ## Make a local development copy of dsd-flyio
 
@@ -49,7 +49,13 @@ django-simple-deploy$ uv pip freeze | grep dsd-
 django-simple-deploy$ pytest
 ```
 
-All tests should pass, and you should see many more tests than what you saw before installing the plugin.
+About 80 tests should pass now. This includes almost all of the core tests, and some tests from dsd-flyio.
+
+If you want to see the work that's done in these tests, run pytest with the `-s` flag. This shows you a bunch of output, which includes some information about where the sample project is being copied to and tested against on your system.
+
+```bash
+django-simple-deploy$ pytest -s
+```
 
 ## Build a disposable sample project for development work
 
@@ -94,10 +100,13 @@ The flag `--unit-testing` here would probably be better changed to `--local-test
 If you were developing a plugin, you'd want to make changes to the plugin and then run `deploy` again. That's easy to do in this dev project environment:
 
 ```bash
-dsd-dev-project_biop0$ git reset --hard INITIAL_STATE && git clean -fd
+dsd-dev-project_biop0$ git reset --hard ADDED_DSD && git clean -fd
 dsd-dev-project_biop0$ python manage.py deploy --unit-testing
 ```
 
 Whenever you're ready, you can leave off the `--unit-testing` flag, and see if your plugin makes an actual deployment.
 
 You can use the same dev project for a lot of development work. Just be aware that some plugins add a variety of git remotes, or other subtle change. These are throwaway projects. Any time you want, you're free to destroy the `dsd-dev-project_<project-id>/` directory, and make a fresh one for your next phase of work.
+
+!!! note
+    If you try to run `deploy` and see the message `Unknown command: 'deploy'`, you probably reset the project to the `INITIAL_STATE` tag instead of the `ADDED_DSD` tag. I use the `ADDED_DSD` tag for development work. When demonstrating the project, I use the `INITIAL_STATE` tag, to show the step of adding `"django_simple_deploy"` to `INSTALLED_APPS`. If you get that message, you probably have to add `"django_simple_deploy"` to `INSTALLED_APPS`.
