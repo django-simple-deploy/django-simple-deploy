@@ -262,26 +262,42 @@ def call_deploy(tmp_dir, dsd_command, platform=None):
         # These platforms need a project name to carry out configuration.
         dsd_command = f"{dsd_command} --deployed-project-name my_blog_project"
 
-    # Get the path to the Python interpreter in the virtual environment.
+    # Get the path to the Python interpreter and bin directory in the virtual environment.
     #   We'll use the full path to the interpreter, rather than trying to rely on
     #   an active venv.
+    venv_dir = Path(tmp_dir) / "b_env"
     if sys.platform == "win32":
-        python_exe = Path(tmp_dir) / "b_env" / "Scripts" / "python.exe"
+        python_exe = venv_dir / "Scripts" / "python.exe"
+        venv_bin = venv_dir / "Scripts"
     else:
-        python_exe = Path(tmp_dir) / "b_env" / "bin" / "python"
+        python_exe = venv_dir / "bin" / "python"
+        venv_bin = venv_dir / "bin"
 
-    dsd_command = dsd_command.replace("python", python_exe.as_posix())
-    print(f"*** dsd_command: {dsd_command} ***")
+    # Build command as a list to handle spaces in paths (e.g. Windows usernames).
+    # Strip the leading "python " from dsd_command, then split the rest.
+    cmd_without_python = dsd_command.replace("python ", "", 1)
+    cmd = [str(python_exe)] + split(cmd_without_python)
+
+    print(f"*** dsd_command: {cmd} ***")
+
+    # Build the venv environment for the subprocess.
+    #   On Windows, using the venv's Python binary alone doesn't activate the venv
+    #   context the way it does on Unix. We need to pass the environment explicitly.
+    venv_env = os.environ.copy()
+    venv_env["PATH"] = str(venv_bin) + os.pathsep + venv_env.get("PATH", "")
+    venv_env["VIRTUAL_ENV"] = str(venv_dir)
+    venv_env.pop("PYTHONHOME", None)  # Remove if set, can interfere with venv
 
     # Make the call to deploy.
     #   The `text=True` argument causes this to return stdout and stderr as strings, not objects.
     #   Some of these commands, such as cwd, are required specifically for Windows.
     sd_call = subprocess.Popen(
-        split(dsd_command),
+        cmd,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
         cwd=tmp_dir,
+        env=venv_env,
     )
     stdout, stderr = sd_call.communicate()
 
