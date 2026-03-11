@@ -17,6 +17,7 @@ This release will have a stable public interface for end users, and for plugin d
 #### Internal changes
 
 - Comment out `DEBUG` check in functionality test in sample project. It's been flaky during development, because it's helpful to set `DEBUG` to `True` while developing plugins.
+- Improve handling of virtual environments on Windows during integration testing. (#478)
 
 ### 1.4.0
 
