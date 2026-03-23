@@ -57,7 +57,7 @@ def setup_project(tmp_proj_dir, sd_root_dir, cli_options):
         uv_available = True
 
     # Copy sample project to temp dir.
-    sample_project_dir = sd_root_dir / "sample_project/blog_project"
+    sample_project_dir = sd_root_dir / "vendor/dsd-sample-project/blog_project"
     copytree(sample_project_dir, tmp_proj_dir, dirs_exist_ok=True)
     remove_unneeded_files(tmp_proj_dir, cli_options.pkg_manager)
 
