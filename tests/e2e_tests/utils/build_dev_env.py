@@ -125,7 +125,7 @@ else:
     project_dir = sd_root_dir.parent / f"dsd-dev-project_{random_id}"
 
 # Copy sample project to project dir.
-sample_project_dir = sd_root_dir / "sample_project/blog_project"
+sample_project_dir = sd_root_dir / "vendor/dsd-sample-project/blog_project"
 copytree(sample_project_dir, project_dir, dirs_exist_ok=True)
 remove_unneeded_files(project_dir, pkg_manager)
 
