@@ -32,7 +32,7 @@ def setup_project(tmp_proj_dir, sd_root_dir, config):
         uv_available = True
 
     # Copy sample project to temp dir.
-    sample_project_dir = sd_root_dir / "sample_project/blog_project"
+    sample_project_dir = sd_root_dir / "vendor/dsd-sample-project/blog_project"
     copytree(sample_project_dir, tmp_proj_dir, dirs_exist_ok=True)
 
     # Create a virtual envronment. Set the path to the environment, instead of
