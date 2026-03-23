@@ -28,7 +28,7 @@ def pytest_addoption(parser):
 
 # Don't look at any test files in the sample_project/ dir.
 # Don't collect e2e tests; only run when specified over CLI.
-collect_ignore = ["sample_project", "tests/e2e_tests"]
+collect_ignore = ["vendor/dsd-sample-project", "tests/e2e_tests"]
 
 # Let plugins import utilities.
 path = Path(__file__).parent / "tests" / "integration_tests" / "utils"
