@@ -1,0 +1,9 @@
+asgiref==3.8.1
+certifi==2024.8.30
+charset-normalizer==3.4.0
+django==5.1.3
+django-bootstrap5==24.3
+idna==3.10
+requests==2.32.3
+sqlparse==0.5.2
+urllib3==2.2.3
