@@ -5,7 +5,7 @@ return statement at the end of a dynamic function, and it can be easy to get
 inconsistent spacing in the messages that are returned.
 
 A test here should mean that the spacing has been verified as appropriate in an actual
-run of the deploy command. For example make a run with automate_all, cancel the run, and make
+run of the deploy command. For example make a run with --automate-all, cancel the run, and make
 sure the spacing of the rendered message looks appropriate.
 """
 
@@ -13,7 +13,6 @@ from django_simple_deploy.management.commands import dsd_messages
 
 
 # --- Static messages ---
-
 
 # Just test one static message for now.
 def test_cancel_automate_all():
@@ -25,15 +24,6 @@ def test_cancel_automate_all():
 
 
 # --- Dynamic messages ---
-
-# DEV: This should be updated to test_invalid_plugin_msg()?
-# def test_invalid_platform_msg():
-#     msg = dsd_messages.invalid_platform_msg("bad_platform")
-#     assert (
-#         msg
-#         == '\n\n--- The platform "bad_platform" is not currently supported. ---\n\n- Current options are: fly_io, upsun, and heroku\n- Example usage:\n  $ python manage.py simple_deploy --platform fly_io\n  $ python manage.py simple_deploy --platform upsun\n  $ python manage.py simple_deploy --platform heroku\n\n'
-#     )
-
 
 def test_file_found():
     msg = dsd_messages.file_found("Procfile")
