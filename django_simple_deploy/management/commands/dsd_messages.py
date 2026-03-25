@@ -1,21 +1,22 @@
-"""A collection of messages used in deploy.py."""
+"""A collection of messages used in deploy.py.
 
-# Storing messages here makes for a much shorter deploy.py file, and
-#   makes it easier to see how the messages actually look on screen. The
-#   disadvantage is that it's harder to track what messages are being
-#   displayed when doing development work.
-# When you add a message here, make sure the stdout.write() call has a comment
-#   that clearly summarizes what the message says.
-#
-# Line length conventions
-# - Try to keep lines at the 79-char PEP 8 limit, but the project is not
-#   overly strict about it at this point.
-#
-# - DynamicMessages
-#   - It can be helpful to make a second vertical line at 86 characters
-#     (78 characters + two indentation levels) to judge the line lengths
-#     for dynamic messages.
+Storing messages here makes for a much shorter deploy.py file, and makes it
+easier to see how the messages actually look on screen. The  disadvantage is
+that it's harder to track what messages are being displayed when doing
+development work.
 
+When you add a message here, make sure the stdout.write() call has a comment
+that clearly summarizes what the message says.
+
+Line length conventions
+- Try to keep lines at the 79-char PEP 8 limit, but the project is not
+  overly strict about it at this point.
+
+- DynamicMessages
+  - It can be helpful to make a second vertical line at 86 characters
+    (78 characters + two indentation levels) to judge the line lengths
+    for dynamic messages.
+"""
 
 from textwrap import dedent
 
@@ -51,27 +52,6 @@ django-simple-deploy makes.
 # --- Dynamic strings ---
 # These need to be generated in functions, to display information that's
 #   determined as the script runs.
-
-
-# DEV: This should be updated for invalid plugin.
-# def invalid_platform_msg(requested_platform):
-#     """Error message, when an invalid --platform argument is provided."""
-
-#     msg = dedent(
-#         f"""
-
-#         --- The platform "{requested_platform}" is not currently supported. ---
-
-#         - Current options are: fly_io, upsun, and heroku
-#         - Example usage:
-#           $ python manage.py simple_deploy --platform fly_io
-#           $ python manage.py simple_deploy --platform upsun
-#           $ python manage.py simple_deploy --platform heroku
-
-#     """
-#     )
-#     return msg
-
 
 def file_found(filename):
     """Found a file that we plan to write.
