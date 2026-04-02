@@ -8,11 +8,14 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
-### Unreleased
+### 1.4.1
 
 #### External changes
 
 - Added a Contributing Quick Start page to the docs.
+- Fixes console issues on Windows.
+    - Write unicode codes when symbols can't be handled, such as in some Git Bash consoles.
+    - Also, flush stream after writing, to avoid some buffering issues seen in Git Bash.
 
 #### Internal changes
 
