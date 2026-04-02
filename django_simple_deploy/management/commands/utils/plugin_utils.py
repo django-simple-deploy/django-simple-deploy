@@ -314,7 +314,14 @@ def write_output(output, write_to_console=True, skip_logging=False):
     output_str = get_string_from_output(output)
 
     if write_to_console and not logs_to_console():
-        dsd_config.stdout.write(output_str)
+        try:
+            dsd_config.stdout.write(output_str)
+        except UnicodeEncodeError:
+            # This is motivated by an error writing Unicode characters in 
+            # Git Bash consoles on Windows.
+            encoding = getattr(dsd_config.stdout, "encoding", None) or "utf-8"
+            safe_output_str = output_str.encode(encoding, errors="backslashreplace").decode(encoding, errors="replace")
+            dsd_config.stdout.write(safe_output_str)
 
     if not skip_logging:
         log_info(output_str)
