@@ -323,6 +323,13 @@ def write_output(output, write_to_console=True, skip_logging=False):
             safe_output_str = output_str.encode(encoding, errors="backslashreplace").decode(encoding, errors="replace")
             dsd_config.stdout.write(safe_output_str)
 
+        # Flush, to avoid any buffering in consoles.
+        try:
+            dsd_config.stdout.flush()
+        except Exception:
+            # Continue silently if the console does not support flushing.
+            pass
+
     if not skip_logging:
         log_info(output_str)
 
