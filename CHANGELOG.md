@@ -8,6 +8,12 @@ For inspiration and motivation, see [Keep a CHANGELOG](https://keepachangelog.co
 
 This release will have a stable public interface for end users, and for plugin developers as well. The project will continue to be refined internally and may gain some new features, but will have overall stability as a high priority.
 
+### Unreleased
+
+#### External changes
+
+-[User Stories](https://django-simple-deploy.readthedocs.io/en/latest/design_docs/user_stories/) docs page started.
+
 ### 1.4.1
 
 #### External changes
