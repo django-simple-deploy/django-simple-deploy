@@ -58,6 +58,7 @@ nav:
   - 'Design Documentation':
     - 'Rationale': 'design_docs/rationale.md'
     - 'Use Cases': 'design_docs/use_cases.md'
+    - 'User Stores': 'design_docs/user_stories.md'
     - 'Strengths and Limitations': 'design_docs/strengths_limitations.md'
   - 'Testing':
     - 'testing/index.md'
