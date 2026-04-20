@@ -18,8 +18,9 @@ There are currently three officially supported plugins:
 
 ## Third-party plugins
 
-There is one third-party plugin at the moment:
+There are two third-party plugin at the moment:
 
 - [dsd-codered](https://github.com/ehmatthes/dsd-codered)
+- [dsd-codered](https://github.com/funkyrailroad/dsd-render)
 
 If you are aware of additional plugins, please open an [issue](https://github.com/django-simple-deploy/django-simple-deploy/issues) and let us know.
